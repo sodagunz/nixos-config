@@ -22,6 +22,7 @@
       home.stateVersion = "24.05";
       programs.home-manager.enable = true;
     };
+    backupFileExtension = "hmbackup";
   };
 
   users.users.${username} = {
@@ -31,7 +32,7 @@
       "networkmanager"
       "wheel"
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
   nix.settings.allowed-users = [ "${username}" ];
 }
