@@ -1,97 +1,95 @@
 { inputs, pkgs, ... }:
-let
-  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix { };
-in
 {
   home.packages = (with pkgs; [
-    _2048
+    # ---- CLI essential
+    entr          # perform action when file change
+    eza           # ls replacement
+    fd            # better find
+    file          # filetype info
+    hexdump       # read files as hex
+    jq            # json queries
+    killall       # exactly what you'd expect
+    ripgrep       # better grep
+    unzip         # unzip
+    xxd           # hexdump with more features
 
-    ## CLI utility
-    ani-cli
-    binsider
-    bitwise # cli tool for bit / hex manipulation
-    caligula # User-friendly, lightweight TUI for disk imaging
-    dconf-editor
-    docfd # TUI multiline fuzzy document finder
-    eza # ls replacement
-    entr # perform action when file change
-    fd # find replacement
-    ffmpeg
-    file # Show file information 
-    gtt # google translate TUI
-    gifsicle # gif utility
-    gtrash # rm replacement, put deleted files in system trash
-    hexdump
-    imv # image viewer
-    jq # JSON processor
-    killall
-    lazygit
-    libnotify
-    man-pages # extra man pages
-    mimeo
-    mpv # video player
-    ncdu # disk space
-    nitch # systhem fetch util
-    nixd # nix lsp
-    nixfmt-rfc-style # nix formatter
-    openssl
-    onefetch # fetch utility for git repo
-    pamixer # pulseaudio command line mixer
-    playerctl # controller for media players
-    poweralertd
-    programmer-calculator
-    ripgrep # grep replacement
-    shfmt # bash formatter
-    swappy # snapshot editing tool
-    tdf # cli pdf viewer
-    treefmt2 # project formatter
-    tldr
-    todo # cli todo list
-    toipe # typing test in the terminal
-    ttyper # cli typing test
-    unzip
-    valgrind # c memory analyzer
-    wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
-    wget
-    yt-dlp-light
-    xdg-utils
-    xxd
-    ncspot
+    # ---- CLI non-essential
+    bitwise       # programming calculator
+    gifsicle      # gif utility
+    gtrash        # better rm with recovery
+    mimeo         # open files using MIME types
 
-    ## CLI 
-    cbonsai # terminal screensaver
-    cmatrix
-    pipes # terminal screensaver
-    sl
-    tty-clock # cli clock
+    # ---- doc
+    man-pages     # extra man pages
+    tldr          # community manpages
 
-    ## GUI Apps
-    # audacity
-    bleachbit # cache cleaner
-    gimp
-    libreoffice
-    nix-prefetch-github #prefetch nix info from github
-    # obs-studio
-    pavucontrol # pulseaudio volume controle (GUI)
-    pitivi # video editing
-    qalculate-gtk # calculator
-    resources # GUI resources monitor
-    soundwireserver
-    thunderbird
-    vlc
-    winetricks
-    wineWowPackages.wayland
-    zenity
+    # ---- TUI
+    binsider      # analize ELF binaries
+    gtt           # google translate
+    lazygit       # git
+    ncdu          # NCurses (d)isk (u)tility
+    ncspot        # NCurses Spotify
+    tdf           # PDF renderer
 
-    # C / C++
-    gcc
-    gdb
-    gnumake
+    # ---- programming
+    cargo               # rust package manager
+    gcc                 # GNU Compiler Collection
+    gdb                 # GNU Debugger
+    gnumake             # GNU Make
+    nix-prefetch-github # prefetch nix info from github
+    nixd                # nix lsp
+    nixfmt-rfc-style    # nix formatter
+    python3             # Python3
+    shfmt               # bash formatter
+    treefmt2            # project formatter
+    valgrind            # c memory analyzer
+    zenity              # uses GTK to retrieve user value
+    inputs.alejandra.defaultPackage.${system} # nixpkgs formatter
+    python312Packages.ipython                 # Jupyter Notebooks
 
-    # Python
-    python3
-    python312Packages.ipython
+    # ---- system / media
+    caligula      # disk imaging/burning
+    dconf-editor  # configuration editor
+    ffmpeg        # a/v processor
+    imv           # image viewer
+    libnotify     # notifications daemon
+    mpv           # video player
+    openssl       # ssl transport layer security
+    sccache       # cache for cargo
+    pkg-config    # for openssl pkg info
+    pamixer       # pulseaudio command line mixer
+    pavucontrol   # pulseaudio volume control (GUI)
+    playerctl     # controller for media players
+    poweralertd   # power alert
+    wget          # HTTP Get
 
-    inputs.alejandra.defaultPackage.${system}
+    # ---- info fetchers
+    nitch         # (ni)x fe(tch)
+    onefetch      # git repo fetch
+
+    # ---- leisure
+    ani-cli       # anime via CLI
+    cbonsai       # terminal screensaver bonsai
+    cmatrix       # terminal screensaver matrix
+    cowsay        # cowsay
+    lolcat        # rainbow cat
+    pipes         # terminal screensaver pipes
+    sl            # terminal screensaver train
+    toipe         # speed typing with good UI
+    tty-clock     # terminal screensaver clock
+    ttyper        # speed typing good feedback on misses
+    yt-dlp-light  # youtube downloader
+
+    # ---- wayland tools
+    swappy        # screenshot editing tool
+    wl-clipboard  # clipboard utils for wayland (wl-copy, wl-paste)
+    xdg-utils     # tools to integrate with xdg
+
+    # ---- apps
+    gimp          # Photoshop without the sugar
+    libreoffice   # Office without the suits
+    resources     # GUI resources monitor
+    thunderbird   # Mozilla Email client
+    vlc           # VideoLan Client
   ]);
 }
