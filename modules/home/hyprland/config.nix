@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   wayland.windowManager.hyprland = {
     settings = {
@@ -43,8 +43,8 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgb(98971A) rgb(CC241D) 45deg";
-        "col.inactive_border" = "0x00000000";
+        "col.active_border" = "rgb(${config.colorScheme.palette.base0C}) rgb(${config.colorScheme.palette.base0D}) 45deg";
+        "col.inactive_border" = "rgb(${config.colorScheme.palette.base01})";
         border_part_of_window = false;
         no_border_on_floating = false;
       };

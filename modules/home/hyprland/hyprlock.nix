@@ -8,7 +8,7 @@ in
     # BACKGROUND
     background {
       monitor =
-      path = ${../../../wallpapers/otherWallpaper/gruvbox/forest_road.jpg}
+      path = ${../../../wallpapers/otherWallpaper/badres.webp}
       blur_passes = 2
       contrast = 0.8916
       brightness = 0.8172
@@ -32,7 +32,7 @@ in
       text = cmd[update:1000] echo "$(date +"%k:%M")"
       color = rgba(235, 219, 178, .9)
       font_size = 115
-      font_family = Maple Mono Bold
+      font_family = DejaVu Sans Bold
       shadow_passes = 3
       position = 0, ${if (host == "laptop") then "-25" else "-150"}
       halign = center
@@ -45,7 +45,7 @@ in
       text = cmd[update:1000] echo "- $(date +"%A, %B %d") -"
       color = rgba(235, 219, 178, .9)
       font_size = 18
-      font_family = Maple Mono
+      font_family = DejaVu Sans
       shadow_passes = 3
       position = 0, ${if (host == "laptop") then "-225" else "-350"}
       halign = center
@@ -74,7 +74,7 @@ in
       text =   $USER
       color = rgba(235, 219, 178, 1)
       font_size = 15
-      font_family = Maple Mono Bold
+      font_family = DejaVu Sans Bold
       position = 0, ${if (host == "laptop") then "131" else "281"}
       halign = center
       valign = bottom
@@ -94,13 +94,17 @@ in
       color = rgba(235, 219, 178, .9)
       font_color = rgba(235, 219, 178, .9)
       font_size = 14
-      font_family = Maple Mono Bold
+      font_family = DejaVu Sans Bold
       fade_on_empty = false
-      placeholder_text = <i><span foreground="##fbf1c7">Enter Password</span></i>
+      placeholder_text = <i>Enter Password</i>
       hide_input = false
       position = 0, ${if (host == "laptop") then "50" else "200"}
       halign = center
       valign = bottom
+      inner_color = rgba(102, 92, 84, .33)
+      fail_transition = 500
+      fail_color = rgba(204, 34, 34, .66)
+      check_color = rgba(204, 136, 34, .66)
     }
   '';
 }

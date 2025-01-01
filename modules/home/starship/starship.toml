@@ -18,8 +18,10 @@ $julia\
 $nodejs\
 $rust\
 $ruby\
+$custom\
 [](fg:surface1 bg:surface2)\
 $docker_context\
+$nix_shell\
 [](fg:surface2 bg:overlay0)\
 $character(bg:overlay0)\
 """
@@ -28,21 +30,21 @@ right_format = "$time"
 
 # Sets user-defined palette
 # Palettes must be defined _after_ this line
-palette = "catppuccin_frappe"
+palette = "tokyonight_dark"
 command_timeout = 1000
 
 [character]
 # Note the use of Catppuccin color 'peach'
 format = "[$symbol ]($style bold)"
-success_symbol = "[[ 󰄛](fg:green bg:overlay0)[](fg:overlay0)  ](fg:rosewater)"
-error_symbol = "[[ 󰄛](fg:red bg:overlay0)[](fg:overlay0)  ](fg:rosewater)"
-vimcmd_symbol = "[[ 󰄛](fg:mauve bg:overlay0)[](fg:overlay0)  ](fg:rosewater)" # For use with zsh-vi-mode
-vimcmd_replace_one_symbol = '[[ 󰄛](fg:mauve bg:overlay0)[](fg:overlay0)  ](fg:mauve)'
-vimcmd_replace_symbol = '[[ 󰄛](fg:mauve bg:overlay0)[](fg:overlay0)  ](fg:mauve)'
-vimcmd_visual_symbol = '[[ 󰄛](fg:yellow bg:overlay0)[](fg:overlay0)  ](fg:yellow)'
+success_symbol = "[[](fg:overlay0)  ](fg:rosewater)"
+error_symbol = "[[](fg:overlay0)  ](fg:rosewater)"
+vimcmd_symbol = "[[](fg:overlay0)  ](fg:rosewater)" # For use with zsh-vi-mode
+vimcmd_replace_one_symbol = '[[](fg:overlay0)  ](fg:mauve)'
+vimcmd_replace_symbol = '[[](fg:overlay0)  ](fg:mauve)'
+vimcmd_visual_symbol = '[[](fg:overlay0)  ](fg:yellow)'
 
 [directory]
-style = "fg:red bg:base"
+style = "fg:subtext0 bg:base"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -57,73 +59,113 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "fg:maroon bg:surface0"
+style = "fg:subtext0 bg:surface0"
 format = '[[ $symbol $branch ]($style)]($style)'
 
 [git_status]
-style = "fg:maroon bg:surface0"
+style = "fg:subtext0 bg:surface0"
 format = '[[($all_status$ahead_behind )]($style)]($style)'
 
 [c]
 symbol = " "
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [docker_context]
 symbol = " "
-style = "fg:yellow bg:surface2"
-format = '[[ $symbol $context ](fg:yellow bg:surface2)]($style)$path'
+style = "fg:subtext1 bg:surface2"
+format = '[[ $symbol $context ](fg:subtext1 bg:surface2)]($style)$path'
 only_with_files = false
 
 [elixir]
 symbol = " "
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [elm]
 symbol = " "
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+
+[nix_shell]
+symbol = "󱄅 "
+style = "fg:text bg:surface1"
 
 [golang]
 symbol = " "
-style = "fg:peach bg:##cba6f7"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+style = "fg:text bg:##cba6f7"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [haskell]
 symbol = " "
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [java]
 symbol = " "
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [julia]
 symbol = " "
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [nodejs]
-symbol = ""
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+symbol = " "
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [rust]
-symbol = ""
-style = "fg:peach bg:surface1"
-format = '[[ $symbol ($version) ](fg:peach bg:surface1)]($style)'
+symbol = " "
+style = "fg:text bg:surface1"
+format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [ruby]
-symbol = ""
-style = "fg:peach bg:surface1"
-format = '[[ $symbol( $version) ](fg:peach bg:surface1)]($style)'
+symbol = " "
+style = "fg:text bg:surface1"
+format = '[[ $symbol( $version) ](fg:text bg:surface1)]($style)'
+
+[custom.nix]
+symbol = "󱄅 "
+command = "nix --version"
+detect_extensions = ["nix"]
+description = "nix language version"
+style = "fg:texxt bg:surface1"
+format = '[[ $symbol( $output) ](fg:text bg:surface1)]($style)'
 
 [time]
 disabled = false
 format = '[ $time](fg:rosewater)'
 time_format = '%T'
+
+[palettes.tokyonight_dark]
+crust = "#1f2335"
+mantle = "#24283b"
+base = "#292e42"
+surface0 = "#3b4261"
+surface1 = "#414868"
+surface2 = "#545c7e"
+overlay0 = "#565f89"
+overlay1 = "#636a92"
+overlay2 = "#737aa2"
+text = "#c0caf5"
+subtext1 = "#b4b9e5"
+subtext0 = "#a9b1d6"
+lavender = "#bb9af7"
+blue = "#3d59a1"
+sapphire = "#41a6b5"
+sky = "#7aa2f7"
+teal = "#4fd6be"
+green = "#c3e88d"
+yellow = "#ffc777"
+peach = "#ff9e64"
+maroon = "#ff757f"
+red = "#c53b53"
+mauve = "#9d7cd8"
+pink = "#ff007c"
+rosewater = "#dc8a78"
+flamingo = "#dd7878"
 
 
 # Palette definitions

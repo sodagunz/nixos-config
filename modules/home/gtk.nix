@@ -27,11 +27,12 @@ in
       size = 12;
     };
     theme = {
-      name = "Gruvbox-Green-Dark";
-      package = pkgs.gruvbox-gtk-theme.override {
+      name = "Tokyo-Night";
+      package = pkgs.tokyonight-gtk-theme.override {
         colorVariants = [ "dark" ];
-        themeVariants = [ "green" ];
-        tweakVariants = [ "macos" ];
+        themeVariants = [ "purple" ];
+        sizeVariants = [ "compact" ];
+        tweakVariants = [ "black" ];
       };
     };
     iconTheme = {

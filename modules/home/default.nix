@@ -24,7 +24,6 @@
     ./scripts/scripts.nix # personal scripts
     ./swayosd.nix # brightness / volume wiget
     ./swaync/swaync.nix # notification deamon
-    ./vscodium.nix # vscode forck
     ./waybar # status bar
     ./waypaper.nix # GUI wallpaper picker
     ./xdg-mimes.nix # xdg config

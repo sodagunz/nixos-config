@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 {
   home.packages = with pkgs; [ swayosd ];
 
@@ -18,8 +18,9 @@
         ",XF86AudioRaiseVolume, exec, swayosd-client --output-volume +2 --max-volume=100"
         ",XF86AudioLowerVolume, exec, swayosd-client --output-volume -2"
 
-        "$mainMod, f11, exec, swayosd-client --output-volume +2 --max-volume=100"
-        "$mainMod, f12, exec, swayosd-client --output-volume -2"
+        "$mainMod, f12, exec, swayosd-client --output-volume +2 --max-volume=100"
+        "$mainMod, f11, exec, swayosd-client --output-volume -2"
+        "$mainMod, f10, exec, swayosd-client --output-volume mute-toggle"
       ];
       bindr = [
         "CAPS,Caps_Lock,exec,swayosd-client --caps-lock"
@@ -34,7 +35,7 @@
         padding: 0px 10px;
         border-radius: 30px;
         border: 10px;
-        background: alpha(#111111, 0.99);
+        background: alpha(#${config.colorScheme.palette.base01}, 0.99);
     }
 
     #container {
@@ -42,7 +43,7 @@
     }
 
     image, label {
-        color: #FBF1C7;
+        color: #${config.colorScheme.palette.base07};
     }
 
     progressbar:disabled,
@@ -60,13 +61,13 @@
         min-height: inherit;
         border-radius: inherit;
         border: none;
-        background: alpha(#CCCCCC, 0.1);
+        background: alpha(#${config.colorScheme.palette.base06}, 0.1);
     }
     progress {
         min-height: inherit;
         border-radius: inherit;
         border: none;
-        background: #FBF1C7;
+        background: #${config.colorScheme.palette.base07};
     }
   '';
 }
