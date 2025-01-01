@@ -23,7 +23,7 @@ in
   programs.waybar.settings.mainBar = with custom; {
     position = "top";
     layer = "top";
-    height = "2rem";
+    height = 48;
     margin-top = 0;
     margin-bottom = 0;
     margin-left = 0;
