@@ -1,4 +1,4 @@
 { inputs, ... }:
 {
-  colorScheme = inputs.nix-colors.colorSchemes.tokyo-night-terminal-storm;
+  colorScheme = inputs.nix-colors.colorSchemes.tokyo-night-terminal-dark;
 }

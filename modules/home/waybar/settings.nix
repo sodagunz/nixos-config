@@ -21,9 +21,9 @@ let
 in
 {
   programs.waybar.settings.mainBar = with custom; {
-    position = "bottom";
+    position = "top";
     layer = "top";
-    height = 28;
+    height = "2rem";
     margin-top = 0;
     margin-bottom = 0;
     margin-left = 0;

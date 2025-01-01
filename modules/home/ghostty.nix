@@ -7,7 +7,7 @@ in
 
   xdg.configFile."ghostty/config".text = ''
     # Font
-    font-family = "Maple Mono"
+    font-family = "DejaVu Sans Mono"
     font-size = 17
     font-thicken = true
     font-feature = ss01
@@ -17,8 +17,8 @@ in
     adjust-box-thickness = 1
 
     # Theme
-    theme = "gruvbox"
-    background-opacity = 0.66
+    theme = "tokyonight"
+    background-opacity = 1.00
 
     cursor-style = bar
     cursor-style-blink = false
@@ -44,31 +44,5 @@ in
     gtk-wide-tabs = false
 
     auto-update = off
-  '';
-  xdg.configFile."ghostty/themes/gruvbox".text = ''
-    background = #151718
-    foreground = #fbf1c7
-
-    palette = 0=#3c3836
-    palette = 1=#cc241d
-    palette = 2=#98971a
-    palette = 3=#d79921
-    palette = 4=#458588
-    palette = 5=#b16286
-    palette = 6=#689d6a
-    palette = 7=#a89984
-    palette = 8=#928374
-    palette = 9=#fb4934
-    palette = 10=#b8bb26
-    palette = 11=#fabd2f
-    palette = 12=#83a598
-    palette = 13=#d3869b
-    palette = 14=#8ec07c
-    palette = 15=#fbf1c7
-
-    cursor-color = #D5C4A1
-
-    selection-foreground = #282828
-    selection-background = #98971A
   '';
 }
