@@ -4,6 +4,7 @@ let
 in
 {
   home.packages = [ pkgs.hyprlock ];
+
   xdg.configFile."hypr/hyprlock.conf".text = ''
     # BACKGROUND
     background {
@@ -101,10 +102,7 @@ in
       position = 0, ${if (host == "laptop") then "50" else "200"}
       halign = center
       valign = bottom
-      inner_color = rgba(102, 92, 84, .33)
-      fail_transition = 500
       fail_color = rgba(204, 34, 34, .66)
-      check_color = rgba(204, 136, 34, .66)
     }
   '';
 }

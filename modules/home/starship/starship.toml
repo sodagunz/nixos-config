@@ -44,7 +44,7 @@ vimcmd_replace_symbol = '[[](fg:overlay0)  ](fg:mauve)'
 vimcmd_visual_symbol = '[[](fg:overlay0)  ](fg:yellow)'
 
 [directory]
-style = "fg:subtext0 bg:base"
+style = "fg:green bg:base"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
