@@ -1,7 +1,7 @@
 { inputs, username, host, ... }: {
   imports = [
     ./audacious.nix # music player
-    ./bat.nix # better cat command
+    ./bat # better cat command
     ./browser.nix # firefox based browser
     ./btop.nix # resouces monitor 
     ./cava.nix # audio visualizer

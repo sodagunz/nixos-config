@@ -66,12 +66,12 @@ in
     tty-clock # cli clock
 
     ## GUI Apps
-    audacity
+    # audacity
     bleachbit # cache cleaner
     gimp
     libreoffice
-    nix-prefetch-github
-    obs-studio
+    nix-prefetch-github #prefetch nix info from github
+    # obs-studio
     pavucontrol # pulseaudio volume controle (GUI)
     pitivi # video editing
     qalculate-gtk # calculator

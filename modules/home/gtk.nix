@@ -27,7 +27,7 @@ in
       size = 12;
     };
     theme = {
-      name = "Tokyo-Night";
+      name = "Tokyonight-Purple-Dark-Compact";
       package = pkgs.tokyonight-gtk-theme.override {
         colorVariants = [ "dark" ];
         themeVariants = [ "purple" ];

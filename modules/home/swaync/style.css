@@ -1,21 +1,21 @@
 @define-color shadow rgba(0, 0, 0, 0.25);
 
-@define-color base #3C3836;
-@define-color mantle #282828;
-@define-color crust #1D2021;
+@define-color base #292e42;
+@define-color mantle #24283b;
+@define-color crust #1f2335;
 
-@define-color text #FBF1C7;
-@define-color subtext0 #CBDBB2;
-@define-color subtext1 #D5C4A1;
+@define-color text #c0caf5;
+@define-color subtext0 #a9b1a6;
+@define-color subtext1 #b4b9e5;
 
-@define-color surface0 #3C3836;
-@define-color surface1 #665C54;
-@define-color surface2 #7C6F64;
+@define-color surface0 #3b4261;
+@define-color surface1 #414868;
+@define-color surface2 #545c7e;
 
-@define-color green #98971A;
+@define-color green #9ece6a;
 
 * {
-    font-family: "NotoSansMono Nerd Font";
+    font-family: "DejaVu Sans Mono";
     background-clip: border-box;
 }
 
