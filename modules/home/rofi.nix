@@ -1,18 +1,18 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = (with pkgs; [ rofi-wayland ]);
 
   xdg.configFile."rofi/theme.rasi".text = ''
     * {
-      bg-col: #1D2021;
-      bg-col-light: #282828;
-      border-col: #A89984;
-      selected-col: #3C3836;
-      green: #98971A;
-      fg-col: #FBF1C7;
-      fg-col2: #EBDBB2;
-      grey: #BDAE93;
-      highlight: @green;
+      bg-col: #${config.colorScheme.palette.base00};
+      bg-col-light: #${config.colorScheme.palette.base02};
+      border-col: #${config.colorScheme.palette.base01};
+      selected-col: #${config.colorScheme.palette.base03};
+      cyan: #${config.colorScheme.palette.base0C};
+      fg-col: #${config.colorScheme.palette.base07};
+      fg-col2: #${config.colorScheme.palette.base06};
+      grey: #${config.colorScheme.palette.base05};
+      highlight: @cyan;
     }
   '';
 
@@ -64,7 +64,7 @@
     }
 
     prompt {
-      background-color: @green;
+      background-color: @cyan;
       padding: 4px;
       text-color: @bg-col-light;
       border-radius: 3px;
@@ -124,7 +124,7 @@
 
     button selected {
       background-color: @bg-col;
-      text-color: @green;
+      text-color: @cyan;
     }
   '';
 }

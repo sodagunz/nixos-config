@@ -1,21 +1,20 @@
-{ ... }:
+{ config, ... }:
 let
   custom = {
     font = "Maple Mono";
     font_size = "18px";
     font_weight = "bold";
-    text_color = "#FBF1C7";
-    background_0 = "#1D2021";
-    background_1 = "#282828";
-    border_color = "#928374";
-    red = "#CC241D";
-    green = "#98971A";
-    yellow = "#FABD2F";
-    blue = "#458588";
-    magenta = "#B16286";
-    cyan = "#689D6A";
-    orange = "#D65D0E";
-    orange_bright = "#FE8019";
+    text_color = "#${config.colorScheme.palette.base07}";
+    background_0 = "#${config.colorScheme.palette.base00}";
+    background_1 = "#${config.colorScheme.palette.base02}";
+    border_color = "#${config.colorScheme.palette.base01}";
+    red = "#${config.colorScheme.palette.base08}";
+    green = "#${config.colorScheme.palette.base0C}";
+    yellow = "#${config.colorScheme.palette.base0A}";
+    blue = "#${config.colorScheme.palette.base0D}";
+    magenta = "#${config.colorScheme.palette.base0E}";
+    cyan = "#${config.colorScheme.palette.base0B}";
+    orange = "#${config.colorScheme.palette.base0F}";
     opacity = "1";
     indicator_height = "2px";
   };
@@ -34,8 +33,8 @@ in
     }
 
     window#waybar {
-      background: #282828;
-      border-top: 1px solid #928374;
+      background: ${background_0};
+      border-top: 1px solid ${border_color};
     }
 
     tooltip {
@@ -51,7 +50,7 @@ in
       padding-left: 15px;
     }
     #workspaces button {
-      color: ${yellow};
+      color: ${green};
       padding-left:  5px;
       padding-right: 5px;
       margin-right: 10px;
@@ -60,7 +59,7 @@ in
       color: ${text_color};
     }
     #workspaces button.active {
-      color: ${orange_bright};
+      color: ${cyan};
     }
 
     #clock {

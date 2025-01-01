@@ -20,8 +20,8 @@
         "hyprlock"
 
         ## App auto start
-        # "[workspace 1 silent] zen"
-        # "[workspace 2 silent] kitty"
+        "[workspace 1 silent] zen"
+        "[workspace 2 silent] kitty"
       ];
 
       input = {
@@ -138,14 +138,14 @@
 
       bind = [
         # show keybinds list
-        "$mainMod, H, exec, show-keybinds"
+        "$mainMod ALT, H, exec, show-keybinds"
 
         # keybindings
         "$mainMod, A, exec, ghostty"
         "$mainMod ALT, A, exec, [float; center; size 950 650] kitty"
         "$mainMod, D, exec, [fullscreen] ghostty"
         "$mainMod SHIFT, A, exec, [float; center; size 950 650] ghostty"
-        "$mainMod, W, exec, hyprctl dispatch exec '[workspace 1 silent] firefox'"
+        "$mainMod, W, exec, hyprctl dispatch exec '[workspace 1 silent] zen'"
         "$mainMod, Q, killactive,"
         "$mainMod, F, fullscreen, 0"
         "$mainMod SHIFT, F, fullscreen, 1"

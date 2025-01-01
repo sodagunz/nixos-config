@@ -42,6 +42,10 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
+
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
+    };
   };
 
   outputs =
