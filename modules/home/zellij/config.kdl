@@ -1,0 +1,33 @@
+default_shell "fish"
+keybinds {
+  normal {
+    bind "Enter" { MessagePlugin "autolock" {}; }
+    // Note: You may want to bind/intercept/relay other keys to activate this plugin,
+    // like `Ctrl+r` which opens shell history in Atuin / FZF. For example:
+    // bind "Ctrl r" {  // Intercept `Ctrl+r`.
+    //     WriteChars "\u{0012}";  // Passthru `Ctrl+r`
+    //     MessagePlugin "autolock" {};  // Activate the autolock plugin.
+    // }      
+  }
+
+  shared{
+    bind "Alt f" { SwitchToMode "Normal" ToggleFocusFullscreen }
+    bind "Alt d" { SwitchToMode "Normal" Detach }
+  }
+  unbind "Ctrl g"
+}
+plugins {
+  "filepicker"
+  "tab-bar"
+  "status-bar"
+  "strider"
+  "compact-bar"
+  "session-manager"
+  autolock location="https://github.com/fresh2dev/zellij-autolock/releases/latest/download/zellij-autolock.wasm" {
+    triggers "nvim|vim|v"  // Lock when any open these programs open. They are expected to unlock themselves when closed (e.g., using zellij.vim plugin).
+    watch_triggers "fzf|zoxide|atuin|atac"  // Lock when any of these open and monitor until closed.
+    watch_interval "1.0"  // When monitoring, check every X seconds.
+  }
+//...
+}
+theme "tokyo-night-dark"

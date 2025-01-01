@@ -5,7 +5,9 @@
     ./browser.nix # firefox based browser
     ./btop.nix # resouces monitor 
     ./cava.nix # audio visualizer
+    ./colors #nix colorscheme manager
     ./fastfetch.nix # fetch tool
+    ./fish #shell
     ./fzf.nix # fuzzy finder
     ./gaming.nix # packages related to gaming
     ./ghostty.nix # terminal
@@ -22,14 +24,13 @@
     ./retroarch.nix
     ./rofi.nix # launcher
     ./scripts/scripts.nix # personal scripts
-    ./swayosd.nix # brightness / volume wiget
+    ./starship #shell bar
     ./swaync/swaync.nix # notification deamon
+    ./swayosd.nix # brightness / volume wiget
     ./waybar # status bar
     ./waypaper.nix # GUI wallpaper picker
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
-    ./fish #shell
-    ./starship #shell bar
-    ./colors #nix colorscheme manager
+    ./zellij #terminal multiplexer
   ];
 }

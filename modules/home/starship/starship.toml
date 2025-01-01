@@ -59,11 +59,11 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "fg:subtext0 bg:surface0"
+style = "fg:peach bg:surface0"
 format = '[[ $symbol $branch ]($style)]($style)'
 
 [git_status]
-style = "fg:subtext0 bg:surface0"
+style = "fg:peach bg:surface0"
 format = '[[($all_status$ahead_behind )]($style)]($style)'
 
 [c]
