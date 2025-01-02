@@ -7,6 +7,7 @@
         "systemctl --user import-environment &"
         "hash dbus-update-activation-environment 2>/dev/null &"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &"
+        "gnome-keyring-daemon --start --components=secrets"
 
         "nm-applet &"
         "poweralertd &"
@@ -21,7 +22,7 @@
 
         ## App auto start
         "[workspace 1 silent] zen"
-        "[workspace 2 silent] kitty"
+        "[workspace 2 silent] ghostty"
       ];
 
       input = {

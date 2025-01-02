@@ -88,8 +88,9 @@ style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
 
 [nix_shell]
+format='[via $symbol $state(\($name\)) ]($style)'
 symbol = "󱄅 "
-style = "fg:text bg:surface1"
+style = "fg:subtext1 bg:surface2"
 
 [golang]
 symbol = " "
