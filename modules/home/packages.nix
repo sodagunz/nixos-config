@@ -45,7 +45,8 @@
     valgrind            # c memory analyzer
     zenity              # uses GTK to retrieve user value
     inputs.alejandra.defaultPackage.${system} # nixpkgs formatter
-    python312Packages.ipython                 # Jupyter Notebooks
+    python312Packages.ipython                 # interactive python
+
 
     # ---- system / media
     caligula      # disk imaging/burning

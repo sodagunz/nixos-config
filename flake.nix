@@ -3,88 +3,82 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nur.url = "github:nix-community/NUR";
-
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hyprpicker.url = "github:hyprwm/hyprpicker";
 
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
+    ghostty.url = "github:ghostty-org/ghostty";
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+    };
 
     hyprland = {
       type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
       submodules = true;
+      url = "https://github.com/hyprwm/Hyprland";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hypr-contrib.url = "github:hyprwm/contrib";
+    hyprmag.url = "github:SIMULATAN/hyprmag";
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+    nix-colors.url = "github:misterio77/nix-colors";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nur.url = "github:nix-community/NUR";
+    nvf.url = "github:notashelf/nvf";
 
     spicetify-nix = {
-      url = "github:gerg-l/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:gerg-l/spicetify-nix";
     };
-
-    hyprmag.url = "github:SIMULATAN/hyprmag";
-
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     yazi-plugins = {
-      url = "github:yazi-rs/plugins";
       flake = false;
+      url = "github:yazi-rs/plugins";
     };
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
-    };
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs =
-    { nixpkgs, self, ... }@inputs:
-    let
-      username = "gunz";
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
+  outputs = {
+    nixpkgs,
+    self,
+    ...
+  } @ inputs: let
+    username = "gunz";
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations = {
+      desktop = nixpkgs.lib.nixosSystem {
         inherit system;
-        config.allowUnfree = true;
+        modules = [
+          ./hosts/desktop
+        ];
+        specialArgs = {
+          host = "desktop";
+          inherit self inputs username;
+        };
       };
-      lib = nixpkgs.lib;
-    in
-    {
-      nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/desktop ];
-          specialArgs = {
-            host = "desktop";
-            inherit self inputs username;
-          };
+      laptop = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/laptop
+        ];
+        specialArgs = {
+          host = "laptop";
+          inherit self inputs username;
         };
-        laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/laptop ];
-          specialArgs = {
-            host = "laptop";
-            inherit self inputs username;
-          };
-        };
-        vm = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/vm ];
-          specialArgs = {
-            host = "vm";
-            inherit self inputs username;
-          };
+      };
+      vm = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/vm
+        ];
+        specialArgs = {
+          host = "vm";
+          inherit self inputs username;
         };
       };
     };
+  };
 }
