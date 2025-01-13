@@ -1,14 +1,15 @@
-{ pkgs, lib, ... }:
-{
-  programs.dconf.enable = true;
-  programs.zsh.enable = true;
-  programs.fish.enable = true;
-  programs.firefox.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    # pinentryFlavor = "";
+_: {
+  programs = {
+    dconf.enable = true;
+    zsh.enable = true;
+    fish.enable = true;
+    firefox.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      # pinentryFlavor = "";
+    };
+    nix-ld.enable = true;
+    ssh.startAgent = true;
   };
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ ];
 }

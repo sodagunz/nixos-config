@@ -1,4 +1,4 @@
-{...}: {
+_: {
   # #NOTE: replaced by nvf
   # programs.neovim = {
   #   enable = true;
@@ -15,17 +15,24 @@
       vim = {
         viAlias = false;
         vimAlias = true;
+        preventJunkFiles = true;
+        hideSearchHighlight = true;
+        useSystemClipboard = true;
+        bell = "visual";
+        searchCase = "smart";
+        undoFile.enable = true;
+
         lsp = {
           enable = true;
-          formatOnSave = true;
-          lspkind.enable = false;
-          lightbulb.enable = true;
-          lspsaga.enable = false;
-          trouble.enable = true;
-          lspSignature.enable = true;
-          otter-nvim.enable = false;
-          lsplines.enable = true;
-          nvim-docs-view.enable = true;
+          formatOnSave = true; # format files on save, creates a backup
+          lspkind.enable = true; # pictograms on LSP suggestions
+          lightbulb.enable = true; # lightbulb when codeaction exists
+          lspsaga.enable = false; # improved lsp experience
+          trouble.enable = true; # improved diagnostics
+          lspSignature.enable = true; # show function signature as you type
+          otter-nvim.enable = true; # creates tmp subbuffer with only one language
+          lsplines.enable = false; # renders diagnostics on virtual lines kinda like rustc
+          nvim-docs-view.enable = false; # shows docs on a new panel #mapped to l by default which sucks
         };
 
         debugger = {
@@ -64,12 +71,16 @@
           nvim-scrollbar.enable = true;
           nvim-web-devicons.enable = true;
           nvim-cursorline.enable = true;
-          cinnamon-nvim.enable = true;
-          fidget-nvim.enable = true;
+          cinnamon-nvim.enable = true; #softened scrolling
+          fidget-nvim.enable = true; #fidget spinner for notify
 
           highlight-undo.enable = true;
           indent-blankline.enable = true;
+
+          cellular-automaton.enable = true;
         };
+
+        minimap.codewindow.enable = true;
 
         statusline = {
           lualine = {
@@ -88,6 +99,7 @@
         autopairs.nvim-autopairs.enable = true;
 
         autocomplete.nvim-cmp.enable = true;
+        autocomplete.nvim-cmp.mappings.confirm = "<S-CR>";
         snippets.luasnip.enable = true;
 
         filetree.neo-tree.enable = true; #TODO replace with oil
@@ -98,7 +110,7 @@
 
         binds = {
           whichKey.enable = true;
-          cheatsheet.enable = true;
+          cheatsheet.enable = false; # visual aid for vim navigation
         };
 
         telescope.enable = true;
@@ -111,7 +123,7 @@
 
         notify.nvim-notify.enable = true;
 
-        projects.project-nvim.enable = false; # Never used before
+        projects.project-nvim.enable = true; # Never used before
 
         utility = {
           ccc.enable = false;
@@ -119,8 +131,8 @@
           diffview-nvim.enable = true;
           motion = {
             hop.enable = true;
-            leap.enable = true;
-            precognition.enable = true;
+            leap.enable = false;
+            precognition.enable = false;
           };
 
           images.image-nvim.enable = false;
@@ -129,8 +141,6 @@
         ui = {
           borders.enable = true;
           noice.enable = true;
-          colorizer.enable = true;
-          modes-nvim.enable = false; #??
           illuminate.enable = true;
           breadcrumbs = {
             enable = true;
