@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+_: {
   imports = [
     ./hardware-configuration.nix
     ./../../modules/core

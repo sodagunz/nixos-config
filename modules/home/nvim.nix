@@ -1,10 +1,4 @@
 _: {
-  # #NOTE: replaced by nvf
-  # programs.neovim = {
-  #   enable = true;
-  #   vimAlias = true;
-  # };
-
   programs.vim = {
     enable = true;
   };
@@ -161,5 +155,10 @@ _: {
         comments.comment-nvim.enable = true;
       };
     };
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 }

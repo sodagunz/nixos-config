@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.git = {
     enable = true;
 
@@ -11,6 +10,7 @@
       credential.helper = "store";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
+      push.autoSetupRemote = true;
     };
 
     delta = {
@@ -24,7 +24,7 @@
     };
   };
 
-  home.packages = [ pkgs.gh ]; # pkgs.git-lfs
+  home.packages = [pkgs.gh]; # pkgs.git-lfs
 
   programs.zsh.shellAliases = {
     g = "lazygit";

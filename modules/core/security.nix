@@ -1,7 +1,10 @@
-{ ... }:
-{
-  security.rtkit.enable = true;
-  security.sudo.enable = true;
-  security.pam.services.sddm.enableGnomeKeyring = true;
-  security.pam.services.hyprlock.enableGnomeKeyring = true;
+_: {
+  security = {
+    rtkit.enable = true;
+    sudo.enable = true;
+    pam.services = {
+      sddm.enableGnomeKeyring = true;
+      hyprlock.enableGnomeKeyring = true;
+    };
+  };
 }
