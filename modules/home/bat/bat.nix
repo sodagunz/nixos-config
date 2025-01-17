@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.bat = {
     enable = true;
     config = {
@@ -25,6 +24,5 @@
         file = "extras/sublime/tokyonight_night.tmTheme";
       };
     };
-
   };
 }

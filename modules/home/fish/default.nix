@@ -1,6 +1,3 @@
-{ ... }:
-{
-  imports = [
-    ./fish.nix
-  ];
+{...}: {
+  imports = [./fish.nix];
 }

@@ -1,9 +1,14 @@
-{ inputs, username, host, ... }: {
+{
+  inputs,
+  username,
+  host,
+  ...
+}: {
   imports = [
     ./audacious.nix # music player
     ./bat # better cat command
     ./browser.nix # firefox based browser
-    ./btop.nix # resouces monitor 
+    ./btop.nix # resouces monitor
     ./cava.nix # audio visualizer
     ./colors #nix colorscheme manager
     ./fastfetch.nix # fetch tool

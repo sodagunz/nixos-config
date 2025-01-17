@@ -1,8 +1,60 @@
 {
   description = "Guinz NixOS configuration";
+  outputs = {
+    nixpkgs,
+    self,
+    flake-parts,
+    ...
+  } @ inputs: let
+    username = "guinz";
+  in
+    flake-parts.lib.mkFlake {
+      inherit inputs;
+    } {
+      # Use any system
+      systems = import inputs.systems;
+
+      flake = {
+        nixosConfigurations = {
+          desktop = nixpkgs.lib.nixosSystem {
+            modules = [./hosts/desktop];
+            specialArgs = {
+              host = "desktop";
+              inherit self inputs username;
+            };
+          };
+          laptop = nixpkgs.lib.nixosSystem {
+            modules = [./hosts/laptop];
+            specialArgs = {
+              host = "laptop";
+              inherit self inputs username;
+            };
+          };
+          vm = nixpkgs.lib.nixosSystem {
+            modules = [./hosts/vm];
+            specialArgs = {
+              host = "vm";
+              inherit self inputs username;
+            };
+          };
+        };
+
+        perSystem = {pkgs, ...}: {
+          formatter = pkgs.alejandra;
+
+          checks = {
+            nix-fmt = pkgs.runCommand "nix-fmt-check" {nativeBuildInputs = [pkgs.alejandra];} ''
+              alejandra --check ${self} < /dev/null | tee $out
+            '';
+          };
+        };
+      };
+    };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    systems.url = "github:nix-systems/default";
 
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     ghostty.url = "github:ghostty-org/ghostty";
@@ -38,47 +90,5 @@
     };
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-  };
-
-  outputs = {
-    nixpkgs,
-    self,
-    ...
-  } @ inputs: let
-    username = "gunz";
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/desktop
-        ];
-        specialArgs = {
-          host = "desktop";
-          inherit self inputs username;
-        };
-      };
-      laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/laptop
-        ];
-        specialArgs = {
-          host = "laptop";
-          inherit self inputs username;
-        };
-      };
-      vm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/vm
-        ];
-        specialArgs = {
-          host = "vm";
-          inherit self inputs username;
-        };
-      };
-    };
   };
 }

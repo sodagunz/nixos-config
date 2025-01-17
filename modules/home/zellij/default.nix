@@ -1,4 +1,3 @@
-{ ... }:
-{
-  imports = [ ./zellij.nix ];
+{...}: {
+  imports = [./zellij.nix];
 }

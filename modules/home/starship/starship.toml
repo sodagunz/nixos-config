@@ -30,254 +30,254 @@ right_format = "$time"
 
 # Sets user-defined palette
 # Palettes must be defined _after_ this line
-palette = "tokyonight_dark"
 command_timeout = 1000
+palette         = "tokyonight_dark"
 
 [character]
 # Note the use of Catppuccin color 'peach'
-format = "[$symbol ]($style bold)"
-success_symbol = "[[](fg:overlay0)  ](fg:rosewater)"
-error_symbol = "[[](fg:overlay0)  ](fg:rosewater)"
-vimcmd_symbol = "[[](fg:overlay0)  ](fg:rosewater)" # For use with zsh-vi-mode
+error_symbol              = "[[](fg:overlay0)  ](fg:rosewater)"
+format                    = "[$symbol ]($style bold)"
+success_symbol            = "[[](fg:overlay0)  ](fg:rosewater)"
 vimcmd_replace_one_symbol = '[[](fg:overlay0)  ](fg:mauve)'
-vimcmd_replace_symbol = '[[](fg:overlay0)  ](fg:mauve)'
-vimcmd_visual_symbol = '[[](fg:overlay0)  ](fg:yellow)'
+vimcmd_replace_symbol     = '[[](fg:overlay0)  ](fg:mauve)'
+vimcmd_symbol             = "[[](fg:overlay0)  ](fg:rosewater)" # For use with zsh-vi-mode
+vimcmd_visual_symbol      = '[[](fg:overlay0)  ](fg:yellow)'
 
 [directory]
-style = "fg:green bg:base"
-format = "[ $path ]($style)"
+format            = "[ $path ]($style)"
+style             = "fg:green bg:base"
 truncation_length = 3
 truncation_symbol = "…/"
 
 [directory.substitutions]
 "Documents" = " "
 "Downloads" = " "
-"Music" = " "
-"Pictures" = " "
-"Projects" = " "
+"Music"     = " "
+"Pictures"  = " "
+"Projects"  = " "
 "Workspace" = "󰲋 "
 
 [git_branch]
-symbol = ""
-style = "fg:peach bg:surface0"
 format = '[[ $symbol $branch ]($style)]($style)'
+style  = "fg:peach bg:surface0"
+symbol = ""
 
 [git_status]
-style = "fg:peach bg:surface0"
 format = '[[($all_status$ahead_behind )]($style)]($style)'
+style  = "fg:peach bg:surface0"
 
 [c]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [docker_context]
-symbol = " "
-style = "fg:subtext1 bg:surface2"
-format = '[[ $symbol $context ](fg:subtext1 bg:surface2)]($style)$path'
+format          = '[[ $symbol $context ](fg:subtext1 bg:surface2)]($style)$path'
 only_with_files = false
+style           = "fg:subtext1 bg:surface2"
+symbol          = " "
 
 [elixir]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [elm]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [nix_shell]
-format='[via $symbol $state(\($name\)) ]($style)'
+format = '[via $symbol $state(\($name\)) ]($style)'
+style  = "fg:subtext1 bg:surface2"
 symbol = "󱄅 "
-style = "fg:subtext1 bg:surface2"
 
 [golang]
-symbol = " "
-style = "fg:text bg:##cba6f7"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:##cba6f7"
+symbol = " "
 
 [haskell]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [java]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [julia]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [nodejs]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [rust]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol ($version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [ruby]
-symbol = " "
-style = "fg:text bg:surface1"
 format = '[[ $symbol( $version) ](fg:text bg:surface1)]($style)'
+style  = "fg:text bg:surface1"
+symbol = " "
 
 [custom.nix]
-symbol = "󱄅 "
-command = "nix --version"
+command           = "nix --version"
+description       = "nix language version"
 detect_extensions = ["nix"]
-description = "nix language version"
-style = "fg:texxt bg:surface1"
-format = '[[ $symbol( $output) ](fg:text bg:surface1)]($style)'
+format            = '[[ $symbol( $output) ](fg:text bg:surface1)]($style)'
+style             = "fg:texxt bg:surface1"
+symbol            = "󱄅 "
 
 [time]
-disabled = false
-format = '[ $time](fg:rosewater)'
+disabled    = false
+format      = '[ $time](fg:rosewater)'
 time_format = '%T'
 
 [palettes.tokyonight_dark]
-crust = "#1f2335"
-mantle = "#24283b"
-base = "#292e42"
-surface0 = "#3b4261"
-surface1 = "#414868"
-surface2 = "#545c7e"
-overlay0 = "#565f89"
-overlay1 = "#636a92"
-overlay2 = "#737aa2"
-text = "#c0caf5"
-subtext1 = "#b4b9e5"
-subtext0 = "#a9b1d6"
-lavender = "#bb9af7"
-blue = "#3d59a1"
-sapphire = "#41a6b5"
-sky = "#7aa2f7"
-teal = "#4fd6be"
-green = "#9ece6a"
-yellow = "#ffc777"
-peach = "#ff9e64"
-maroon = "#ff757f"
-red = "#c53b53"
-mauve = "#9d7cd8"
-pink = "#ff007c"
+base      = "#292e42"
+blue      = "#3d59a1"
+crust     = "#1f2335"
+flamingo  = "#dd7878"
+green     = "#9ece6a"
+lavender  = "#bb9af7"
+mantle    = "#24283b"
+maroon    = "#ff757f"
+mauve     = "#9d7cd8"
+overlay0  = "#565f89"
+overlay1  = "#636a92"
+overlay2  = "#737aa2"
+peach     = "#ff9e64"
+pink      = "#ff007c"
+red       = "#c53b53"
 rosewater = "#dc8a78"
-flamingo = "#dd7878"
+sapphire  = "#41a6b5"
+sky       = "#7aa2f7"
+subtext0  = "#a9b1d6"
+subtext1  = "#b4b9e5"
+surface0  = "#3b4261"
+surface1  = "#414868"
+surface2  = "#545c7e"
+teal      = "#4fd6be"
+text      = "#c0caf5"
+yellow    = "#ffc777"
 
 
 # Palette definitions
 [palettes.catppuccin_latte]
+base      = "#eff1f5"
+blue      = "#1e66f5"
+crust     = "#dce0e8"
+flamingo  = "#dd7878"
+green     = "#40a02b"
+lavender  = "#7287fd"
+mantle    = "#e6e9ef"
+maroon    = "#e64553"
+mauve     = "#8839ef"
+overlay0  = "#9ca0b0"
+overlay1  = "#8c8fa1"
+overlay2  = "#7c7f93"
+peach     = "#fe640b"
+pink      = "#ea76cb"
+red       = "#d20f39"
 rosewater = "#dc8a78"
-flamingo = "#dd7878"
-pink = "#ea76cb"
-mauve = "#8839ef"
-red = "#d20f39"
-maroon = "#e64553"
-peach = "#fe640b"
-yellow = "#df8e1d"
-green = "#40a02b"
-teal = "#179299"
-sky = "#04a5e5"
-sapphire = "#209fb5"
-blue = "#1e66f5"
-lavender = "#7287fd"
-text = "#4c4f69"
-subtext1 = "#5c5f77"
-subtext0 = "#6c6f85"
-overlay2 = "#7c7f93"
-overlay1 = "#8c8fa1"
-overlay0 = "#9ca0b0"
-surface2 = "#acb0be"
-surface1 = "#bcc0cc"
-surface0 = "#ccd0da"
-base = "#eff1f5"
-mantle = "#e6e9ef"
-crust = "#dce0e8"
+sapphire  = "#209fb5"
+sky       = "#04a5e5"
+subtext0  = "#6c6f85"
+subtext1  = "#5c5f77"
+surface0  = "#ccd0da"
+surface1  = "#bcc0cc"
+surface2  = "#acb0be"
+teal      = "#179299"
+text      = "#4c4f69"
+yellow    = "#df8e1d"
 
 [palettes.catppuccin_frappe]
+base      = "#303446"
+blue      = "#8caaee"
+crust     = "#232634"
+flamingo  = "#eebebe"
+green     = "#a6d189"
+lavender  = "#babbf1"
+mantle    = "#292c3c"
+maroon    = "#ea999c"
+mauve     = "#ca9ee6"
+overlay0  = "#737994"
+overlay1  = "#838ba7"
+overlay2  = "#949cbb"
+peach     = "#ef9f76"
+pink      = "#f4b8e4"
+red       = "#e78284"
 rosewater = "#f2d5cf"
-flamingo = "#eebebe"
-pink = "#f4b8e4"
-mauve = "#ca9ee6"
-red = "#e78284"
-maroon = "#ea999c"
-peach = "#ef9f76"
-yellow = "#e5c890"
-green = "#a6d189"
-teal = "#81c8be"
-sky = "#99d1db"
-sapphire = "#85c1dc"
-blue = "#8caaee"
-lavender = "#babbf1"
-text = "#c6d0f5"
-subtext1 = "#b5bfe2"
-subtext0 = "#a5adce"
-overlay2 = "#949cbb"
-overlay1 = "#838ba7"
-overlay0 = "#737994"
-surface2 = "#626880"
-surface1 = "#51576d"
-surface0 = "#414559"
-base = "#303446"
-mantle = "#292c3c"
-crust = "#232634"
+sapphire  = "#85c1dc"
+sky       = "#99d1db"
+subtext0  = "#a5adce"
+subtext1  = "#b5bfe2"
+surface0  = "#414559"
+surface1  = "#51576d"
+surface2  = "#626880"
+teal      = "#81c8be"
+text      = "#c6d0f5"
+yellow    = "#e5c890"
 
 [palettes.catppuccin_macchiato]
+base      = "#24273a"
+blue      = "#8aadf4"
+crust     = "#181926"
+flamingo  = "#f0c6c6"
+green     = "#a6da95"
+lavender  = "#b7bdf8"
+mantle    = "#1e2030"
+maroon    = "#ee99a0"
+mauve     = "#c6a0f6"
+overlay0  = "#6e738d"
+overlay1  = "#8087a2"
+overlay2  = "#939ab7"
+peach     = "#f5a97f"
+pink      = "#f5bde6"
+red       = "#ed8796"
 rosewater = "#f4dbd6"
-flamingo = "#f0c6c6"
-pink = "#f5bde6"
-mauve = "#c6a0f6"
-red = "#ed8796"
-maroon = "#ee99a0"
-peach = "#f5a97f"
-yellow = "#eed49f"
-green = "#a6da95"
-teal = "#8bd5ca"
-sky = "#91d7e3"
-sapphire = "#7dc4e4"
-blue = "#8aadf4"
-lavender = "#b7bdf8"
-text = "#cad3f5"
-subtext1 = "#b8c0e0"
-subtext0 = "#a5adcb"
-overlay2 = "#939ab7"
-overlay1 = "#8087a2"
-overlay0 = "#6e738d"
-surface2 = "#5b6078"
-surface1 = "#494d64"
-surface0 = "#363a4f"
-base = "#24273a"
-mantle = "#1e2030"
-crust = "#181926"
+sapphire  = "#7dc4e4"
+sky       = "#91d7e3"
+subtext0  = "#a5adcb"
+subtext1  = "#b8c0e0"
+surface0  = "#363a4f"
+surface1  = "#494d64"
+surface2  = "#5b6078"
+teal      = "#8bd5ca"
+text      = "#cad3f5"
+yellow    = "#eed49f"
 
 [palettes.catppuccin_mocha]
+base      = "#1e1e2e"
+blue      = "#89b4fa"
+crust     = "peach"
+flamingo  = "#f2cdcd"
+green     = "#a6e3a1"
+lavender  = "#b4befe"
+mantle    = "#181825"
+maroon    = "#eba0ac"
+mauve     = "#cba6f7"
+overlay0  = "#6c7086"
+overlay1  = "#7f849c"
+overlay2  = "#9399b2"
+peach     = "#fab387"
+pink      = "#f5c2e7"
+red       = "#f38ba8"
 rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "peach"
+sapphire  = "#74c7ec"
+sky       = "#89dceb"
+subtext0  = "#a6adc8"
+subtext1  = "#bac2de"
+surface0  = "#313244"
+surface1  = "#45475a"
+surface2  = "#585b70"
+teal      = "#94e2d5"
+text      = "#cdd6f4"
+yellow    = "#f9e2af"

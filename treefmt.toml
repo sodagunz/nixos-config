@@ -2,31 +2,38 @@
 
 # Exclude files or directories matching the specified globs
 excludes = [
-    "LICENSE",
-    "*.png",
-    "*.jpg",
-    "*.md",
-    "*.lock",
-    "*.zip",
-    "*.css",
-    "*.json",
-    "*.zsh",
-    "*/packages.nix",
-    "*/home/default.nix",
-    "treefmt.toml",
+  "*.css",
+  "*.jpg",
+  "*.json",
+  "*.lock",
+  "*.md",
+  "*.png",
+  "*.webp",
+  "*.zip",
+  "*.zsh",
+  "LICENSE",
 ]
 
 [formatter.nix]
-command = "nixfmt"
-options = [ "-sv", "-w" ,"80" ]
-includes = [ "*.nix" ]
-excludes = [ ]
+command  = "alejandra"
+excludes = []
+includes = ["*.nix"]
 
 [formatter.sh]
-command = "shfmt"
-options = [ "-l", "-w", "-ci", "-sr", "-i", "4" ]
-includes = [ "*.sh" ]
+command  = "shfmt"
 excludes = []
+includes = ["*.sh"]
+options  = ["-l", "-w", "-ci", "-sr", "-i", "4"]
+
+[formatter.toml]
+command  = "taplo"
+includes = ["*.toml"]
+options  = ["fmt", "-o", "align_entries=true", "-o", "reorder_keys=true"]
+
+[formatter.kdl]
+command  = "kdlfmt"
+includes = ["*kdl"]
+options  = ["format"]
 
 
 # Log paths that did not match any formatters at the specified log level

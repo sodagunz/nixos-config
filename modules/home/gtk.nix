@@ -1,11 +1,13 @@
-{ pkgs, config, ... }:
-let
-  monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix { };
+{
+  pkgs,
+  config,
+  ...
+}: let
+  monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {};
   monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix {
     inherit monolisa;
   };
-in
-{
+in {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -29,15 +31,15 @@ in
     theme = {
       name = "Tokyonight-Purple-Dark-Compact";
       package = pkgs.tokyonight-gtk-theme.override {
-        colorVariants = [ "dark" ];
-        themeVariants = [ "purple" ];
-        sizeVariants = [ "compact" ];
-        tweakVariants = [ "black" ];
+        colorVariants = ["dark"];
+        themeVariants = ["purple"];
+        sizeVariants = ["compact"];
+        tweakVariants = ["black"];
       };
     };
     iconTheme = {
       name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme.override { color = "black"; };
+      package = pkgs.papirus-icon-theme.override {color = "black";};
     };
     cursorTheme = {
       name = "Bibata-Modern-Ice";

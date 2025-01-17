@@ -1,9 +1,7 @@
-{ inputs, pkgs, ... }:
-let
-  ghostty = inputs.ghostty.packages.x86_64-linux.default;
-in
-{
-  home.packages = (with pkgs; [ ghostty ]);
+{inputs, ...}: let
+  ghostty = inputs.ghostty.packages.x86_64-linux.default; #FIXME use get per system
+in {
+  home.packages = [ghostty];
 
   xdg.configFile."ghostty/config".text = ''
     # Font

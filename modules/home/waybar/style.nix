@@ -1,5 +1,4 @@
-{ config, ... }:
-let
+{config, ...}: let
   custom = {
     font = "Maple Mono";
     font_size = "18px";
@@ -18,8 +17,7 @@ let
     opacity = "1";
     indicator_height = "2px";
   };
-in
-{
+in {
   programs.waybar.style = with custom; ''
     * {
       border: none;

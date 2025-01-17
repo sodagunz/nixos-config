@@ -1,6 +1,9 @@
-{ pkgs, config, ... }:
 {
-  home.packages = (with pkgs; [ rofi-wayland ]);
+  pkgs,
+  config,
+  ...
+}: {
+  home.packages = with pkgs; [rofi-wayland];
 
   xdg.configFile."rofi/theme.rasi".text = ''
     * {
@@ -118,7 +121,7 @@
       padding: 10px;
       background-color: @bg-col-light;
       text-color: @grey;
-      vertical-align: 0.5; 
+      vertical-align: 0.5;
       horizontal-align: 0.5;
     }
 

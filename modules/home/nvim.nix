@@ -65,8 +65,8 @@ _: {
           nvim-scrollbar.enable = true;
           nvim-web-devicons.enable = true;
           nvim-cursorline.enable = true;
-          cinnamon-nvim.enable = true; #softened scrolling
-          fidget-nvim.enable = true; #fidget spinner for notify
+          cinnamon-nvim.enable = true; # softened scrolling
+          fidget-nvim.enable = true; # fidget spinner for notify
 
           highlight-undo.enable = true;
           indent-blankline.enable = true;
@@ -96,7 +96,7 @@ _: {
         autocomplete.nvim-cmp.mappings.confirm = "<S-CR>";
         snippets.luasnip.enable = true;
 
-        filetree.neo-tree.enable = true; #TODO replace with oil
+        filetree.neo-tree.enable = true; # TODO replace with oil
 
         tabline.nvimBufferline.enable = true;
 
@@ -146,7 +146,10 @@ _: {
               nix = "110";
               ruby = "120";
               java = "130";
-              go = ["90" "130"];
+              go = [
+                "90"
+                "130"
+              ];
             };
           };
           fastaction.enable = true;
