@@ -15,7 +15,6 @@
     ripgrep # better grep
     unzip # unzip
     xxd # hexdump with more features
-    zoxide # better cd
 
     # ---- CLI non-essential
     bitwise # programming calculator
@@ -50,8 +49,9 @@
     zenity # uses GTK to retrieve user value
     inputs.alejandra.defaultPackage.${system} # nixpkgs formatter
     python312Packages.ipython # interactive python
-    taplo
-    kdlfmt
+    taplo # toml formatter and more
+    kdlfmt # kdl formatter
+    yamlfmt # yaml formatter
 
     # ---- system / media
     caligula # disk imaging/burning

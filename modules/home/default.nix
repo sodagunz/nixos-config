@@ -1,9 +1,4 @@
-{
-  inputs,
-  username,
-  host,
-  ...
-}: {
+_: {
   imports = [
     ./audacious.nix # music player
     ./bat # better cat command
@@ -37,5 +32,6 @@
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
     ./zellij #terminal multiplexer
+    ./zoxide.nix #better cd
   ];
 }

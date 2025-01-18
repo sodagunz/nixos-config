@@ -6,7 +6,7 @@
     flake-parts,
     ...
   } @ inputs: let
-    username = "guinz";
+    username = "gunz";
   in
     flake-parts.lib.mkFlake {
       inherit inputs;

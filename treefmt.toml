@@ -8,6 +8,7 @@ excludes = [
   "*.lock",
   "*.md",
   "*.png",
+  "*.tmTheme", #plist file, should be formattable as XML or HTML
   "*.webp",
   "*.zip",
   "*.zsh",
@@ -32,8 +33,12 @@ options  = ["fmt", "-o", "align_entries=true", "-o", "reorder_keys=true"]
 
 [formatter.kdl]
 command  = "kdlfmt"
-includes = ["*kdl"]
+includes = ["*.kdl"]
 options  = ["format"]
+
+[formatter.yaml]
+command  = "yamlfmt"
+includes = ["*.yaml", "*.yml"]
 
 
 # Log paths that did not match any formatters at the specified log level
