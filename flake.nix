@@ -77,7 +77,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nur.url = "github:nix-community/NUR";
-    nvf.url = "github:notashelf/nvf";
+    nvf.url = "github:notashelf/nvf/af0cc1a85675e3a0dedb15ce648344c52d15c8d8";
 
     spicetify-nix = {
       inputs.nixpkgs.follows = "nixpkgs";

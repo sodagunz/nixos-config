@@ -7,7 +7,7 @@ _: {
     enable = true;
     settings = {
       vim = {
-        viAlias = false;
+        viAlias = true;
         vimAlias = true;
         preventJunkFiles = true;
         hideSearchHighlight = true;
@@ -25,7 +25,6 @@ _: {
           trouble.enable = true; # improved diagnostics
           lspSignature.enable = true; # show function signature as you type
           otter-nvim.enable = true; # creates tmp subbuffer with only one language
-          lsplines.enable = false; # renders diagnostics on virtual lines kinda like rustc
           nvim-docs-view.enable = false; # shows docs on a new panel #mapped to l by default which sucks
         };
 
@@ -79,14 +78,13 @@ _: {
         statusline = {
           lualine = {
             enable = true;
-            theme = "tokyonight";
+            theme = "nord";
           };
         };
 
         theme = {
           enable = true;
-          name = "tokyonight";
-          style = "night";
+          name = "nord";
           transparent = false;
         };
 
@@ -95,8 +93,6 @@ _: {
         autocomplete.nvim-cmp.enable = true;
         autocomplete.nvim-cmp.mappings.confirm = "<S-CR>";
         snippets.luasnip.enable = true;
-
-        filetree.neo-tree.enable = true; # TODO replace with oil
 
         tabline.nvimBufferline.enable = true;
 
@@ -130,12 +126,15 @@ _: {
           };
 
           images.image-nvim.enable = false;
+          oil-nvim.enable = true;
+          sleuth.enable = true;
         };
 
         ui = {
           borders.enable = true;
           noice.enable = true;
           illuminate.enable = true;
+          colorizer.enable = true;
           breadcrumbs = {
             enable = true;
             navbuddy.enable = true;
@@ -143,6 +142,7 @@ _: {
           smartcolumn = {
             enable = true;
             setupOpts.custom_colorcolumn = {
+              rust = "120";
               nix = "110";
               ruby = "120";
               java = "130";
@@ -152,7 +152,7 @@ _: {
               ];
             };
           };
-          fastaction.enable = true;
+          fastaction.enable = false;
         };
 
         comments.comment-nvim.enable = true;

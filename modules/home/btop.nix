@@ -3,7 +3,7 @@
     enable = true;
 
     settings = {
-      color_theme = "tokyo-night";
+      color_theme = "nord";
       theme_background = false;
       update_ms = 500;
     };

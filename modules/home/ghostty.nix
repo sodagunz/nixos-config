@@ -15,7 +15,7 @@ in {
     adjust-box-thickness = 1
 
     # Theme
-    theme = "tokyonight"
+    theme = nord
     background-opacity = 1.00
 
     cursor-style = bar

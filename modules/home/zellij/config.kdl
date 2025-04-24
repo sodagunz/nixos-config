@@ -7,6 +7,12 @@ keybinds clear-defaults=true {
         bind "Ctrl b" {
             SwitchToMode "Tmux"
         }
+        bind "Ctrl @" { 
+            SwitchToMode "Tmux"
+        }
+        bind "Ctrl Space" {
+            SwitchToMode "Tmux"
+        }
         bind "Ctrl h" {
             MoveFocus "Left"
         }
@@ -31,73 +37,81 @@ keybinds clear-defaults=true {
         }
         bind "Ctrl b" {
             Write 2
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl @" {
+            Write 2
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl Space" {
+            Write 2
+            SwitchToMode "Normal"
         }
         bind "\"" {
             NewPane "Down"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "%" {
             NewPane "Right"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "z" {
             ToggleFocusFullscreen
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Ctrl z" {
             TogglePaneFrames
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "c" {
             NewTab
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "," {
             SwitchToMode "RenameTab"
         }
         bind "p" {
             GoToPreviousTab
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "n" {
             GoToNextTab
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Left" {
             MoveFocus "Left"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Right" {
             MoveFocus "Right"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Down" {
             MoveFocus "Down"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Up" {
             MoveFocus "Up"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "h" {
             MoveFocus "Left"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "l" {
             MoveFocus "Right"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Ctrl l" {
             Clear
         }
         bind "j" {
             MoveFocus "Down"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "k" {
             MoveFocus "Up"
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "o" {
             FocusNextPane
@@ -107,22 +121,26 @@ SwitchToMode "Normal"
         }
         bind "r" {
             SwitchToMode "RenameTab"
-TabNameInput 0
+            TabNameInput 0
+        }
+        bind "Ctrl r" {
+            SwitchToMode "RenamePane"
+            PaneNameInput 0
         }
         bind "Space" {
             NextSwapLayout
         }
         bind "x" {
             CloseFocus
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "w" {
             ToggleFloatingPanes
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "e" {
             TogglePaneEmbedOrFloating
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Ctrl w" {
             LaunchOrFocusPlugin "zellij:session-manager" {
@@ -133,43 +151,43 @@ SwitchToMode "Normal"
         }
         bind "1" {
             GoToTab 1
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "2" {
             GoToTab 2
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "3" {
             GoToTab 3
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "4" {
             GoToTab 4
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "5" {
             GoToTab 5
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "6" {
             GoToTab 6
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "7" {
             GoToTab 7
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "8" {
             GoToTab 8
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "9" {
             GoToTab 9
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Tab" {
             ToggleTab
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "=" "+" {
             Resize "Increase"
@@ -181,11 +199,11 @@ SwitchToMode "Normal"
     renametab {
         bind "Ctrl c" {
             UndoRenameTab
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Esc" {
             UndoRenameTab
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Enter" {
             SwitchToMode "Normal"
@@ -194,11 +212,11 @@ SwitchToMode "Normal"
     renamepane {
         bind "Ctrl c" {
             UndoRenamePane
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Esc" {
             UndoRenamePane
-SwitchToMode "Normal"
+            SwitchToMode "Normal"
         }
         bind "Enter" {
             SwitchToMode "Normal"
@@ -228,4 +246,4 @@ plugins {
 pane_frames false
 copy_command "wl-copy"
 mirror_session true
-theme "tokyo-night-dark"
+theme "nord"

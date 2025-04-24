@@ -44,7 +44,7 @@
     nixfmt-rfc-style # nix formatter
     python3 # Python3
     shfmt # bash formatter
-    treefmt2 # project formatter
+    treefmt # project formatter
     valgrind # c memory analyzer
     zenity # uses GTK to retrieve user value
     inputs.alejandra.defaultPackage.${system} # nixpkgs formatter
@@ -68,6 +68,9 @@
     playerctl # controller for media players
     poweralertd # power alert
     wget # HTTP Get
+    ghc
+    cabal-install
+    haskell-language-server
 
     # ---- info fetchers
     nitch # (ni)x fe(tch)

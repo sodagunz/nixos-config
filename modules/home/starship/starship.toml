@@ -31,7 +31,7 @@ right_format = "$time"
 # Sets user-defined palette
 # Palettes must be defined _after_ this line
 command_timeout = 1000
-palette         = "tokyonight_dark"
+palette         = "nord"
 
 [character]
 # Note the use of Catppuccin color 'peach'
@@ -140,6 +140,34 @@ disabled    = false
 format      = '[ $time](fg:rosewater)'
 time_format = '%T'
 
+[palettes.nord]
+rosewater = "#B48EAD"
+flamingo = "#B48EAD"
+pink = "##B48EAD"
+mauve = "##B48EAD"
+red = "#5E81AC"
+maroon = "#81A1C1"
+peach = "#8FBCBB"
+green = "#A3BE8C"
+yellow = "#A3BE8C"
+teal = "#8FBCBB"
+sky = "#88C0D0"
+sapphire = "#81A1C1"
+blue = "#5E81AC"
+lavender = "#4E518C"
+text = "#ECEFF4"
+subtext1 = "#E5E9F0"
+subtext0 = "#E5E9F0"
+overlay2 = "#7F899D"
+overlay1 = "#6E788C"
+overlay0 = "#5D677B"
+surface2 = "#4C566A"
+surface1 = "#434C5E"
+surface0 = "#3B4252"
+base = "#2E3440"
+mantle = "#2E3440"
+crust = "#2E3440"
+
 [palettes.tokyonight_dark]
 base      = "#292e42"
 blue      = "#3d59a1"
@@ -232,7 +260,7 @@ blue      = "#8aadf4"
 crust     = "#181926"
 flamingo  = "#f0c6c6"
 green     = "#a6da95"
-lavender  = "#b7bdf8"
+lavender  = "#B7BDF8"
 mantle    = "#1e2030"
 maroon    = "#ee99a0"
 mauve     = "#c6a0f6"

@@ -12,5 +12,10 @@
         };
       }
     ];
+    interactiveShellInit = ''
+      set fish_greeting
+
+      alias wrk "cd ~/Workspace"
+    '';
   };
 }

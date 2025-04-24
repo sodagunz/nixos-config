@@ -17,7 +17,10 @@ in {
     twemoji-color-font
     noto-fonts-emoji
     fantasque-sans-mono
-    maple-mono
+    maple-mono.variable
+    maple-mono.truetype
+    maple-mono.NF
+    maple-mono.NF-CN
     # monolisa
     # monolisa-nerd
   ];
@@ -29,13 +32,8 @@ in {
       size = 12;
     };
     theme = {
-      name = "Tokyonight-Purple-Dark-Compact";
-      package = pkgs.tokyonight-gtk-theme.override {
-        colorVariants = ["dark"];
-        themeVariants = ["purple"];
-        sizeVariants = ["compact"];
-        tweakVariants = ["black"];
-      };
+      name = "Nordic";
+      package = pkgs.nordic;
     };
     iconTheme = {
       name = "Papirus-Dark";

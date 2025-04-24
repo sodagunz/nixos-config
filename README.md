@@ -26,7 +26,7 @@
 | **Text Editor**             |    [Neovim][Neovim] via [nvf][nvf]     |
 | **System resource monitor** |              [Btop][Btop]              |
 | **File Manager**            |  [nemo][nemo] GUI + [yazi][yazi] TUI   |
-| **Color Scheme**            |        [TokyoNight][TokyoNight]        |
+| **Color Scheme**            |          [Nord/Nordic][Nord]           |
 | **Cursor**                  | [Bibata-Modern-Ice][Bibata-Modern-Ice] |
 | **Icons**                   |      [Papirus-Dark][Papirus-Dark]      |
 | **Lockscreen**              |          [Hyprlock][Hyprlock]          |
@@ -85,4 +85,4 @@
 [Papirus-Dark]: https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 [Bibata-Modern-Ice]: https://www.gnome-look.org/p/1197198
 [ncspot]: https://github.com/hrkfdn/ncspot
-[TokyoNight]: https://github.com/folke/tokyonight.nvim
+[Nord]: https://github.com/EliverLara/Nordic

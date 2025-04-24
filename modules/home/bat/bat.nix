@@ -3,7 +3,7 @@
     enable = true;
     config = {
       pager = "less -FR";
-      theme = "tokyonight";
+      theme = "nord";
     };
     extraPackages = with pkgs.bat-extras; [
       batman
