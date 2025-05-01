@@ -7,12 +7,6 @@ keybinds clear-defaults=true {
         bind "Ctrl b" {
             SwitchToMode "Tmux"
         }
-        bind "Ctrl @" { 
-            SwitchToMode "Tmux"
-        }
-        bind "Ctrl Space" {
-            SwitchToMode "Tmux"
-        }
         bind "Ctrl h" {
             MoveFocus "Left"
         }
@@ -24,6 +18,33 @@ keybinds clear-defaults=true {
         }
         bind "Ctrl k" {
             MoveFocus "Up"
+        }
+
+        bind "Ctrl Alt h" {
+            MovePane "Left"
+        }
+        bind "Ctrl Alt h" {
+            MovePane "Right"
+        }
+        bind "Ctrl Alt j" {
+            MovePane "Down"
+        }
+        bind "Ctrl Alt k" {
+            MovePane "Up"
+        }
+
+        bind "Ctrl Alt i" {
+            Resize "Decrease"
+        }
+        bind "Ctrl Alt o" {
+            Resize "Increase"
+        }
+
+        bind "Alt =" {
+            Resize "Increase"
+        }
+        bind "Alt -" {
+            Resize "Decrease"   
         }
     }
     locked {
@@ -39,14 +60,6 @@ keybinds clear-defaults=true {
             Write 2
             SwitchToMode "Normal"
         }
-        bind "Ctrl @" {
-            Write 2
-            SwitchToMode "Normal"
-        }
-        bind "Ctrl Space" {
-            Write 2
-            SwitchToMode "Normal"
-        }
         bind "\"" {
             NewPane "Down"
             SwitchToMode "Normal"
@@ -54,6 +67,12 @@ keybinds clear-defaults=true {
         bind "%" {
             NewPane "Right"
             SwitchToMode "Normal"
+        }
+        bind "Alt +" {
+            Resize "Increase"
+        }
+        bind "Alt -" {
+            Resize "Decrease"   
         }
         bind "z" {
             ToggleFocusFullscreen
@@ -219,6 +238,11 @@ keybinds clear-defaults=true {
             SwitchToMode "Normal"
         }
         bind "Enter" {
+            SwitchToMode "Normal"
+        }
+    }
+    scroll {
+        bind "Esc" {
             SwitchToMode "Normal"
         }
     }

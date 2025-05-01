@@ -39,6 +39,7 @@
     gcc # GNU Compiler Collection
     gdb # GNU Debugger
     gnumake # GNU Make
+    just # easy make substitute
     nix-prefetch-github # prefetch nix info from github
     nixd # nix lsp
     nixfmt-rfc-style # nix formatter

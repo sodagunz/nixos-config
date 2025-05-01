@@ -42,7 +42,6 @@ _: {
           enableExtraDiagnostics = true;
 
           nix.enable = true;
-          markdown.enable = true;
           bash.enable = true;
           clang.enable = true;
           css.enable = true;
@@ -58,6 +57,15 @@ _: {
           ocaml.enable = true;
           haskell.enable = true;
           julia.enable = true;
+          typst = {
+            enable = true;
+            extensions.typst-preview-nvim.enable = true;
+          };
+
+          markdown = {
+            enable = true;
+            extensions.render-markdown-nvim.enable = true;
+          };
         };
 
         visuals = {
@@ -128,6 +136,8 @@ _: {
           images.image-nvim.enable = false;
           oil-nvim.enable = true;
           sleuth.enable = true;
+          leetcode-nvim.enable = true;
+          yazi-nvim.enable = true;
         };
 
         ui = {
@@ -152,7 +162,7 @@ _: {
               ];
             };
           };
-          fastaction.enable = false;
+          fastaction.enable = true;
         };
 
         comments.comment-nvim.enable = true;
