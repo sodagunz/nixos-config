@@ -21,6 +21,7 @@ in {
     maple-mono.truetype
     maple-mono.NF
     maple-mono.NF-CN
+    montserrat
     # monolisa
     # monolisa-nerd
   ];
@@ -28,16 +29,16 @@ in {
   gtk = {
     enable = true;
     font = {
-      name = "Maple Mono";
-      size = 12;
+      name = "Montserrat";
+      size = 14;
     };
     theme = {
       name = "Nordic";
       package = pkgs.nordic;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme.override {color = "black";};
+      name = "Nordzy";
+      package = pkgs.nordzy-icon-theme;
     };
     cursorTheme = {
       name = "Bibata-Modern-Ice";

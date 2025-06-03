@@ -26,7 +26,7 @@
       cycle: false;
       font: "JetBrainsMono NF Bold 15";
       show-icons: true;
-      icon-theme: "Papirus-dark";
+      icon-theme: "Nordzy";
       terminal: "kitty";
       drun-display-format: "{icon} {name}";
       location: 0;

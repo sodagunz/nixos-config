@@ -4,6 +4,10 @@
   ...
 }: {
   home.packages = with pkgs; [
+    # ---- Work :(
+    jetbrains.rust-rover
+    rustup # FIXME: I should use something like devenv instead, rather than a global rust version for RR
+
     # ---- CLI essential
     entr # perform action when file change
     eza # ls replacement
@@ -35,7 +39,6 @@
     tdf # PDF renderer
 
     # ---- programming
-    cargo # rust package manager
     gcc # GNU Compiler Collection
     gdb # GNU Debugger
     gnumake # GNU Make
@@ -101,5 +104,7 @@
     resources # GUI resources monitor
     thunderbird # Mozilla Email client
     vlc # VideoLan Client
+
+    discord
   ];
 }
