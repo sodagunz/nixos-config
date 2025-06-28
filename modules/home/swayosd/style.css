@@ -2,7 +2,7 @@ window {
         padding: 0px 10px;
         border-radius: 30px;
         border: 10px;
-        background: alpha(#${config.colorScheme.palette.base01}, 0.99);
+        background: alpha(#3B4252, 0.99);
     }
 
     #container {
@@ -10,7 +10,7 @@ window {
     }
 
     image, label {
-        color: #${config.colorScheme.palette.base07};
+        color: #ECEFF4;
     }
 
     progressbar:disabled,
@@ -28,11 +28,11 @@ window {
         min-height: inherit;
         border-radius: inherit;
         border: none;
-        background: alpha(#${config.colorScheme.palette.base06}, 0.1);
+        background: alpha(#ECEFF4, 0.1);
     }
     progress {
         min-height: inherit;
         border-radius: inherit;
         border: none;
-        background: #${config.colorScheme.palette.base07};
+        background: #ECEFF4;
     }

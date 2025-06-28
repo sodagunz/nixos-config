@@ -1,21 +1,21 @@
 @define-color shadow rgba(0, 0, 0, 0.25);
 
-@define-color base #292e42;
-@define-color mantle #24283b;
-@define-color crust #1f2335;
+@define-color base #2e3440;
+@define-color mantle #3b4252;
+@define-color crust #434c5e;
 
-@define-color text #c0caf5;
-@define-color subtext0 #a9b1a6;
-@define-color subtext1 #b4b9e5;
+@define-color text #eceff4;
+@define-color subtext0 #e5e9f0;
+@define-color subtext1 #d8dee9;
 
-@define-color surface0 #3b4261;
-@define-color surface1 #414868;
-@define-color surface2 #545c7e;
+@define-color surface0 #4c566a;
+@define-color surface1 #434c5e;
+@define-color surface2 #3b4252;
 
-@define-color green #9ece6a;
+@define-color green #a3be8c;
 
 * {
-    font-family: "DejaVu Sans Mono";
+    font-family: "Montserrat";
     background-clip: border-box;
 }
 
@@ -51,7 +51,6 @@ label {
     /* background: @insensitive_bg_color; */
 }
 
-
 .notification-content {
     min-height: 64px;
     margin: 10px;
@@ -69,7 +68,6 @@ label {
     background: transparent;
     border: none;
 }
-
 
 .notification-default-action {
     border-radius: 4px;
@@ -142,7 +140,7 @@ label {
     /* background: transparent; */
     background: @crust;
     /* background: @theme_bg_color; */
-    border: 2px solid #A89984;
+    border: 2px solid #a89984;
     border-radius: 0px;
     box-shadow: 0px 0px 2px black;
 }
@@ -169,7 +167,7 @@ label {
 .notification-group {
     /* opacity: 1.0; */
     /* opacity: 0; */
-    color: alpha(@theme_text_color, 0.50);
+    color: alpha(@text, 0.5);
 }
 
 .notification-group {
@@ -193,7 +191,6 @@ label {
     border-radius: 4px;
     box-shadow: none;
 }
-
 
 .notification-row {
     outline: none;
@@ -225,7 +222,6 @@ label {
 .control-center-list>row:last-child {
     padding: 5px 10px 10px 10px;
 }
-
 
 /* Window behind control center and on all other monitors */
 .blank-window {
@@ -370,7 +366,6 @@ label {
     box-shadow: none;
 }
 
-
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
     background: @mantle;
     /* background: alpha(currentColor, 0.1); */
@@ -456,7 +451,7 @@ carouselindicatordots {
 
 .notification-group>box.vertical {
     /* border: solid 5px red; */
-    margin-top: 3px
+    margin-top: 3px;
 }
 
 /* Backlight and volume widgets */

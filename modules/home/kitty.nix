@@ -5,16 +5,9 @@
     themeFile = "gruvbox-dark-hard";
 
     font = {
-      name = "Maple Mono";
+      name = "DejaVu Sans Mono";
       size = 16;
     };
-
-    extraConfig = ''
-      font_features MapleMono-Regular +ss01 +ss02 +ss04
-      font_features MapleMono-Bold +ss01 +ss02 +ss04
-      font_features MapleMono-Italic +ss01 +ss02 +ss04
-      font_features MapleMono-Light +ss01 +ss02 +ss04
-    '';
 
     settings = {
       confirm_os_window_close = 0;
