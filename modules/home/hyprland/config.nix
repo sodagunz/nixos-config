@@ -46,7 +46,6 @@
         "col.active_border" = "rgb(${config.colorScheme.palette.base0C}) rgb(${config.colorScheme.palette.base0D}) 45deg";
         "col.inactive_border" = "rgb(${config.colorScheme.palette.base01})";
         no_border_on_floating = false;
-        border_part_of_window = false;
       };
 
       decoration = {
@@ -353,13 +352,16 @@
         "noshadow,class:^()$,title:^()$"
         "noblur,class:^()$,title:^()$"
 
-        # No gaps when only
-        "gapsout:0, onworkspace:w[t1]"
-        "gapsin:0, onworkspace:w[t1]"
-        "gapsout:0, onworkspace:w[tg1]"
-        "gapsin:0, onworkspace:w[tg1]"
-        "gapsout:0, onworkspace:f[1]"
-        "gapsin:0, onworkspace:f[1]"
+        #         # No gaps when only
+        #         "w[t1], gapsout:0, gapsin:0"
+        #         "w[tg1], gapsout:0, gapsin:0"
+        #         "f[1], gapsout:0, gapsin:0"
+        # "bordersize 0, floating:0, onworkspace:w[t1]"
+        # windowrulev2 = rounding 0, floating:0, onworkspace:w[t1]
+        # windowrulev2 = bordersize 0, floating:0, onworkspace:w[tg1]
+        # windowrulev2 = rounding 0, floating:0, onworkspace:w[tg1]
+        # windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
+        # windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
       ];
     };
 
