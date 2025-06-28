@@ -1,8 +1,3 @@
-{
-  inputs,
-  pkgs,
-  host,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [obsidian];
 }

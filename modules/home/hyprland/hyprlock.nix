@@ -1,10 +1,4 @@
-{
-  pkgs,
-  host,
-  ...
-}: let
-  text = "rgb(251, 241, 199)";
-in {
+{pkgs, ...}: {
   home.packages = [pkgs.hyprlock];
 
   xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
