@@ -56,7 +56,7 @@ _: {
           rust.crates.enable = true;
           ocaml.enable = true;
           haskell.enable = true;
-          julia.enable = true;
+          julia.enable = false; # Julia depot takes ages to build
           typst = {
             enable = true;
             extensions.typst-preview-nvim.enable = true;
