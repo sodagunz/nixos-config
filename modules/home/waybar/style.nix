@@ -3,7 +3,7 @@
     font = "Maple Mono";
     font_size = "18px";
     font_weight = "bold";
-    text_color = "#${config.colorScheme.palette.base07}";
+    text_color = "#${config.colorScheme.palette.base06}";
     background_0 = "#${config.colorScheme.palette.base00}";
     background_1 = "#${config.colorScheme.palette.base02}";
     border_color = "#${config.colorScheme.palette.base01}";
