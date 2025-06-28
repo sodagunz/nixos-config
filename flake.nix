@@ -23,20 +23,8 @@
               inherit self inputs username;
             };
           };
-          laptop = nixpkgs.lib.nixosSystem {
-            modules = [./hosts/laptop];
-            specialArgs = {
-              host = "laptop";
-              inherit self inputs username;
-            };
-          };
-          vm = nixpkgs.lib.nixosSystem {
-            modules = [./hosts/vm];
-            specialArgs = {
-              host = "vm";
-              inherit self inputs username;
-            };
-          };
+          
+          
         };
 
         perSystem = {pkgs, ...}: {
