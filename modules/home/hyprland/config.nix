@@ -45,36 +45,8 @@
         border_size = 2;
         "col.active_border" = "rgb(${config.colorScheme.palette.base0C}) rgb(${config.colorScheme.palette.base0D}) 45deg";
         "col.inactive_border" = "rgb(${config.colorScheme.palette.base01})";
-        border_part_of_window = false;
         no_border_on_floating = false;
-      };
-
-      misc = {
-        disable_autoreload = true;
-        disable_hyprland_logo = true;
-        always_follow_on_dnd = true;
-        layers_hog_keyboard_focus = true;
-        animate_manual_resizes = false;
-        enable_swallow = true;
-        focus_on_activate = true;
-        new_window_takes_over_fullscreen = 2;
-        middle_click_paste = false;
-      };
-
-      dwindle = {
-        # no_gaps_when_only = false;
-        force_split = 0;
-        special_scale_factor = 1.0;
-        split_width_multiplier = 1.0;
-        use_active_for_splits = true;
-        pseudotile = "yes";
-        preserve_split = "yes";
-      };
-
-      master = {
-        new_status = "master";
-        special_scale_factor = 1;
-        # no_gaps_when_only = false;
+        border_part_of_window = false;
       };
 
       decoration = {
@@ -134,6 +106,34 @@
           # "borderangle, 1, 30,  fluent_decel, once" # for animating the border's gradient angle - styles: once (default), loop
           "workspaces,  1, 4,   easeOutCubic, fade" # styles: slide, slidevert, fade, slidefade, slidefadevert
         ];
+      };
+
+      dwindle = {
+        # no_gaps_when_only = false;
+        force_split = 0;
+        special_scale_factor = 1.0;
+        split_width_multiplier = 1.0;
+        use_active_for_splits = true;
+        pseudotile = "yes";
+        preserve_split = "yes";
+      };
+
+      master = {
+        new_status = "master";
+        special_scale_factor = 1;
+        # no_gaps_when_only = false;
+      };
+
+      misc = {
+        disable_autoreload = true;
+        disable_hyprland_logo = true;
+        always_follow_on_dnd = true;
+        layers_hog_keyboard_focus = true;
+        animate_manual_resizes = false;
+        enable_swallow = true;
+        focus_on_activate = true;
+        new_window_takes_over_fullscreen = 2;
+        middle_click_paste = false;
       };
 
       bind = [
@@ -267,34 +267,29 @@
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      # windowrule
       windowrule = [
-        "float,Viewnior"
-        "center,Viewnior"
-        "size 1200 800,Viewnior"
-        "float,imv"
-        "center,imv"
-        "size 1200 725,imv"
-        "float,mpv"
-        "center,mpv"
-        "tile,Aseprite"
-        "size 1200 725,mpv"
-        "float,audacious"
-        "pin,rofi"
-        "pin,waypaper"
-        "tile, neovide"
-        "idleinhibit focus,mpv"
-        "float,udiskie"
+        "float,class:^(Viewnior)$"
+        "center,class:^(Viewnior)$"
+        "size 1200 800,class:^(Viewnior)$"
+        "float,class:^(imv)$"
+        "center,class:^(imv)$"
+        "size 1200 725,class:^(imv)$"
+        "float,class:^(mpv)$"
+        "center,class:^(mpv)$"
+        "tile,class:^(Aseprite)$"
+        "size 1200 725,class:^(mpv)$"
+        "float,class:^(audacious)$"
+        "pin,class:^(rofi)$"
+        "pin,class:^(waypaper)$"
+        "tile,class:^(neovide)$"
+        "idleinhibit focus,class:^(mpv)$"
+        "float,class:^(udiskie)$"
         "float,title:^(Transmission)$"
         "float,title:^(Volume Control)$"
         "float,title:^(Firefox — Sharing Indicator)$"
         "move 0 0,title:^(Firefox — Sharing Indicator)$"
         "size 700 450,title:^(Volume Control)$"
         "move 40 55%,title:^(Volume Control)$"
-      ];
-
-      # windowrulev2
-      windowrulev2 = [
         "float, title:^(Picture-in-Picture)$"
         "opacity 1.0 override 1.0 override, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
@@ -357,13 +352,14 @@
         "opaque,class:^()$,title:^()$"
         "noshadow,class:^()$,title:^()$"
         "noblur,class:^()$,title:^()$"
-      ];
 
-      # No gaps when only
-      workspace = [
-        "w[t1], gapsout:0, gapsin:0"
-        "w[tg1], gapsout:0, gapsin:0"
-        "f[1], gapsout:0, gapsin:0"
+        # No gaps when only
+        "gapsout:0, onworkspace:w[t1]"
+        "gapsin:0, onworkspace:w[t1]"
+        "gapsout:0, onworkspace:w[tg1]"
+        "gapsin:0, onworkspace:w[tg1]"
+        "gapsout:0, onworkspace:f[1]"
+        "gapsin:0, onworkspace:f[1]"
       ];
     };
 
