@@ -17,10 +17,17 @@
     win-virtio
     win-spice
     adwaita-icon-theme
+
+    dive
+    podman-tui
+    docker-compose
+    podman-compose
   ];
 
   # Manage the virtualisation services
   virtualisation = {
+    containers.enable = true;
+
     libvirtd = {
       enable = true;
       qemu = {
@@ -29,7 +36,15 @@
         ovmf.packages = [pkgs.OVMFFull.fd];
       };
     };
+
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+
     spiceUSBRedirection.enable = true;
   };
+
   services.spice-vdagentd.enable = true;
 }
