@@ -6,7 +6,7 @@ _: {
     ./btop.nix # resouces monitor
     ./cava.nix # audio visualizer
     ./colors #nix colorscheme manager
-    ./fastfetch.nix # fetch tool
+    ./fastfetch # fetch tool
     ./fish #shell
     ./fzf.nix # fuzzy finder
     ./gaming.nix # packages related to gaming
@@ -16,17 +16,17 @@ _: {
     ./gtk.nix # gtk theme
     ./hyprland # window manager
     ./kitty.nix # terminal
-    ./micro.nix # nano replacement
+    ./micro # nano replacement
     ./nemo.nix # file manager
     ./nvim.nix # neovim editor
     ./obsidian.nix
     ./packages.nix # other packages
     ./retroarch.nix
-    ./rofi.nix # launcher
+    ./rofi # launcher
     ./scripts/scripts.nix # personal scripts
     ./starship #shell bar
     ./swaync/swaync.nix # notification deamon
-    ./swayosd.nix # brightness / volume wiget
+    ./swayosd # brightness / volume wiget
     ./waybar # status bar
     ./waypaper.nix # GUI wallpaper picker
     ./xdg-mimes.nix # xdg config
