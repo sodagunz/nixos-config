@@ -23,8 +23,6 @@
               inherit self inputs username;
             };
           };
-          
-          
         };
 
         perSystem = {pkgs, ...}: {

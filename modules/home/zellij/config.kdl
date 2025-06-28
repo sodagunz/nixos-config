@@ -19,7 +19,6 @@ keybinds clear-defaults=true {
         bind "Ctrl k" {
             MoveFocus "Up"
         }
-
         bind "Ctrl Alt h" {
             MovePane "Left"
         }
@@ -32,19 +31,17 @@ keybinds clear-defaults=true {
         bind "Ctrl Alt k" {
             MovePane "Up"
         }
-
         bind "Ctrl Alt i" {
             Resize "Decrease"
         }
         bind "Ctrl Alt o" {
             Resize "Increase"
         }
-
         bind "Alt =" {
             Resize "Increase"
         }
         bind "Alt -" {
-            Resize "Decrease"   
+            Resize "Decrease"
         }
     }
     locked {
@@ -72,7 +69,7 @@ keybinds clear-defaults=true {
             Resize "Increase"
         }
         bind "Alt -" {
-            Resize "Decrease"   
+            Resize "Decrease"
         }
         bind "z" {
             ToggleFocusFullscreen

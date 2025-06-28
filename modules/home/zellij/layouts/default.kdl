@@ -8,20 +8,15 @@ layout {
             format_right "#[bg=#88c0d0,fg=#2e3440]{datetime}"
             format_space "#[bg=#2e3440]"
             hide_frame_for_single_pane "false"
-
             mode_normal "#[bg=#88c0d0, fg=#2e3440,bold]  NORMAL #[bg=#2e3440,fg=#88c0d0]"
             mode_locked "#[bg=#bf616a, fg=#2e3440,bold]  LOCKED #[bg=#2e3440,fg=#bf616a]"
             mode_tmux "#[bg=#d08770, fg=#2e3440,bold]   TMUX #[bg=#2e3440,fg=#d08770]"
-
-
             tab_normal "#[fg=#2e3440,bg=#3b4252] #[fg=#eceff4,bg=#3b4252]{index}  {name} #[fg=#3b4252,bg=#2e3440]"
             tab_normal_fullscreen "#[fg=#eceff4,bg=#2e3440] {index} {name} [] "
             tab_normal_sync "#[fg=#eceff4,bg=#2e3440] {index} {name} <> "
-
             tab_active "#[fg=#2e3440,bg=#eceff4,bold,italic] {index}  {name} #[fg=#eceff4,bg=#2e3440]"
             tab_active_fullscreen "#[fg=#b48ead,bg=#2e3440,bold,italic] {index} {name} [] "
             tab_active_sync "#[fg=#b48ead,bg=#2e3440,bold,italic] {index} {name} <> "
-
             datetime "#[fg=#2e3440,bg=#88c0d0,bold] {format} "
             datetime_format "%A, %d %b %Y %H:%M"
             datetime_timezone "Europe/Madrid"
