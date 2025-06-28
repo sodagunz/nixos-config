@@ -16,5 +16,6 @@ _: {
     ./wayland.nix
     ./virtualization.nix
     ./bluetooth.nix
+    ./cachix.nix
   ];
 }
