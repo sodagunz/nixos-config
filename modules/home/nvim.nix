@@ -18,8 +18,8 @@ _: {
 
         assistant = {
           copilot = {
-            enabled = true;
-            cmp.enabled = true;
+            enable = true;
+            cmp.enable = true;
           };
         };
 
@@ -107,6 +107,7 @@ _: {
 
         autocomplete.nvim-cmp.enable = true;
         autocomplete.nvim-cmp.mappings.confirm = "<S-CR>";
+
         snippets.luasnip.enable = true;
 
         tabline.nvimBufferline.enable = true;
@@ -141,6 +142,7 @@ _: {
           };
 
           images.image-nvim.enable = false;
+          snacks-nvim.enable = true;
           oil-nvim.enable = true;
           sleuth.enable = true;
           leetcode-nvim.enable = true;
