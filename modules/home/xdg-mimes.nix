@@ -5,7 +5,7 @@
 }:
 with lib; let
   defaultApps = {
-    browser = ["zen-browser.desktop"];
+    browser = ["firefox.desktop"];
     text = ["org.gnome.TextEditor.desktop"];
     image = ["imv-dir.desktop"];
     audio = ["mpv.desktop"];
