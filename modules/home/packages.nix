@@ -4,9 +4,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    # ---- Agents
-    gemini-cli
-
     # ---- CLI essential
     entr # perform action when file change
     eza # ls replacement
@@ -31,11 +28,13 @@
 
     # ---- TUI
     binsider # analize ELF binaries
+    gemini-cli # gemini CLI agent
     gtt # google translate
     lazygit # git
     ncdu # NCurses (d)isk (u)tility
     ncspot # NCurses Spotify
     tdf # PDF renderer
+    wiki-tui # Wikipedia
 
     # ---- programming
     gcc # GNU Compiler Collection
