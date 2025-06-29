@@ -1,11 +1,11 @@
-{...}: {
+_: {
   programs.kitty = {
     enable = true;
 
-    themeFile = "gruvbox-dark-hard";
+    themeFile = "Nord";
 
     font = {
-      name = "DejaVu Sans Mono";
+      name = "Maple Mono";
       size = 16;
     };
 

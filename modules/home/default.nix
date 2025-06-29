@@ -10,7 +10,7 @@ _: {
     ./fish #shell
     ./fzf.nix # fuzzy finder
     ./gaming.nix # packages related to gaming
-    ./ghostty.nix # terminal
+    ./ghostty # terminal
     ./git.nix # version control
     ./gnome.nix # gnome apps
     ./gtk.nix # gtk theme
