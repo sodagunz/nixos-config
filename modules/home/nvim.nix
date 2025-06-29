@@ -16,6 +16,13 @@ _: {
         searchCase = "smart";
         undoFile.enable = true;
 
+        assistant = {
+          copilot = {
+            enabled = true;
+            cmp.enabled = true;
+          };
+        };
+
         lsp = {
           enable = true;
           formatOnSave = true; # format files on save, creates a backup
