@@ -7,6 +7,9 @@ keybinds clear-defaults=true {
         bind "Ctrl b" {
             SwitchToMode "Tmux"
         }
+        bind "Ctrl n" {
+            SwitchToMode "Tmux"
+        }
         bind "Ctrl h" {
             MoveFocus "Left"
         }
@@ -54,6 +57,10 @@ keybinds clear-defaults=true {
             SwitchToMode "Scroll"
         }
         bind "Ctrl b" {
+            Write 2
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl n" {
             Write 2
             SwitchToMode "Normal"
         }

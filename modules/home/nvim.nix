@@ -19,13 +19,16 @@ _: {
         assistant = {
           copilot = {
             enable = true;
-            cmp.enable = true;
+            cmp.enable = false;
+            setupOpts = {
+              accept = "<S-CR>";
+            };
           };
         };
 
         lsp = {
           enable = true;
-          formatOnSave = true; # format files on save, creates a backup
+          formatOnSave = false; # format files on save, creates a backup
           lspkind.enable = true; # pictograms on LSP suggestions
           lightbulb.enable = true; # lightbulb when codeaction exists
           lspsaga.enable = false; # improved lsp experience
@@ -50,20 +53,27 @@ _: {
 
           nix.enable = true;
           bash.enable = true;
+
           clang.enable = true;
-          css.enable = true;
-          html.enable = true;
-          sql.enable = true;
-          ts.enable = true;
-          lua.enable = true;
           go.enable = true;
-          python.enable = true;
-          zig.enable = true;
+          elixir.enable = true;
           rust.enable = true;
           rust.crates.enable = true;
+          zig.enable = true;
+
+          css.enable = true;
+          html.enable = true;
+          ts.enable = true;
+          sql.enable = true;
+
+          lua.enable = true;
+
+          python.enable = true;
+          julia.enable = false; # Julia depot takes ages to build
+
           ocaml.enable = true;
           haskell.enable = true;
-          julia.enable = false; # Julia depot takes ages to build
+
           typst = {
             enable = true;
             extensions.typst-preview-nvim.enable = true;
@@ -153,7 +163,12 @@ _: {
           borders.enable = true;
           noice.enable = true;
           illuminate.enable = true;
-          colorizer.enable = true;
+          colorizer = {
+            enable = true;
+            setupOpts = {
+              filetypes = {"*" = {};};
+            };
+          };
           breadcrumbs = {
             enable = true;
             navbuddy.enable = true;
