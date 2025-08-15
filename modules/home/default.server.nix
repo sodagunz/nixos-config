@@ -7,12 +7,13 @@
     ./fzf.nix
     ./git.nix
     ./nvim.nix
-    ./xdg-mimies.nix
+    ./xdg-mimes.nix
+    ./zellij
   ];
 
   home.packages = with pkgs; [
     entr
-    aza
+    eza
     fd
     file
     hexdump
