@@ -1,46 +1,58 @@
 {
   description = "Guinz NixOS configuration";
   outputs = {
+    home-manager,
     nixpkgs,
+    nvf,
     self,
-    flake-parts,
     ...
   } @ inputs: let
-    username = "gunz";
-  in
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux" "aarch64-darwin"];
+    # Nvf setup works differently on hm and on nixos modules.
+    hmNvim = nvf.lib.neovimConfiguration {
+      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      modules = [./modules/home/hm-nvim.nix];
+    };
+  in {
+    nixosConfigurations = (
+      let
+        nixosHosts = {
+          minispore = {
+            system = "x86_64-linux";
+            username = "gunz";
+          };
+          homegrown = {
+            system = "x86_64-linux";
+            username = "gunz";
+          };
+        };
 
-      flake = {
-        nixosConfigurations = {
-          desktop = nixpkgs.lib.nixosSystem {
-            modules = [./hosts/desktop];
+        mkNixosHost = hostname: hostConfig:
+          nixpkgs.lib.nixosSystem {
+            modules = [./hosts/${hostname}];
+            system = hostConfig.system;
             specialArgs = {
-              host = "desktop";
-              inherit self inputs username;
+              host = hostname;
+              username = hostConfig.username;
+              homeModules = [./hosts/${hostname}/home.nix];
+              inherit self inputs;
             };
           };
-        };
+      in
+        nixpkgs.lib.mapAttrs mkNixosHost nixosHosts
+    );
 
-        perSystem = {pkgs, ...}: {
-          formatter = pkgs.alejandra;
-
-          checks = {
-            nix-fmt = pkgs.runCommand "nix-fmt-check" {nativeBuildInputs = [pkgs.alejandra];} ''
-              alejandra --check ${self} < /dev/null | tee $out
-            '';
-          };
-        };
-      };
+    # Workaround for not being able to use nix-darwin on one of my systems:
+    homeConfigurations."tomas.guiznburg" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      modules = [
+        {home.packages = [hmNvim.neovim];}
+      ];
     };
+  };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
-    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
+    alejandra.url = "github:kamadorueda/alejandra";
     ghostty.url = "github:ghostty-org/ghostty";
-
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
@@ -58,6 +70,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-gaming.url = "github:fufexan/nix-gaming";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     nvf.url = "github:notashelf/nvf/af0cc1a85675e3a0dedb15ce648344c52d15c8d8";
 
