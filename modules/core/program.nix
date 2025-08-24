@@ -10,8 +10,6 @@ _: {
       # pinentryFlavor = "";
     };
     nix-ld.enable = true;
-    ssh.startAgent = true;
+    # ssh.startAgent = true;
   };
-
-  # services.gnome.gnome-keyring.enable = true;
 }

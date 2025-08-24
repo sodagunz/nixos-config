@@ -17,9 +17,6 @@ layout {
             tab_active "#[fg=#2e3440,bg=#eceff4,bold,italic] {index}  {name} #[fg=#eceff4,bg=#2e3440]"
             tab_active_fullscreen "#[fg=#b48ead,bg=#2e3440,bold,italic] {index} {name} [] "
             tab_active_sync "#[fg=#b48ead,bg=#2e3440,bold,italic] {index} {name} <> "
-            datetime "#[fg=#2e3440,bg=#88c0d0,bold] {format} "
-            datetime_format "%A, %d %b %Y %H:%M"
-            datetime_timezone "Europe/Madrid"
         }
     }
 }

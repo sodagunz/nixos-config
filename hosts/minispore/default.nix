@@ -4,5 +4,6 @@ _: {
     ./../../modules/core
   ];
 
+  services.gnome.gnome-keyring.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
 }

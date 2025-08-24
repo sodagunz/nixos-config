@@ -5,4 +5,5 @@ _: {
   ];
 
   powerManagement.cpuFreqGovernor = "schedutil";
+  programs.ssh.startAgent = true;
 }

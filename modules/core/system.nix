@@ -37,7 +37,11 @@
     fstrim.enable = true;
     openssh = {
       enable = true;
-      settings.X11Forwarding = true;
+      settings = {
+        X11Forwarding = true;
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
     };
 
     # Pretty much required for systemd and polkit.
