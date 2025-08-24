@@ -7,6 +7,7 @@
     ./fzf.nix
     ./git.nix
     ./nvim.nix
+    ./starship
     ./xdg-mimes.nix
     ./zellij
   ];
