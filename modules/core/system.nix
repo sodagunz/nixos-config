@@ -23,8 +23,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    wget
     git
+    xclip
   ];
 
   time.timeZone = "Europe/Madrid";
@@ -33,8 +33,12 @@
   system.stateVersion = "24.05";
 
   services = {
-    fstrim.enable = true; # Extends life of SSDs, does nothing for HHDs.
-    openssh.enable = true;
+    # Extends life of SSDs, does nothing for HHDs.
+    fstrim.enable = true;
+    openssh = {
+      enable = true;
+      settings.X11Forwarding = true;
+    };
     dbus.enable = true; # Pretty much required for systemd and polkit.
 
     # Prevent shutdown on tapping the power key:
