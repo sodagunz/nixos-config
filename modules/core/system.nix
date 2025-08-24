@@ -1,11 +1,10 @@
 {
-  self,
   pkgs,
-  lib,
   inputs,
   ...
 }: {
-  # imports = [ inputs.nix-gaming.nixosModules.default ];
+  security.sudo.enable = true;
+
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -32,4 +31,15 @@
   i18n.defaultLocale = "en_US.UTF-8";
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";
+
+  services = {
+    fstrim.enable = true; # Extends life of SSDs, does nothing for HHDs.
+    openssh.enable = true;
+    dbus.enable = true; # Pretty much required for systemd and polkit.
+
+    # Prevent shutdown on tapping the power key:
+    logind.extraConfig = ''
+      HandlePowerKey=ignore
+    '';
+  };
 }

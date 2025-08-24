@@ -4,5 +4,5 @@ _: {
     ./../../modules/core
   ];
 
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "schedutil";
 }

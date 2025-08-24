@@ -14,6 +14,11 @@
     ];
   };
 
+  security.pam.services = {
+    ssdm.enableGnomeKeyring = true;
+    hyprlock.enableGnomeKeyring = true;
+  };
+
   environment.systemPackages = with pkgs; [
     # xwaylandvideobridge
   ];

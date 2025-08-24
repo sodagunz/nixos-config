@@ -1,8 +1,8 @@
 _: {
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/core
+    ./../../modules/core/default.server.nix
   ];
 
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "schedutil";
 }

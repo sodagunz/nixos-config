@@ -8,4 +8,5 @@
     # lowLatency.enable = true;
   };
   environment.systemPackages = with pkgs; [pulseaudioFull];
+  security.rtkit.enable = true;
 }
