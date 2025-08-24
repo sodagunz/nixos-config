@@ -13,33 +13,31 @@
       modules = [./modules/home/hm-nvim.nix];
     };
   in {
-    nixosConfigurations = (
-      let
-        nixosHosts = {
-          minispore = {
-            system = "x86_64-linux";
-            username = "gunz";
-          };
-          homegrown = {
-            system = "x86_64-linux";
-            username = "gunz";
+    nixosConfigurations = let
+      nixosHosts = {
+        minispore = {
+          system = "x86_64-linux";
+          username = "gunz";
+        };
+        homegrown = {
+          system = "x86_64-linux";
+          username = "gunz";
+        };
+      };
+
+      mkNixosHost = hostname: hostConfig:
+        nixpkgs.lib.nixosSystem {
+          modules = [./hosts/${hostname}];
+          inherit (hostConfig) system;
+          specialArgs = {
+            host = hostname;
+            inherit (hostConfig) username;
+            homeModules = [./hosts/${hostname}/home.nix];
+            inherit self inputs;
           };
         };
-
-        mkNixosHost = hostname: hostConfig:
-          nixpkgs.lib.nixosSystem {
-            modules = [./hosts/${hostname}];
-            system = hostConfig.system;
-            specialArgs = {
-              host = hostname;
-              username = hostConfig.username;
-              homeModules = [./hosts/${hostname}/home.nix];
-              inherit self inputs;
-            };
-          };
-      in
-        nixpkgs.lib.mapAttrs mkNixosHost nixosHosts
-    );
+    in
+      nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
 
     # Workaround for not being able to use nix-darwin on one of my systems:
     homeConfigurations."tomas.guiznburg" = home-manager.lib.homeManagerConfiguration {

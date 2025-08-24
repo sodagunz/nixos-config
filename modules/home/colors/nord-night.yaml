@@ -1,14 +1,14 @@
-scheme: "Nord"
-author: "arcticicestudio"
+scheme: "Nord Night"
+author: "sodagunz"
 
 # Polar Night (backgrounds) 
-base00: "2E3440"  # #2E3440  (override)
+base00: "252933"  # #252933  (override)
 base01: "3B4252"  # #3B4252
 base02: "434C5E"  # #434C5E
 base03: "4C566A"  # #4C566A
 
 # Snow Storm (foregrounds)
-base04: "D8DEE9"  # #D8DEE9  (override)
+base04: "C0C5CF"  # #C0C5CF  (override)
 base05: "E5E9F0"  # #E5E9F0
 base06: "ECEFF4"  # #ECEFF4
 

@@ -249,6 +249,12 @@ keybinds clear-defaults=true {
         bind "Esc" {
             SwitchToMode "Normal"
         }
+        bind "Ctrl n" {
+            SwitchToMode "Normal"
+        }
+        bind "Ctrl b" {
+            SwitchToMode "Normal"
+        }
     }
 }
 plugins {
