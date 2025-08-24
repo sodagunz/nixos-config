@@ -12,9 +12,11 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs username host;};
     users.${username} = {
-      imports = [
-        inputs.nvf.homeManagerModules.default
-      ] ++ homeModules;
+      imports =
+        [
+          inputs.nvf.homeManagerModules.default
+        ]
+        ++ homeModules;
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
@@ -33,6 +35,9 @@
       "wheel"
     ];
     shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOPsjlsehCwuVVDsyaKJoxvIefqu1BPl2/B3V8dghrf gunz@minispore"
+    ];
   };
   nix.settings.allowed-users = ["${username}"];
 }

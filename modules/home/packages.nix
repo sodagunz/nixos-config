@@ -32,7 +32,7 @@
     gtt # google translate
     lazygit # git
     ncdu # NCurses (d)isk (u)tility
-    ncspot # NCurses Spotify
+    # ncspot # NCurses Spotify # Disabled due to issue :(
     tdf # PDF renderer
     wiki-tui # Wikipedia
 

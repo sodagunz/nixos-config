@@ -39,7 +39,19 @@
       enable = true;
       settings.X11Forwarding = true;
     };
-    dbus.enable = true; # Pretty much required for systemd and polkit.
+
+    # Pretty much required for systemd and polkit.
+    dbus.enable = true;
+
+    dnsmasq = {
+      enable = true; # Resolve local dns queries
+      settings = {
+        no-resolv = true;
+        bind-interfaces = true;
+        server = ["8.8.8.8" "8.8.4.4" "1.1.1.1"];
+        address = ["/homegrown/192.168.1.204" "/minispore/192.168.1.200"];
+      };
+    };
 
     # Prevent shutdown on tapping the power key:
     logind.extraConfig = ''
