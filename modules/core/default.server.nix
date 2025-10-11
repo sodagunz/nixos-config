@@ -1,8 +1,9 @@
 _: {
   imports = [
     ./bootloader.nix
+    ./copyparty.nix
     ./hardware.nix
-    ./network.nix
+    ./network.server.nix
     ./nh.nix
     ./program.nix
     ./system.nix

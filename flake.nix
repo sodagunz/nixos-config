@@ -22,12 +22,13 @@
         homegrown = {
           system = "x86_64-linux";
           username = "gunz";
+          extraHostModules = [inputs.copyparty.nixosModules.default];
         };
       };
 
       mkNixosHost = hostname: hostConfig:
         nixpkgs.lib.nixosSystem {
-          modules = [./hosts/${hostname}];
+          modules = [./hosts/${hostname}] ++ hostConfig.extraHostModules;
           inherit (hostConfig) system;
           specialArgs = {
             host = hostname;
@@ -50,6 +51,7 @@
 
   inputs = {
     alejandra.url = "github:kamadorueda/alejandra";
+    copyparty.url = "github:9001/copyparty";
     ghostty.url = "github:ghostty-org/ghostty";
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
