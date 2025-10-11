@@ -2,11 +2,11 @@
   imports = [
     ./bat
     ./btop.nix
+    ./editor.nix
     ./fastfetch
     ./fish
     ./fzf.nix
     ./git.nix
-    ./nvim.nix
     ./starship
     ./xdg-mimes.nix
     ./zellij

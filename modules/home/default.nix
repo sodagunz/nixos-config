@@ -6,6 +6,7 @@ _: {
     ./btop.nix # resouces monitor
     ./cava.nix # audio visualizer
     ./colors #nix colorscheme manager
+    ./editor.nix # editor
     ./fastfetch # fetch tool
     ./fish #shell
     ./fzf.nix # fuzzy finder
@@ -18,7 +19,6 @@ _: {
     ./kitty.nix # terminal
     ./micro # nano replacement
     ./nemo.nix # file manager
-    ./nvim.nix # neovim editor
     ./obsidian.nix
     ./packages.nix # other packages
     ./retroarch.nix

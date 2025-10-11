@@ -7,7 +7,6 @@ font-feature = ss04
 bold-is-bright = false
 adjust-box-thickness = 1
 
-theme = nord
 background-opacity = 1.00
 
 cursor-style = bar
@@ -34,3 +33,5 @@ gtk-tabs-location = bottom
 gtk-wide-tabs = false
 
 auto-update = off
+
+theme = nord-night

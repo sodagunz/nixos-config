@@ -130,43 +130,43 @@ symbol = ""
 
 [golang]
 disabled = false
-format = '[[ $symbol ($version) ](fg:base07 bg:base02)]($style)' # #8FBCBB #434C5E
+format = '[[ $symbol ($version) ](fg:base07 bg:base03)]($style)' # #8FBCBB #434C5E
 style  = "fg:base07 bg:base03" # #8FBCBB #434C5E
 symbol = " "
 
 [haskell]
 disabled = false
-format = '[[ $symbol ($version) ](fg:base07 bg:base02)]($style)' # #8FBCBB #434C5E
+format = '[[ $symbol ($version) ](fg:base07 bg:base03)]($style)' # #8FBCBB #434C5E
 style  = "fg:base07 bg:base03" # #8FBCBB #434C5E
 symbol = " "
 
 [java]
 disabled = false
-format = '[[ $symbol ($version) ](fg:base07 bg:base02)]($style)' # #8FBCBB #434C5E
+format = '[[ $symbol ($version) ](fg:base07 bg:base03)]($style)' # #8FBCBB #434C5E
 style  = "fg:base07 bg:base03" # #8FBCBB #434C5E
 symbol = " "
 
 [julia]
 disabled = false
-format = '[[ $symbol ($version) ](fg:base07 bg:base02)]($style)' # #8FBCBB #434C5E
+format = '[[ $symbol ($version) ](fg:base07 bg:base03)]($style)' # #8FBCBB #434C5E
 style  = "fg:base07 bg:base03" # #8FBCBB #434C5E
 symbol = " "
 
 [nodejs]
 disabled = false
-format = '[[ $symbol ($version) ](fg:base07 bg:base02)]($style)' # #8FBCBB #434C5E
+format = '[[ $symbol ($version) ](fg:base07 bg:base03)]($style)' # #8FBCBB #434C5E
 style  = "fg:base07 bg:base03" # #8FBCBB #434C5E
 symbol = " "
 
 [rust]
 disabled = false
-format = '[[ $symbol ($version) ](fg:base07 bg:base02)]($style)' # #8FBCBB #434C5E
+format = '[[ $symbol ($version) ](fg:base07 bg:base03)]($style)' # #8FBCBB #434C5E
 style  = "fg:base07 bg:base03" # #8FBCBB #434C5E
 symbol = " "
 
 [ruby]
 disabled = false
-format = '[[ $symbol( $version) ](fg:base07 bg:base02)]($style)' # #8FBCBB #434C5E
+format = '[[ $symbol( $version) ](fg:base07 bg:base03)]($style)' # #8FBCBB #434C5E
 style  = "fg:base07 bg:base03" # #8FBCBB #434C5E
 symbol = " "
 

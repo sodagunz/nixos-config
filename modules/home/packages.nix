@@ -4,6 +4,8 @@
   ...
 }: {
   home.packages = with pkgs; [
+    ardour # DAW
+
     # ---- CLI essential
     entr # perform action when file change
     eza # ls replacement
@@ -33,6 +35,7 @@
     lazygit # git
     ncdu # NCurses (d)isk (u)tility
     # ncspot # NCurses Spotify # Disabled due to issue :(
+    ueberzugpp
     tdf # PDF renderer
     wiki-tui # Wikipedia
 
