@@ -4,6 +4,7 @@ _: {
     ./copyparty.nix
     ./hardware.nix
     ./network.server.nix
+    ./jellyfin.nix
     ./nh.nix
     ./program.nix
     ./system.nix
