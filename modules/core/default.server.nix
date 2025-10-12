@@ -1,10 +1,9 @@
 _: {
   imports = [
     ./bootloader.nix
-    ./copyparty.nix
     ./hardware.nix
+    ./media.nix
     ./network.server.nix
-    ./jellyfin.nix
     ./nh.nix
     ./program.nix
     ./system.nix
