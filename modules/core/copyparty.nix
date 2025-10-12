@@ -21,7 +21,7 @@
 
     volumes = {
       "/" = {
-        path = "/srv/copyparty";
+        path = "/srv";
         access = {
           rwd = "*";
           # rwd = ["admins"];
