@@ -1,6 +1,11 @@
 {config, ...}: {
   wayland.windowManager.hyprland = {
     settings = {
+      monitor = [
+        "HDMI-A-2,3840x2160@59.99700,0x0,1"
+        "HDMI-A-1,1920x1080@60,3840x1080,1"
+      ];
+
       # autostart
       exec-once = [
         "systemctl --user import-environment &"
@@ -191,8 +196,8 @@
         "$mainMod, 0, workspace, 10"
 
         #switch monitor
-        "$mainMod, SHIFT, TAB, movecurrentworkspacetomonitor, +1"
-        "$mainMod, SHIFT, TAB, focusmonitor, +1"
+        "$mainMod SHIFT, TAB, movecurrentworkspacetomonitor, +1"
+        "$mainMod SHIFT, TAB, focusmonitor, +1"
         "$mainMod, TAB, focusmonitor, +1"
 
         # same as above, but switch to the workspace
@@ -369,11 +374,6 @@
         # windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
       ];
     };
-
-    monitor = [
-      "HDMI-A-2,3840x2160@59.99700,0x0,1"
-      "HDMI-A-1,1920x1080@60,3840x0,1"
-    ];
 
     extraConfig = "
       monitor=,preferred,auto,auto
