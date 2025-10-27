@@ -361,17 +361,12 @@
         "opaque,class:^()$,title:^()$"
         "noshadow,class:^()$,title:^()$"
         "noblur,class:^()$,title:^()$"
+      ];
 
-        #         # No gaps when only
-        #         "w[t1], gapsout:0, gapsin:0"
-        #         "w[tg1], gapsout:0, gapsin:0"
-        #         "f[1], gapsout:0, gapsin:0"
-        # "bordersize 0, floating:0, onworkspace:w[t1]"
-        # windowrulev2 = rounding 0, floating:0, onworkspace:w[t1]
-        # windowrulev2 = bordersize 0, floating:0, onworkspace:w[tg1]
-        # windowrulev2 = rounding 0, floating:0, onworkspace:w[tg1]
-        # windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-        # windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+      workspace = [
+        "w[t1], gapsout:0, gapsin:0"
+        "w[tg1], gapsout:0, gapsin:0"
+        "f[1], gapsout:0, gapsin:0"
       ];
     };
 
