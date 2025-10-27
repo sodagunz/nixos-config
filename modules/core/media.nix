@@ -14,7 +14,6 @@
   ];
 
   services = {
-
     copyparty = {
       enable = true;
       user = "copyparty";
