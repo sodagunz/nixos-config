@@ -190,6 +190,11 @@
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
 
+        #switch monitor
+        "$mainMod, SHIFT, TAB, movecurrentworkspacetomonitor, +1"
+        "$mainMod, SHIFT, TAB, focusmonitor, +1"
+        "$mainMod, TAB, focusmonitor, +1"
+
         # same as above, but switch to the workspace
         "$mainMod SHIFT, 1, movetoworkspacesilent, 1" # movetoworkspacesilent
         "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
@@ -364,6 +369,11 @@
         # windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
       ];
     };
+
+    monitor = [
+      "HDMI-A-2,3840x2160@59.99700,0x0,1"
+      "HDMI-A-1,1920x1080@60,3840x0,1"
+    ];
 
     extraConfig = "
       monitor=,preferred,auto,auto
