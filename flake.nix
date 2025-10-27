@@ -18,6 +18,7 @@
         minispore = {
           system = "x86_64-linux";
           username = "gunz";
+          extraHostModules = [];
         };
         homegrown = {
           system = "x86_64-linux";
