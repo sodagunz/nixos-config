@@ -1,5 +1,5 @@
 {
-  description = "Guinz NixOS configuration";
+  description = "gunz systems configuration";
   outputs = {
     home-manager,
     nixpkgs,
@@ -21,6 +21,11 @@
           extraHostModules = [];
         };
         homegrown = {
+          system = "x86_64-linux";
+          username = "gunz";
+          extraHostModules = [inputs.copyparty.nixosModules.default];
+        };
+        filmotheque = {
           system = "x86_64-linux";
           username = "gunz";
           extraHostModules = [inputs.copyparty.nixosModules.default];
