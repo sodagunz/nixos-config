@@ -6,13 +6,7 @@
     nvf,
     self,
     ...
-  } @ inputs: let
-    # Nvf setup works differently on hm and on nixos modules.
-    hmNvim = nvf.lib.neovimConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-      modules = [./modules/home/hm-nvim.nix];
-    };
-  in {
+  } @ inputs: {
     nixosConfigurations = let
       nixosHosts = {
         minispore = {
@@ -45,14 +39,6 @@
         };
     in
       nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
-
-    # Workaround for not being able to use nix-darwin on one of my systems:
-    homeConfigurations."tomas.guiznburg" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-      modules = [
-        {home.packages = [hmNvim.neovim];}
-      ];
-    };
   };
 
   inputs = {
