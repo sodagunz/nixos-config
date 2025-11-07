@@ -35,12 +35,6 @@
     ./hardware-configuration.nix
 
     ./../../modules/nixos
-
-    ./../../modules/nixos/xserver.nix
-    ./../../modules/nixos/pipewire.nix
-    ./../../modules/nixos/steam.nix
-    ./../../modules/nixos/flatpak.nix
-    ./../../modules/nixos/wayland.nix
-    ./../../modules/nixos/bluetooth.nix
+    ./../../modules/nixos/workstation
   ];
 }

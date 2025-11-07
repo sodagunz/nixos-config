@@ -22,6 +22,6 @@
   imports = [
     ./hardware-configuration.nix
     ./../../modules/nixos
-    ./../../modules/nixos/media.nix
+    ./../../modules/nixos/server/media.nix
   ];
 }

@@ -61,8 +61,7 @@
   imports = [
     ./hardware-configuration.nix
     ./../../modules/nixos
-    ./../../modules/nixos/nas.nix
-    ./../../modules/nixos/media.nix
+    ./../../modules/nixos/server
   ];
 
 }
