@@ -34,13 +34,13 @@
   imports = [
     ./hardware-configuration.nix
 
-    ./../../modules/core
+    ./../../modules/nixos
 
-    ./../../modules/core/xserver.nix
-    ./../../modules/core/pipewire.nix
-    ./../../modules/core/steam.nix
-    ./../../modules/core/flatpak.nix
-    ./../../modules/core/wayland.nix
-    ./../../modules/core/bluetooth.nix
+    ./../../modules/nixos/xserver.nix
+    ./../../modules/nixos/pipewire.nix
+    ./../../modules/nixos/steam.nix
+    ./../../modules/nixos/flatpak.nix
+    ./../../modules/nixos/wayland.nix
+    ./../../modules/nixos/bluetooth.nix
   ];
 }

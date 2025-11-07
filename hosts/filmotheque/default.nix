@@ -60,9 +60,9 @@
   # Enable modules as needed for server specialization
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/core
-    ./../../modules/core/nas.nix
-    ./../../modules/core/media.nix
+    ./../../modules/nixos
+    ./../../modules/nixos/nas.nix
+    ./../../modules/nixos/media.nix
   ];
 
 }

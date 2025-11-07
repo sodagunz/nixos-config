@@ -21,7 +21,7 @@
   # Enable modules as needed for server specialization
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/core
-    ./../../modules/core/media.nix
+    ./../../modules/nixos
+    ./../../modules/nixos/media.nix
   ];
 }
