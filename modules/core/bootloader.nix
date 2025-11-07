@@ -1,6 +1,7 @@
 {
   pkgs,
   host,
+  config,
   ...
 }: {
   boot = {
@@ -9,9 +10,5 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 10;
     };
-    kernelPackages =
-      if host == "homegrown"
-      then pkgs.linuxPackages
-      else pkgs.linuxPackages_latest;
   };
 }

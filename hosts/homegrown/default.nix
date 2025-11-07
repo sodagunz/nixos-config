@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./../../modules/core/default.server.nix
@@ -6,4 +6,5 @@ _: {
 
   powerManagement.cpuFreqGovernor = "schedutil";
   programs.ssh.startAgent = true;
+  boot.kernelPackages = pkgs.linuxPackages;
 }
