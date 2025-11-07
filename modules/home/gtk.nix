@@ -3,10 +3,10 @@
   config,
   ...
 }: let
-  monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {};
-  monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix {
-    inherit monolisa;
-  };
+  # monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {};
+  # monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix {
+  #   inherit monolisa;
+  # };
 in {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
@@ -15,7 +15,7 @@ in {
     nerd-fonts.caskaydia-cove
     nerd-fonts.symbols-only
     twemoji-color-font
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     fantasque-sans-mono
     maple-mono.variable
     maple-mono.truetype

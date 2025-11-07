@@ -47,7 +47,7 @@
     ghostty.url = "github:ghostty-org/ghostty";
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/master";
     };
 
     hyprland = {

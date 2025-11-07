@@ -85,11 +85,6 @@ _: {
           ocaml.enable = true;
           haskell.enable = true;
 
-          typst = {
-            enable = true;
-            extensions.typst-preview-nvim.enable = true;
-          };
-
           markdown = {
             enable = true;
             extensions.render-markdown-nvim.enable = true;
