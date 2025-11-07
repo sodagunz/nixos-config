@@ -56,10 +56,5 @@
         address = ["/homegrown/192.168.1.204" "/minispore/192.168.1.200"];
       };
     };
-
-    # Prevent shutdown on tapping the power key:
-    logind.extraConfig = ''
-      HandlePowerKey=ignore
-    '';
   };
 }
