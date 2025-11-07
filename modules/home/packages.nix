@@ -2,8 +2,34 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+let
+  ncspot-fixed = let
+    originalPkg = pkgs.ncspot;
+  in pkgs.rustPlatform.buildRustPackage {
+    inherit (originalPkg) pname meta buildInputs nativeBuildInputs;
+    
+    version = "1.3.1-fix-librespot-spotifyuri-api";
+    src = pkgs.fetchFromGitHub {
+      owner = "gui-wf";
+      repo = "ncspot";
+      rev = "2b05f53198f94f5696352d22602efa701f807db2";
+      hash = "sha256-8fBY81O97Wu9oHVk+ZakL2UT49KxSX6eoXltdP3kLqw=";
+    };
+    
+    cargoLock = {
+      lockFile = ./ncspot-Cargo.lock;
+      outputHashes = {
+        "librespot-core-0.7.1" = "sha256-DulOkNP4vbdlIHUr/dKWfMAR5JKJIYQ3fuA1yK07Nb0=";
+      };
+    };
+  };
+in
+ {
   home.packages = with pkgs; [
+    # ncspot # NCurses Spotify # Disabled due to issue :(
+    ncspot-fixed
+
     ardour # DAW
 
     # ---- CLI essential
@@ -34,7 +60,6 @@
     gtt # google translate
     lazygit # git
     ncdu # NCurses (d)isk (u)tility
-    # ncspot # NCurses Spotify # Disabled due to issue :(
     ueberzugpp
     tdf # PDF renderer
     wiki-tui # Wikipedia
