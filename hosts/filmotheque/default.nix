@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./../../modules/core/default.server.nix
+    ./../../modules/core/nas.nix
   ];
 
   powerManagement.cpuFreqGovernor = "schedutil";
