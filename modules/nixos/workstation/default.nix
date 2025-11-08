@@ -1,6 +1,7 @@
 # Complete workstation modules
 _:{
   imports = [
+    ../base
     ./bluetooth.nix
     ./flatpak.nix
     ./pipewire.nix
