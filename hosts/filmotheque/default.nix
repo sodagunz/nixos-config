@@ -1,13 +1,26 @@
 {pkgs, ...}: {
-  imports = [
-    ./hardware-configuration.nix
-    ./../../modules/core/default.server.nix
-    ./../../modules/core/nas.nix
-  ];
 
+  # This should be an 8 character hex, you can get it via
+  # head -c4 /dev/urandom | od -A none -t x4
+  # It should be unique, and static between builds.
+  networking.hostId = "83a73ad2";
+
+  # System power management: `performance` | `schedutil` | `powersave`
   powerManagement.cpuFreqGovernor = "schedutil";
+
+  # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable. 
+  boot.kernelPackages = pkgs.linuxPackages; # ZFS usually lags behind latest
+  
+  # SSH agent is required for headless hosts
   programs.ssh.startAgent = true;
 
+  # Open custom ports
+  # 3923: Copyparty
+  networking.firewall.allowedTCPPorts = [3923];
+  networking.firewall.allowedUDPPorts = [3923];
+
+  # Set up zfs
+  # TODO: make this a module and parameterize pools?
   boot = {
     supportedFilesystems = ["zfs"];
     zfs = {
@@ -16,8 +29,6 @@
       package = pkgs.zfs;
       devNodes = "/dev/disk/by-id";
     };
-    # ZFS usually lags behind latest
-    kernelPackages = pkgs.linuxPackages;
   };
   services.zfs = {
     autoScrub = {
@@ -25,16 +36,11 @@
       interval = "weekly";
     };
 
-
     autoSnapshot.enable = false;
   };
 
-
-  # This should be an 8 character hex, you can get it via
-  # head -c4 /dev/urandom | od -A none -t x4
-  # It should be unique, and static between builds.
-  networking.hostId = "83a73ad2";
-
+  # Set up smart monitoring
+  # TODO: make this a module and parameterize drive names?
   services.smartd = {
     enable = true;
     autodetect = true;
@@ -49,6 +55,12 @@
       }
     ];
   };
-
   environment.systemPackages = [pkgs.smartmontools];
+
+  # Enable modules as needed for server specialization
+  imports = [
+    ./hardware-configuration.nix
+    ./../../modules/nixos/server
+  ];
+
 }

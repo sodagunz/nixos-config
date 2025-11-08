@@ -1,5 +1,5 @@
 {...}: {
   imports = [
-    ../../modules/home/default.server.nix
+    ../../modules/home/server
   ];
 }
