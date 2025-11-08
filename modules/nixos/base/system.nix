@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   ...
 }: {
   security.sudo.enable = true;
@@ -17,9 +16,6 @@
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       ];
     };
-  };
-  nixpkgs = {
-    overlays = [inputs.nur.overlays.default];
   };
 
   environment.systemPackages = with pkgs; [
@@ -53,7 +49,7 @@
         no-resolv = true;
         bind-interfaces = true;
         server = ["8.8.8.8" "8.8.4.4" "1.1.1.1"];
-        address = ["/homegrown/192.168.1.204" "/minispore/192.168.1.200"];
+        address = ["/homegrown/192.168.1.204" "/minispore/192.168.1.200" "/filmotheque/192.168.1.195"];
       };
     };
   };
