@@ -4,6 +4,7 @@ _:{
     ../base
     ./bluetooth.nix
     ./flatpak.nix
+    ./hardware.nix
     ./pipewire.nix
     ./steam.nix
     ./wayland.nix
