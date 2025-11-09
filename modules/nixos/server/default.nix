@@ -4,5 +4,6 @@ _: {
     ../base
     ./media.nix
     ./nas.nix
+    ./torrent.nix
   ];
 }

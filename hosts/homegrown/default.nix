@@ -13,11 +13,6 @@
   # SSH agent is required for headless hosts
   programs.ssh.startAgent = true;
 
-  # Open custom ports
-  # 3923: Copyparty
-  networking.firewall.allowedTCPPorts = [3923];
-  networking.firewall.allowedUDPPorts = [3923];
-
   # Enable modules as needed for server specialization
   imports = [
     ./hardware-configuration.nix

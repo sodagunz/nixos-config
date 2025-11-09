@@ -40,7 +40,7 @@
           };
         };
         "/tank" = {
-          path = "/tank";
+          path = "/mnt/tank";
           access.rwmd = "*";
           flags = {
             fk = 4;
@@ -58,7 +58,7 @@
       enable = true;
       openFirewall = true;
       group = "media";
-      dataDir = "/tank/media";
+      dataDir = "/mnt/tank/media";
     };
   };
 
@@ -71,6 +71,9 @@
     "${username}"
   ];
 
+  # open copyparty ports
+  networking.firewall.allowedTCPPorts = [3923];
+  networking.firewall.allowedUDPPorts = [3923];
 
   users.users.copyparty = {
     extraGroups = [
@@ -79,11 +82,10 @@
   };
 
   # fileSystems."/srv".options = ["defaults" "acl"];
-
   system.activationScripts.setSharedAcls = with pkgs; ''
     ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /srv
     ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /srv
-    ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /tank/media
-    ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /tank/media
+    ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /mnt/tank
+    ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /mnt/tank
   '';
 }
