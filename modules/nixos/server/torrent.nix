@@ -16,13 +16,16 @@
     enable = true;
     openFirewall = true; # opens 7878
     group = "media";
-    dataDir = "/mnt/tank/data/torrents";
   };
 
   services.sonarr = {
     enable = true;
     openFirewall = true; # opens 8989
     group = "media";
-    dataDir = "/mnt/tank/data/torrents";
+  };
+
+  services.prowlarr = {
+    enable = true;
+    openFirewall = true; #opens 9696
   };
 }
