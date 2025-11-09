@@ -28,9 +28,20 @@
         "/" = {
           path = "/srv";
           access = {
-            rwd = "*";
-            # rwd = ["admins"];
+            rwmd = "*";
           };
+          flags = {
+            fk = 4;
+            scan = 60;
+            e2d = true;
+            chmod_f = 775;
+            chmod_d = 775;
+            gid = 987;
+          };
+        };
+        "/tank" = {
+          path = "/tank";
+          access.rwmd = "*";
           flags = {
             fk = 4;
             scan = 60;
@@ -47,16 +58,19 @@
       enable = true;
       openFirewall = true;
       group = "media";
+      dataDir = "/tank/media";
     };
   };
 
   # Ensure copyparty and jellyfin have a common group.
   # Make my main user part of that group for convenience.
+  users.groups.media.gid = 987;
   users.groups.media.members = [
     "jellyfin"
     "copyparty"
     "${username}"
   ];
+
 
   users.users.copyparty = {
     extraGroups = [
@@ -69,5 +83,7 @@
   system.activationScripts.setSharedAcls = with pkgs; ''
     ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /srv
     ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /srv
+    ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /tank/media
+    ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /tank/media
   '';
 }
