@@ -77,7 +77,7 @@ in
     treefmt # project formatter
     valgrind # c memory analyzer
     zenity # uses GTK to retrieve user value
-    inputs.alejandra.defaultPackage.${system} # nixpkgs formatter
+    inputs.alejandra.defaultPackage.${stdenv.hostPlatform.system} # nixpkgs formatter
     python312Packages.ipython # interactive python
     taplo # toml formatter and more
     kdlfmt # kdl formatter
