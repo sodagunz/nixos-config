@@ -16,17 +16,20 @@
   # NAS client configuration
   # TODO: replace with hostname, maybe parameterize path?
   environment.systemPackages = with pkgs; [nfs-utils];
-  systemd.mounts = [
-    {
-      what = "192.168.1.195:/mnt/tank/data";
-      where = "/mnt/nas";
-      type = "nfs";
-      options = "x-systemd.automount,_netdev";
-    }
-  ];
+  # systemd.mounts = [
+  #   {
+  #     what = "192.168.1.195:/mnt/tank";
+  #     where = "/mnt/tank";
+  #     type = "nfs";
+  #     options = "x-systemd.automount,_netdev";
+  #   }
+  # ];
   systemd.automounts = [
     {
-      where = "/mnt/nas";
+      what = "192.168.1.195:/mnt/tank";
+      where = "/mnt/tank";
+      type = "nfs";
+      options = "_netdev";
     }
   ];
 

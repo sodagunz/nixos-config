@@ -58,7 +58,6 @@
       enable = true;
       openFirewall = true;
       group = "media";
-      dataDir = "/mnt/tank/media";
     };
   };
 
