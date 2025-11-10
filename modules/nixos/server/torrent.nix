@@ -3,11 +3,17 @@
 
   environment.systemPackages = with pkgs; [ transmission_4-qt ];
 
+  # networking.firewall.allowedTCPPorts = [9091];
+
   services.transmission = {
     enable = true;
     package = pkgs.transmission_4;
+    openRPCPort = true;
     settings = {
-      download-dir = "/mnt/tank/media";
+      rpc-bind-address = "0.0.0.0";
+      rpc-whitelist = "0.0.0.0,127.0.0.1,192.168.1.195,192.168.1.200,192.168.1.210";
+      download-dir = "/tank/media/raw";
+      incomplete-dir = "/tank/media/raw/.incomplete";
     };
   };
 

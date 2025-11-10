@@ -40,7 +40,7 @@
           };
         };
         "/tank" = {
-          path = "/mnt/tank";
+          path = "/tank";
           access.rwmd = "*";
           flags = {
             fk = 4;
@@ -48,7 +48,6 @@
             e2d = true;
             chmod_f = 775;
             chmod_d = 775;
-            gid = 987;
           };
         };
       };
@@ -86,5 +85,7 @@
     ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /srv
     ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /mnt/tank
     ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /mnt/tank
+    ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /tank
+    ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /tank
   '';
 }
