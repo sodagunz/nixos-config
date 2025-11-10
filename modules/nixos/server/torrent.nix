@@ -8,24 +8,28 @@
     package = pkgs.transmission_4;
     settings = {
       download-dir = "/mnt/tank/media";
-      watch-dir = "/mnt/tank/data/torrents";
     };
   };
 
   services.radarr = {
     enable = true;
     openFirewall = true; # opens 7878
-    group = "media";
   };
 
   services.sonarr = {
     enable = true;
     openFirewall = true; # opens 8989
-    group = "media";
   };
 
   services.prowlarr = {
     enable = true;
     openFirewall = true; #opens 9696
   };
+
+  users.groups.media.members = [
+    "prowlarr"
+    "sonarr"
+    "radarr"
+    "transmission"
+  ];
 }
