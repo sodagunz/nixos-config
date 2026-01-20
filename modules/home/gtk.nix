@@ -1,29 +1,22 @@
 {
   pkgs,
-  config,
   ...
-}: let
-  monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {};
-  monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix {
-    inherit monolisa;
-  };
-in {
+}: {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
     nerd-fonts.caskaydia-cove
     nerd-fonts.symbols-only
     twemoji-color-font
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     fantasque-sans-mono
     maple-mono.variable
     maple-mono.truetype
     maple-mono.NF
     maple-mono.NF-CN
     montserrat
-    # monolisa
-    # monolisa-nerd
   ];
 
   gtk = {

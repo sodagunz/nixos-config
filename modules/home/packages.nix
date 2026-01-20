@@ -1,11 +1,12 @@
 {
-  inputs,
   pkgs,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     ardour # DAW
-
+    opencode # Agent
+    
     # ---- CLI essential
     entr # perform action when file change
     eza # ls replacement
@@ -46,13 +47,13 @@
     just # easy make substitute
     nix-prefetch-github # prefetch nix info from github
     nixd # nix lsp
-    nixfmt-rfc-style # nix formatter
+    nixfmt# nix formatter
     python3 # Python3
     shfmt # bash formatter
     treefmt # project formatter
     valgrind # c memory analyzer
     zenity # uses GTK to retrieve user value
-    inputs.alejandra.defaultPackage.${system} # nixpkgs formatter
+    alejandra # nixpkgs formatter
     python312Packages.ipython # interactive python
     taplo # toml formatter and more
     kdlfmt # kdl formatter

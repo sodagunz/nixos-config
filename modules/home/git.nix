@@ -2,25 +2,25 @@
   programs.git = {
     enable = true;
 
-    userName = "sodagunz";
-    userEmail = "sodagunz@proton.me";
-
-    extraConfig = {
-      init.defaultBranch = "main";
+    settings = {
       credential.helper = "store";
-      merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
+      init.defaultBranch = "main";
+      merge.conflictstyle = "diff3";
       push.autoSetupRemote = true;
+      user.email = "sodagunz@proton.me";
+      user.name = "sodagunz";
     };
 
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
-        side-by-side = true;
-        diff-so-fancy = true;
-        navigate = true;
-      };
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      line-numbers = true;
+      side-by-side = true;
+      diff-so-fancy = true;
+      navigate = true;
     };
   };
 

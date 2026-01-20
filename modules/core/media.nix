@@ -35,8 +35,8 @@
             fk = 4;
             scan = 60;
             e2d = true;
-            chmod_f = 775;
-            chmod_d = 775;
+            chmod_f = "775";
+            chmod_d = "775";
             gid = 987;
           };
         };
