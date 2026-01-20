@@ -20,6 +20,7 @@
 
   powerManagement.cpuFreqGovernor = "schedutil";
   boot.kernelPackages = pkgs.linuxPackages;
+  programs.wshowkeys.enable = true;
 
   systemd.mounts = [
     {

@@ -26,7 +26,6 @@ _: {
     ./scripts/scripts.nix # personal scripts
     ./starship #shell bar
     ./swaync/swaync.nix # notification deamon
-    ./swayosd # brightness / volume wiget
     ./waybar # status bar
     ./waypaper.nix # GUI wallpaper picker
     ./xdg-mimes.nix # xdg config
