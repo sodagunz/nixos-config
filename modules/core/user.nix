@@ -3,29 +3,11 @@
   inputs,
   username,
   host,
-  homeModules ? [],
+  homeModules ? [ ],
   ...
-}: {
-  imports = [inputs.home-manager.nixosModules.home-manager];
-  home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs username host;};
-    users.${username} = {
-      imports =
-        [
-          inputs.nvf.homeManagerModules.default
-        ]
-        ++ homeModules;
-      home = {
-        username = "${username}";
-        homeDirectory = "/home/${username}";
-        stateVersion = "25.05";
-      };
-      programs.home-manager.enable = true;
-    };
-    backupFileExtension = "hmbackup";
-  };
+}:
+{
+  imports = [ ];
 
   users.users.${username} = {
     isNormalUser = true;
@@ -40,5 +22,5 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICBhO59Hku23ejz5cyWdXQRnk8TpecPNAbZZw0VD60bv tomas"
     ];
   };
-  nix.settings.allowed-users = ["${username}"];
+  nix.settings.allowed-users = [ "${username}" ];
 }

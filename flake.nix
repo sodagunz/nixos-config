@@ -3,7 +3,6 @@
   outputs = {
     home-manager,
     nixpkgs,
-    nvf,
     self,
     ...
   } @ inputs: {
@@ -13,11 +12,6 @@
           system = "x86_64-linux";
           username = "gunz";
           extraHostModules = [];
-        };
-        homegrown = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [inputs.copyparty.nixosModules.default];
         };
         filmotheque = {
           system = "x86_64-linux";
@@ -33,27 +27,60 @@
           specialArgs = {
             host = hostname;
             inherit (hostConfig) username;
-            homeModules = [./hosts/${hostname}/home.nix];
             inherit self inputs;
           };
         };
     in
       nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
+
+    homeConfigurations = let
+      homeHosts = {
+        minispore = {
+          system = "x86_64-linux";
+          username = "gunz";
+          homeModules = [./hosts/minispore/home.nix];
+        };
+        filmotheque = {
+          system = "x86_64-linux";
+          username = "gunz";
+          homeModules = [./hosts/filmotheque/home.nix];
+        };
+      };
+
+      mkHomeHost = hostname: hostConfig:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = hostConfig.system;
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs self;
+            host = hostname;
+            username = hostConfig.username;
+          };
+          modules =
+            [
+              {
+                home = {
+                  inherit (hostConfig) username;
+                  homeDirectory = "/home/${hostConfig.username}";
+                  stateVersion = "25.05";
+                };
+                programs.home-manager.enable = true;
+              }
+            ]
+            ++ hostConfig.homeModules;
+        };
+    in
+      nixpkgs.lib.mapAttrs mkHomeHost homeHosts;
   };
 
   inputs = {
-    alejandra.url = "github:kamadorueda/alejandra";
     copyparty.url = "github:9001/copyparty";
     ghostty.url = "github:ghostty-org/ghostty";
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
-    };
-
-    hyprland = {
-      type = "git";
-      submodules = true;
-      url = "https://github.com/hyprwm/Hyprland";
     };
 
     hypr-contrib.url = "github:hyprwm/contrib";
@@ -64,7 +91,6 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-    nvf.url = "github:notashelf/nvf/af0cc1a85675e3a0dedb15ce648344c52d15c8d8";
 
     spicetify-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,7 +101,5 @@
       flake = false;
       url = "github:yazi-rs/plugins";
     };
-
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 }
