@@ -2,7 +2,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     input = {
-      kb_layout = "us,fr";
+      kb_layout = "us,es,fr";
       kb_options = "grp:alt_caps_toggle,compose:caps";
 
       numlock_by_default = true;

@@ -118,9 +118,9 @@
       ", XF86AudioPrev, exec, playerctl previous"
       ", XF86AudioStop, exec, playerctl stop"
 
-      "CAPS,Caps_Lock,exec,swayosd-client --caps-lock"
-      ", Scroll_Lock,exec,swayosd-client --scroll-lock"
-      ", Num_Lock,exec,swayosd-client --num-lock"
+      ", Caps_Lock, exec, swayosd-client --caps-lock"
+      ", Scroll_Lock, exec, swayosd-client --scroll-lock"
+      ", Num_Lock, exec, swayosd-client --num-lock"
 
       "$mod, XF86MonBrightnessUp, exec, brightnessctl set 100%"
       "$mod, XF86MonBrightnessDown, exec, brightnessctl set 0%"
