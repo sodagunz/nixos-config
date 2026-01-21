@@ -7,20 +7,20 @@
   "notification-layer": "overlay",
   "layer-shell": true,
   "cssPriority": "user",
-  "control-center-margin-top": 10,
-  "control-center-margin-bottom": 10,
-  "control-center-margin-right": 10,
-  "control-center-margin-left": 10,
-  "notification-icon-size": 64,
-  "notification-body-image-height": 128,
+  "control-center-margin-top": 2,
+  "control-center-margin-bottom": 2,
+  "control-center-margin-right": 1,
+  "control-center-margin-left": 0,
+  "notification-icon-size": 48,
+  "notification-body-image-height": 160,
   "notification-body-image-width": 200,
   "timeout": 10,
   "timeout-low": 5,
   "timeout-critical": 0,
   "fit-to-screen": false,
-  "control-center-width": 400,
-  "control-center-height": 650,
-  "notification-window-width": 350,
+  "control-center-width": 380,
+  "control-center-height": 860,
+  "notification-window-width": 400,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
   "transition-time": 200,
@@ -132,8 +132,8 @@
       "text": " Do Not Disturb"
     },
     "mpris": {
-      "image-size": 85,
-      "image-radius": 5
+      "image-size": 96,
+      "image-radius": 12
     }
   }
 }
