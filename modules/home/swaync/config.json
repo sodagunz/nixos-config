@@ -6,7 +6,7 @@
   "control-center-layer": "overlay",
   "notification-layer": "overlay",
   "layer-shell": true,
-  "cssPriority": "application",
+  "cssPriority": "user",
   "control-center-margin-top": 10,
   "control-center-margin-bottom": 10,
   "control-center-margin-right": 10,
@@ -70,7 +70,7 @@
           },
           {
             "label": "󰩭  Window / Region",
-            "command": "grimblast --notify --cursor --freeze copy area"
+            "command": "grimblast --notify --freeze copysave area"
           }
         ]
       },
@@ -80,15 +80,15 @@
         "actions": [
           {
             "label": "  Record screen",
-            "command": "record screen & ; swaync-client -t"
+            "command": "record screen & swaync-client -t"
           },
           {
             "label": "  Record selection",
-            "command": "record area & ; swaync-client -t"
+            "command": "record area & swaync-client -t"
           },
           {
             "label": "  Record GIF",
-            "command": "record gif & ; swaync-client -t"
+            "command": "record gif & swaync-client -t"
           },
           {
             "label": "󰻃  Stop",

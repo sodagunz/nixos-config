@@ -127,8 +127,8 @@
     ];
 
     bindle = [
-      ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
-      ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+      ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise 3%+"
+      ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower 3%-"
       ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise 5%+"
       ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower 5%-"
 
