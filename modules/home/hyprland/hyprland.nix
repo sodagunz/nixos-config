@@ -19,6 +19,7 @@
     direnv
     swayosd
     wshowkeys
+    hyprpolkitagent
   ];
 
   systemd.user.targets.hyprland-session.Unit.Wants = [

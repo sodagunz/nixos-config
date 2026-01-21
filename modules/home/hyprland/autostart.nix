@@ -16,6 +16,7 @@
       "hyprctl setcursor Bibata-Modern-Ice 24 &"
       "swww-daemon &"
       "swayosd-server &"
+      "systemctl --user start hyprpolkitagent"
 
       "hyprlock"
 
