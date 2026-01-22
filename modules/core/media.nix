@@ -6,6 +6,7 @@
 }:
 {
   nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
+
   environment.systemPackages = with pkgs; [
     acl
     copyparty
