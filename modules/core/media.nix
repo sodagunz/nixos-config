@@ -3,8 +3,9 @@
   inputs,
   username,
   ...
-}: {
-  nixpkgs.overlays = [inputs.copyparty.overlays.default];
+}:
+{
+  nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
   environment.systemPackages = with pkgs; [
     acl
     copyparty
@@ -14,7 +15,6 @@
   ];
 
   services = {
-
     copyparty = {
       enable = true;
       user = "copyparty";

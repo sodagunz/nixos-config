@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
 {
-
+  config,
+  pkgs,
+  ...
+}:
+{
   xdg.configFile."swayosd/style.css".source = ./swayosd.css;
 
   wayland.windowManager.hyprland.settings = {

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.git = {
     enable = true;
 
@@ -11,7 +12,6 @@
       user.email = "sodagunz@proton.me";
       user.name = "sodagunz";
     };
-
   };
   programs.delta = {
     enable = true;
@@ -24,7 +24,7 @@
     };
   };
 
-  home.packages = [pkgs.gh]; # pkgs.git-lfs
+  home.packages = [ pkgs.gh ]; # pkgs.git-lfs
 
   programs.zsh.shellAliases = {
     g = "lazygit";

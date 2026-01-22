@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [starship];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ starship ];
   xdg.configFile."starship.toml".source = ./starship.toml;
 
   programs.starship = {

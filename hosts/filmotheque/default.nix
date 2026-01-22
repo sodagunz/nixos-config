@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ./../../modules/core/default.server.nix
@@ -9,10 +10,10 @@
   programs.ssh.startAgent = true;
 
   boot = {
-    supportedFilesystems = ["zfs"];
+    supportedFilesystems = [ "zfs" ];
     zfs = {
       forceImportRoot = false;
-      extraPools = ["tank"];
+      extraPools = [ "tank" ];
       package = pkgs.zfs;
       devNodes = "/dev/disk/by-id";
     };
@@ -25,10 +26,8 @@
       interval = "weekly";
     };
 
-
     autoSnapshot.enable = false;
   };
-
 
   # This should be an 8 character hex, you can get it via
   # head -c4 /dev/urandom | od -A none -t x4
@@ -50,5 +49,5 @@
     ];
   };
 
-  environment.systemPackages = [pkgs.smartmontools];
+  environment.systemPackages = [ pkgs.smartmontools ];
 }

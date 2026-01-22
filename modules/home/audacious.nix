@@ -2,8 +2,9 @@
   pkgs,
   username,
   ...
-}: {
-  home.packages = with pkgs; [audacious];
+}:
+{
+  home.packages = with pkgs; [ audacious ];
   xdg.configFile."audacious/config".text = ''
     [audacious]
     equalizer_active=TRUE

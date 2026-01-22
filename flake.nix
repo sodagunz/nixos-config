@@ -1,84 +1,89 @@
 {
   description = "gunz systems configuration";
-  outputs = {
-    home-manager,
-    nixpkgs,
-    self,
-    ...
-  } @ inputs: {
-    nixosConfigurations = let
-      nixosHosts = {
-        minispore = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [];
-        };
-        retropod = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [];
-        };
-      };
-
-      mkNixosHost = hostname: hostConfig:
-        nixpkgs.lib.nixosSystem {
-          modules = [./hosts/${hostname}] ++ hostConfig.extraHostModules;
-          inherit (hostConfig) system;
-          specialArgs = {
-            host = hostname;
-            inherit (hostConfig) username;
-            inherit self inputs;
+  outputs =
+    {
+      home-manager,
+      nixpkgs,
+      self,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations =
+        let
+          nixosHosts = {
+            minispore = {
+              system = "x86_64-linux";
+              username = "gunz";
+              extraHostModules = [ ];
+            };
+            retropod = {
+              system = "x86_64-linux";
+              username = "gunz";
+              extraHostModules = [ ];
+            };
           };
-        };
-    in
-      nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
 
-    homeConfigurations = let
-      homeHosts = {
-        "gunz@minispore" = {
-          system = "x86_64-linux";
-          username = "gunz";
-          homeModules = [./hosts/minispore/home.nix];
-        };
-        "gunz@filmotheque" = {
-          system = "x86_64-linux";
-          username = "gunz";
-          homeModules = [./hosts/filmotheque/home.nix];
-        };
-        "gunz@retropod" = {
-          system = "x86_64-linux";
-          username = "gunz";
-          homeModules = [./hosts/retropod/home.nix];
-        };
-      };
+          mkNixosHost =
+            hostname: hostConfig:
+            nixpkgs.lib.nixosSystem {
+              modules = [ ./hosts/${hostname} ] ++ hostConfig.extraHostModules;
+              inherit (hostConfig) system;
+              specialArgs = {
+                host = hostname;
+                inherit (hostConfig) username;
+                inherit self inputs;
+              };
+            };
+        in
+        nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
 
-      mkHomeHost = hostname: hostConfig:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = import inputs.nixpkgs-unstable {
-            system = hostConfig.system;
-            config.allowUnfree = true;
+      homeConfigurations =
+        let
+          homeHosts = {
+            "gunz@minispore" = {
+              system = "x86_64-linux";
+              username = "gunz";
+              homeModules = [ ./hosts/minispore/home.nix ];
+            };
+            "gunz@filmotheque" = {
+              system = "x86_64-linux";
+              username = "gunz";
+              homeModules = [ ./hosts/filmotheque/home.nix ];
+            };
+            "gunz@retropod" = {
+              system = "x86_64-linux";
+              username = "gunz";
+              homeModules = [ ./hosts/retropod/home.nix ];
+            };
           };
-          extraSpecialArgs = {
-            inherit inputs self;
-            host = hostname;
-            username = hostConfig.username;
-          };
-          modules =
-            [
-              {
-                home = {
-                  inherit (hostConfig) username;
-                  homeDirectory = "/home/${hostConfig.username}";
-                  stateVersion = "25.11";
-                };
-                programs.home-manager.enable = true;
-              }
-            ]
-            ++ hostConfig.homeModules;
-        };
-    in
-      nixpkgs.lib.mapAttrs mkHomeHost homeHosts;
-  };
+
+          mkHomeHost =
+            hostname: hostConfig:
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs-unstable {
+                system = hostConfig.system;
+                config.allowUnfree = true;
+              };
+              extraSpecialArgs = {
+                inherit inputs self;
+                host = hostname;
+                username = hostConfig.username;
+              };
+              modules = [
+                {
+                  home = {
+                    inherit (hostConfig) username;
+                    homeDirectory = "/home/${hostConfig.username}";
+                    stateVersion = "25.11";
+                  };
+                  programs.home-manager.enable = true;
+                }
+              ]
+              ++ hostConfig.homeModules;
+            };
+        in
+        nixpkgs.lib.mapAttrs mkHomeHost homeHosts;
+    };
 
   inputs = {
     copyparty.url = "github:9001/copyparty";

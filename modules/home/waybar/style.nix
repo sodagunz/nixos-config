@@ -2,6 +2,7 @@
   config,
   pkgs,
   ...
-}: {
-  programs.waybar.style = (pkgs.lib.strings.fileContents ./style.css);
+}:
+{
+  programs.waybar.style = pkgs.lib.strings.fileContents ./style.css;
 }

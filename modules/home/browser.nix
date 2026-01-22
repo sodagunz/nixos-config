@@ -1,8 +1,11 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}: {
   home.packages = (
-    with pkgs; [ firefox chromium brave]
+    with pkgs;
+    [
+      firefox
+      chromium
+      brave
+    ]
   );
 }

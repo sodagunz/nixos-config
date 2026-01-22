@@ -1,3 +1,4 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [unityhub];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ unityhub ];
 }

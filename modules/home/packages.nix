@@ -1,12 +1,9 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     ardour # DAW
     opencode # Agent
-    
+
     # ---- CLI essential
     entr # perform action when file change
     eza # ls replacement
@@ -47,7 +44,7 @@
     just # easy make substitute
     nix-prefetch-github # prefetch nix info from github
     nixd # nix lsp
-    nixfmt# nix formatter
+    nixfmt # nix formatter
     python3 # Python3
     shfmt # bash formatter
     treefmt # project formatter
