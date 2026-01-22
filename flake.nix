@@ -16,6 +16,11 @@
               username = "gunz";
               extraHostModules = [ ];
             };
+            filmotheque = {
+              system = "x86_64-linux";
+              username = "gunz";
+              extraHostModules = [ ];
+            };
             retropod = {
               system = "x86_64-linux";
               username = "gunz";

@@ -1,9 +1,6 @@
 {
   pkgs,
-  inputs,
   username,
-  host,
-  homeModules ? [ ],
   ...
 }:
 {

@@ -19,10 +19,13 @@
 
   powerManagement.cpuFreqGovernor = "schedutil";
   programs.ssh.startAgent = true;
+
   boot.kernelPackages = pkgs.linuxPackages;
 
+  networking.hostId = "7cf0ec96";
+
   environment.systemPackages = with pkgs; [
-    retroarch
+    retroarch-full
   ];
 
   services.xserver = {
@@ -37,17 +40,7 @@
     desktopManager = {
       retroarch = {
         enable = true;
-        package = pkgs.retroarch.override {
-          cores = with pkgs.libretro; [
-            genesis-plus-gx
-            snes9x
-            beetle-psx-hw
-            mupen64plus
-            mgba
-            nestopia
-            fbneo
-          ];
-        };
+        package = pkgs.retroarch-full;
       };
     };
   };
