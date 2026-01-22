@@ -18,6 +18,7 @@
     openFirewall = true;
   };
 
+  services.power-profiles-daemon.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
   boot.kernelPackages = pkgs.linuxPackages;
   programs.wshowkeys.enable = true;
