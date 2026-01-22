@@ -19,12 +19,12 @@
             filmotheque = {
               system = "x86_64-linux";
               username = "gunz";
-              extraHostModules = [ ];
+              extraHostModules = [inputs.copyparty.nixosModules.default];
             };
             retropod = {
               system = "x86_64-linux";
               username = "gunz";
-              extraHostModules = [ ];
+              extraHostModules = [inputs.copyparty.nixosModules.default];
             };
           };
 
