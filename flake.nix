@@ -16,10 +16,10 @@
               username = "gunz";
               extraHostModules = [ ];
             };
-            filmotheque = {
+            retropod = {
               system = "x86_64-linux";
               username = "gunz";
-              extraHostModules = [ inputs.copyparty.nixosModules.default ];
+              extraHostModules = [ ];
             };
           };
 
@@ -50,6 +50,11 @@
               username = "gunz";
               homeModules = [ ./hosts/filmotheque/home.nix ];
             };
+            "gunz@retropod" = {
+              system = "x86_64-linux";
+              username = "gunz";
+              homeModules = [ ./hosts/retropod/home.nix ];
+            };
           };
 
           mkHomeHost =
@@ -73,7 +78,8 @@
                   };
                   programs.home-manager.enable = true;
                 }
-              ] ++ hostConfig.homeModules;
+              ]
+              ++ hostConfig.homeModules;
             };
         in
         nixpkgs.lib.mapAttrs mkHomeHost homeHosts;
