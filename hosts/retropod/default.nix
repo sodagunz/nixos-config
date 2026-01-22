@@ -3,6 +3,32 @@
   username,
   ...
 }:
+let
+  retroarch-custom = pkgs.retroarch.withCores(
+    cores: with cores; [
+      fbneo
+      mame2016
+      puae
+      dosbox-pure
+      beetle-pce
+      gambatte
+      mgba
+      beetle-vb
+      melonds
+      nestopia
+      snes9x
+      mupen64plus
+      scummvm
+      genesis-plus-gx
+      picodrive
+      beetle-saturn
+      flycast
+      pcsx-rearmed
+      pcsx2
+      dolphin
+      citra
+    ]);
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -25,7 +51,7 @@
   networking.hostId = "7cf0ec96";
 
   environment.systemPackages = with pkgs; [
-    retroarch-full
+    retroarch-custom
   ];
 
   services.xserver = {
@@ -40,7 +66,7 @@
     desktopManager = {
       retroarch = {
         enable = true;
-        package = pkgs.retroarch-full;
+        package = retroarch-custom;
       };
     };
   };
