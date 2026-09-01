@@ -4,8 +4,7 @@
   # It should be unique, and static between builds.
   networking.hostId = "be02bace";
 
-  # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable. 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # System power management: `performance` | `schedutil` | `powersave`
   powerManagement.cpuFreqGovernor = "schedutil";
