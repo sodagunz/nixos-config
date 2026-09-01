@@ -4,6 +4,7 @@
     self.homeModules.audacious
     self.homeModules.bat
     self.homeModules.btop
+    self.homeModules.browser
     self.homeModules.cava
     self.homeModules.codex
     self.homeModules.colors
@@ -12,16 +13,21 @@
     self.homeModules.fish
     self.homeModules.git
     self.homeModules.fastfetch
+    self.homeModules.gaming
     self.homeModules.gnome
     self.homeModules.ghostty
+    self.homeModules.gtk
     self.homeModules.kitty
     self.homeModules.micro
     self.homeModules.nemo
     self.homeModules.obsidian
+    self.homeModules.packages
     self.homeModules.retroarch
     self.homeModules.rofi
+    self.homeModules.scripts
     self.homeModules.starship
     self.homeModules.swayosd
+    self.homeModules.swaync
     self.homeModules.waypaper
     self.homeModules.yazi
     self.homeModules.zellij
