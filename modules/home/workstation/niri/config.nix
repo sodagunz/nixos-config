@@ -67,37 +67,23 @@
     environment { NIXOS_OZONE_WL "1"; }
 
     binds {
-        Mod+Alt+H hotkey-overlay-title="Show keybindings" { spawn "show-keybinds"; }
         Mod+A hotkey-overlay-title="Open terminal" { spawn "ghostty"; }
-        Mod+Alt+A hotkey-overlay-title="Open floating Kitty" { spawn "kitty"; }
-        Mod+D hotkey-overlay-title="Open terminal and fullscreen it" { spawn-sh "ghostty & sleep 0.2; niri msg action fullscreen-window"; }
-        Mod+Shift+A hotkey-overlay-title="Open floating terminal" { spawn "ghostty"; }
         Mod+W hotkey-overlay-title="Open Firefox" { spawn "firefox"; }
+        Mod+D hotkey-overlay-title="Open Discord" { spawn "discord"; }
+        Mod+Z hotkey-overlay-title="Open Zed" { spawn "zed"; }
+        Mod+E hotkey-overlay-title="Open file explorer" { spawn "nemo"; }
+        Mod+Space hotkey-overlay-title="Open application launcher" { spawn-sh "rofi -show drun || pkill rofi"; }
         Mod+Q { close-window; }
         Mod+F { fullscreen-window; }
-        Mod+Shift+F { maximize-column; }
-        Mod+Shift+Comma { toggle-window-floating; }
-        Mod+Comma { consume-or-expel-window-left; }
-        Mod+Space { spawn-sh "rofi -show drun || pkill rofi"; }
         Mod+Escape { spawn "swaylock" "-f" "-c" "000000"; }
         Mod+Shift+Escape { spawn "power-menu"; }
-        Mod+P { toggle-column-tabbed-display; }
         Mod+T { toggle-window-rule-opacity; }
-        Mod+E { spawn "nemo"; }
-        Mod+Shift+E { spawn "ghostty" "yazi"; }
-        Mod+Shift+C { spawn "niri" "msg" "pick-color"; }
-        Mod+Alt+W { spawn "waypaper"; }
-        Mod+N { spawn "swaync-client" "-t" "-sw"; }
-        Ctrl+Shift+Escape { spawn "resources"; }
+        Mod+V { spawn-sh "cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"; }
 
         Print { spawn "screenshot" "--copy"; }
         Mod+Print { spawn "screenshot" "--save"; }
         Mod+Shift+Print { spawn "screenshot" "--swappy"; }
 
-        Mod+Left { focus-column-left; }
-        Mod+Right { focus-column-right; }
-        Mod+Up { focus-window-up; }
-        Mod+Down { focus-window-down; }
         Mod+H { focus-column-left; }
         Mod+J { focus-window-down; }
         Mod+K { focus-window-up; }
@@ -114,9 +100,6 @@
         Mod+9 { focus-workspace 9; }
         Mod+0 { focus-workspace 10; }
 
-        Mod+Tab { focus-monitor-next; }
-        Mod+Shift+Tab { move-workspace-to-monitor-next; }
-
         Mod+Shift+1 { move-column-to-workspace 1; }
         Mod+Shift+2 { move-column-to-workspace 2; }
         Mod+Shift+3 { move-column-to-workspace 3; }
@@ -128,23 +111,10 @@
         Mod+Shift+9 { move-column-to-workspace 9; }
         Mod+Shift+0 { move-column-to-workspace 10; }
 
-        Mod+Shift+Left { move-column-left; }
-        Mod+Shift+Right { move-column-right; }
-        Mod+Shift+Up { move-window-up; }
-        Mod+Shift+Down { move-window-down; }
         Mod+Shift+H { move-column-left; }
         Mod+Shift+J { move-window-down; }
         Mod+Shift+K { move-window-up; }
         Mod+Shift+L { move-column-right; }
-
-        Mod+Ctrl+Left { set-column-width "-80"; }
-        Mod+Ctrl+Right { set-column-width "+80"; }
-        Mod+Ctrl+Up { set-window-height "-80"; }
-        Mod+Ctrl+Down { set-window-height "+80"; }
-        Mod+Ctrl+H { set-column-width "-80"; }
-        Mod+Ctrl+J { set-window-height "+80"; }
-        Mod+Ctrl+K { set-window-height "-80"; }
-        Mod+Ctrl+L { set-column-width "+80"; }
 
         XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
         XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
@@ -159,11 +129,15 @@
         Mod+F11 { spawn "swayosd-client" "--output-volume" "-2"; }
         Mod+F10 { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
 
-        Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
-        Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
-        Mod+V { spawn-sh "cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"; }
     }
 
+    // This gives Mod+T an alternate opacity to toggle against.
+    window-rule { opacity 0.90; }
+
+    window-rule {
+        match app-id=r#"^(firefox|ghostty|com\.mitchellh\.ghostty|discord|dev\.zed\.Zed)$"#
+        open-fullscreen true
+    }
     window-rule {
         match app-id=r#"^(Viewnior|imv|mpv|audacious|udiskie|waypaper|zenity|org\.gnome\.FileRoller|pavucontrol|SoundWireServer|\.sameboy-wrapped|file_progress|confirm|dialog|download|notification|error|confirmreset)$"#
         open-floating true
@@ -180,10 +154,5 @@
         match app-id=r#"^(ghostty|com\.mitchellh\.ghostty)$"# at-startup=true
         open-on-workspace "2"
     }
-    window-rule { match app-id="evince"; open-on-workspace "3"; }
-    window-rule { match app-id=r#"^(Gimp-2.10|Aseprite)$"#; open-on-workspace "4"; }
-    window-rule { match app-id=r#"^(Audacious|Spotify)$"#; open-on-workspace "5"; }
-    window-rule { match app-id="com.obsproject.Studio"; open-on-workspace "8"; }
-    window-rule { match app-id=r#"^(discord|WebCord)$"#; open-on-workspace "10"; }
   '';
 }

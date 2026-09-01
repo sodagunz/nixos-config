@@ -102,6 +102,7 @@
     resources # GUI resources monitor
     thunderbird # Mozilla Email client
     vlc # VideoLan Client
+    zed-editor
 
     discord
   ];
