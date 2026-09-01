@@ -16,22 +16,15 @@
   # NAS client configuration
   # TODO: replace with hostname, maybe parameterize path?
   environment.systemPackages = with pkgs; [nfs-utils];
-  # systemd.mounts = [
-  #   {
-  #     what = "192.168.1.195:/mnt/tank";
-  #     where = "/mnt/tank";
-  #     type = "nfs";
-  #     options = "x-systemd.automount,_netdev";
-  #   }
-  # ];
-  systemd.automounts = [
-    {
-      what = "192.168.1.195:/mnt/tank";
-      where = "/mnt/tank";
-      type = "nfs";
-      options = "_netdev";
-    }
-  ];
+  fileSystems."/mnt/tank" = {
+    device = "192.168.1.195:/mnt/tank";
+    fsType = "nfs";
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "_netdev"
+    ];
+  };
 
   # Use default core modules for workstations.
   imports = [

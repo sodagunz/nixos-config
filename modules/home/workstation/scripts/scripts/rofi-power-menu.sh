@@ -38,9 +38,9 @@ icons[shutdown]="\Uf0425"
 icons[cancel]="\Uf0156"
 
 declare -A actions
-actions[lockscreen]="hyprlock"
+actions[lockscreen]="swaylock -f -c 000000"
 #actions[switchuser]="???"
-actions[logout]="sway exit"
+actions[logout]="niri msg action quit --skip-confirmation"
 actions[suspend]="systemctl suspend"
 actions[hibernate]="systemctl hibernate"
 actions[reboot]="systemctl reboot"

@@ -5,15 +5,15 @@ time=$(date +'%Y_%m_%d_at_%Hh%Mm%Ss')
 file="${dir}/Screenshot_${time}.png"
 
 copy() {
-    grimblast --notify --freeze copy area
+    grim -g "$(slurp)" - | wl-copy
 }
 
 save() {
-    grimblast --notify --freeze save area "$file"
+    grim -g "$(slurp)" "$file"
 }
 
 swappy_() {
-    grimblast --notify --freeze save area "$file"
+    grim -g "$(slurp)" "$file"
     swappy -f "$file"
 }
 

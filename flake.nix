@@ -50,15 +50,6 @@
       url = "github:nix-community/home-manager/master";
     };
 
-    hyprland = {
-      type = "git";
-      submodules = true;
-      url = "https://github.com/hyprwm/Hyprland";
-    };
-
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hyprmag.url = "github:SIMULATAN/hyprmag";
-    hyprpicker.url = "github:hyprwm/hyprpicker";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-gaming.url = "github:fufexan/nix-gaming";

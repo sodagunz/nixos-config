@@ -14,9 +14,9 @@
 
 ## Components
 
-|                             |            NixOS + Hyprland            |
+|                             |              NixOS + Niri              |
 | --------------------------- | :------------------------------------: |
-| **Window Manager**          |          [Hyprland][Hyprland]          |
+| **Window Manager**          |              [Niri][Niri]              |
 | **Bar**                     |            [Waybar][Waybar]            |
 | **Application Launcher**    |              [rofi][rofi]              |
 | **Notification Daemon**     |            [swaync][swaync]            |
@@ -28,14 +28,14 @@
 | **Color Scheme**            |          [Nord/Nordic][Nord]           |
 | **Cursor**                  | [Bibata-Modern-Ice][Bibata-Modern-Ice] |
 | **Icons**                   |      [Papirus-Dark][Papirus-Dark]      |
-| **Lockscreen**              |          [Hyprlock][Hyprlock]          |
+| **Lockscreen**              |          [Swaylock][Swaylock]          |
 | **Image Viewer**            |             [qview][qview]             |
 | **Media Player**            |               [mpv][mpv]               |
 | **Music Player**            |          [ncspot][ncspot] TUI          |
-| **Screenshot Software**     |         [grimblast][grimblast]         |
+| **Screenshot Software**     |       [grim][grim] + [slurp][slurp]    |
 | **Screen Recording**        |       [wf-recorder][wf-recorder]       |
 | **Clipboard**               |   [wl-clip-persist][wl-clip-persist]   |
-| **Color Picker**            |        [hyprpicker][hyprpicker]        |
+| **Color Picker**            |            Niri built-in               |
 
 # Installation
 
@@ -57,7 +57,7 @@
 
 <!-- Links -->
 
-[Hyprland]: https://github.com/hyprwm/Hyprland
+[Niri]: https://github.com/niri-wm/niri
 [ghostty]: https://github.com/ghostty-org/ghostty
 [Starship]: https://github.com/starship/starship
 [Waybar]: https://github.com/Alexays/Waybar
@@ -66,13 +66,13 @@
 [nemo]: https://github.com/linuxmint/nemo/
 [yazi]: https://github.com/sxyazi/yazi
 [fish]: https://fishshell.com/
-[Swaylock-effects]: https://github.com/mortie/swaylock-effects
-[Hyprlock]: https://github.com/hyprwm/hyprlock
+[Swaylock]: https://github.com/swaywm/swaylock
 [audacious]: https://audacious-media-player.org/
 [mpv]: https://github.com/mpv-player/mpv
 [nvf]: https://github.com/NotAShelf/nvf
 [Neovim]: https://github.com/neovim/neovim
-[grimblast]: https://github.com/hyprwm/contrib
+[grim]: https://sr.ht/~emersion/grim/
+[slurp]: https://github.com/emersion/slurp
 [qview]: https://interversehq.com/qview/
 [swaync]: https://github.com/ErikReider/SwayNotificationCenter
 [Nerd fonts]: https://github.com/ryanoasis/nerd-fonts
@@ -80,7 +80,6 @@
 [network-manager-applet]: https://gitlab.gnome.org/GNOME/network-manager-applet/
 [wl-clip-persist]: https://github.com/Linus789/wl-clip-persist
 [wf-recorder]: https://github.com/ammen99/wf-recorder
-[hyprpicker]: https://github.com/hyprwm/hyprpicker
 [Papirus-Dark]: https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 [Bibata-Modern-Ice]: https://www.gnome-look.org/p/1197198
 [ncspot]: https://github.com/hrkfdn/ncspot

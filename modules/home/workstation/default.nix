@@ -9,7 +9,7 @@ _: {
     ./ghostty # terminal
     ./gnome.nix # gnome apps
     ./gtk.nix # gtk theme
-    ./hyprland # window manager
+    ./niri # window manager
     ./kitty.nix # terminal
     ./micro # nano replacement
     ./nemo.nix # file manager
