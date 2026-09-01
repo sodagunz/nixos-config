@@ -6,6 +6,7 @@
     };
 
     displayManager = {
+      defaultSession = "niri";
       autoLogin = {
         enable = true;
         user = "${username}";
