@@ -20,6 +20,7 @@
     self.homeModules.kitty
     self.homeModules.micro
     self.homeModules.nemo
+    self.homeModules.niri
     self.homeModules.obsidian
     self.homeModules.packages
     self.homeModules.retroarch
@@ -29,10 +30,10 @@
     self.homeModules.swayosd
     self.homeModules.swaync
     self.homeModules.waypaper
+    self.homeModules.waybar
     self.homeModules.yazi
     self.homeModules.zellij
     self.homeModules.zoxide
     self.homeModules.xdg-mimes
-    ../../modules/home/workstation
   ];
 }
