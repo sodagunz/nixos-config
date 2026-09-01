@@ -11,7 +11,7 @@ Partition (ESP) while retaining the existing Windows boot files on that ESP.
 
 ## Proposed layout
 
-- Existing ESP: mounted at `/boot/efi`, containing firmware bootloaders and the
+- Existing ESP: mounted at `/efi`, containing firmware bootloaders and the
   Windows EFI files.
 - New 1-2 GiB FAT32 XBOOTLDR partition: mounted at `/boot`, containing NixOS
   boot entries, kernels, and initrds.
@@ -35,7 +35,7 @@ Partition (ESP) while retaining the existing Windows boot files on that ESP.
 2. Create a FAT32 partition in the freed space and set its XBOOTLDR type GUID.
 3. Format it, copy/preserve any required NixOS boot content, and update the
    hardware/filesystem declarations using UUIDs.
-4. Configure systemd-boot with the ESP at `/boot/efi` and XBOOTLDR at `/boot`.
+4. Configure systemd-boot with the ESP at `/efi` and XBOOTLDR at `/boot`.
 5. Mount both filesystems and run a boot activation.
 6. Confirm entries with `bootctl`, reboot once into the new default, and retain
    recovery options until the result is proven.

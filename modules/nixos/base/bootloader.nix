@@ -1,22 +1,16 @@
-{
-  pkgs,
-  host,
-  config,
-  ...
-}: {
+_: {
   boot = {
-    initrd = {
-      compressor = "xz";
-      compressorArgs = [
-        "-9e"
-        "--check=crc32"
-      ];
-    };
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      # The EFI system partition is only 96 MiB; keep one rollback generation.
-      systemd-boot.configurationLimit = 2;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/efi";
+      };
+      systemd-boot = {
+        enable = true;
+        xbootldrMountPoint = "/boot";
+      };
+      # Five rollback generations fit comfortably on the 2 GiB XBOOTLDR partition.
+      systemd-boot.configurationLimit = 5;
     };
   };
 }
