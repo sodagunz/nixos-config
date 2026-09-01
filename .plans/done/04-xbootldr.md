@@ -47,3 +47,15 @@ Partition (ESP) while retaining the existing Windows boot files on that ESP.
 - A normal kernel update and bootloader activation succeeds with ample space.
 - The temporary aggressive initrd compression and very low generation limit
   can be reconsidered after the larger partition is working.
+
+## Resolution
+
+- Shrunk the Windows partition and created a 2 GiB FAT32 XBOOTLDR partition at
+  `/dev/nvme0n1p6` with UUID `8DA2-AB27`.
+- Preserved the original ESP and Windows boot files at `/efi`.
+- Mounted XBOOTLDR at `/boot` and configured systemd-boot to use it for NixOS
+  entries, kernels, and initrds.
+- Verified XBOOTLDR entries with `bootctl list`; the NixOS artifacts occupy
+  `/boot/EFI/nixos` and the ESP has ample free space.
+- Increased `systemd-boot.configurationLimit` from two to five and returned
+  initrd compression to the NixOS default.
