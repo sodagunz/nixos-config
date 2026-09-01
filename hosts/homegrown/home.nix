@@ -1,5 +1,6 @@
-{...}: {
+{ self, ... }:
+{
   imports = [
-    ../../modules/home/server
+    self.homeModules.server
   ];
 }

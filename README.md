@@ -2,15 +2,35 @@
 
 ## Layout
 
-- [flake.nix](flake.nix) base of the configuration
-- [hosts](hosts) per-host configurations that contain machine specific
-  configurations
-  - [desktop](hosts/desktop/) Desktop specific configuration
-  
-- [modules](modules) modularized NixOS configurations
-  - [core](modules/core/) Core NixOS configuration
-  - [homes](modules/home/) NixOS + home-manager configuration
+- [flake.nix](flake.nix) declares inputs and loads the dendritic module tree.
+- [parts](parts) contains feature-owned flake-parts modules. A feature can
+  export NixOS configuration through `flake.nixosModules`, Home Manager
+  configuration through `flake.homeModules`, or both.
+- [hosts](hosts) contains machine-specific facts and selects exported profiles.
 - [wallpapers](wallpapers/) 🌄 wallpapers collection
+
+### Adding a feature
+
+Create `parts/<feature>/default.nix`. Keep implementation modules and assets in
+an underscore-prefixed path such as `_module.nix` or `_module/`; `import-tree`
+ignores these paths and only evaluates the feature entry point.
+
+```nix
+{ ... }:
+{
+  flake.homeModules.example = import ./_module.nix;
+  flake.nixosModules.example = import ./_nixos.nix;
+}
+```
+
+Add the exported capability to a profile such as `parts/workstation`, rather
+than importing program files from a host.
+
+### Adding a host
+
+Add the machine under `hosts/<hostname>`, register its system and username in
+`parts/core/default.nix`, and import an exported NixOS profile from the host.
+Standalone Home Manager profiles are constructed in `parts/core/default.nix`.
 
 ## Components
 
@@ -77,9 +97,9 @@ nh os switch .#minispore
 nh home switch '.#gunz@minispore' -b hmbackup
 ```
 
-Run the Home Manager command whenever files under `modules/home` or the host's
-`home.nix` change. Run both commands when a commit changes both system and home
-configuration.
+Run the Home Manager command whenever a feature's Home Manager module or the
+host's `home.nix` changes. Run both commands when a commit changes both system
+and home configuration.
 [Starship]: https://github.com/starship/starship
 [Waybar]: https://github.com/Alexays/Waybar
 [rofi]: https://github.com/lbonn/rofi
