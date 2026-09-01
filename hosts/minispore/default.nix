@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, self, ... }:
+{
   # This should be an 8 character hex, you can get it via
   # head -c4 /dev/urandom | od -A none -t x4
   # It should be unique, and static between builds.
@@ -14,7 +15,7 @@
 
   # NAS client configuration
   # TODO: replace with hostname, maybe parameterize path?
-  environment.systemPackages = with pkgs; [nfs-utils];
+  environment.systemPackages = with pkgs; [ nfs-utils ];
   fileSystems."/mnt/tank" = {
     device = "192.168.1.195:/mnt/tank";
     fsType = "nfs";
@@ -28,6 +29,6 @@
   # Use default core modules for workstations.
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/nixos/workstation
+    self.nixosModules.workstation
   ];
 }
