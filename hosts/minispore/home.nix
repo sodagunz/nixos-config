@@ -6,17 +6,22 @@
     self.homeModules.btop
     self.homeModules.cava
     self.homeModules.codex
+    self.homeModules.colors
     self.homeModules.editor
     self.homeModules.fzf
     self.homeModules.fish
     self.homeModules.git
     self.homeModules.fastfetch
     self.homeModules.gnome
+    self.homeModules.ghostty
     self.homeModules.kitty
+    self.homeModules.micro
     self.homeModules.nemo
     self.homeModules.obsidian
     self.homeModules.retroarch
+    self.homeModules.rofi
     self.homeModules.starship
+    self.homeModules.swayosd
     self.homeModules.waypaper
     self.homeModules.yazi
     self.homeModules.zellij
