@@ -4,45 +4,73 @@
     {
       home-manager,
       nixpkgs,
+      nixpkgs-unstable,
       nvf,
       self,
       ...
     }@inputs:
-    {
-      nixosConfigurations =
-        let
-          nixosHosts = {
-            minispore = {
-              system = "x86_64-linux";
-              username = "gunz";
-              extraHostModules = [ ];
-            };
-            homegrown = {
-              system = "x86_64-linux";
-              username = "gunz";
-              extraHostModules = [ inputs.copyparty.nixosModules.default ];
-            };
-            filmotheque = {
-              system = "x86_64-linux";
-              username = "gunz";
-              extraHostModules = [ inputs.copyparty.nixosModules.default ];
-            };
-          };
+    let
+      hostConfigs = {
+        minispore = {
+          system = "x86_64-linux";
+          username = "gunz";
+          extraHostModules = [ ];
+        };
+        homegrown = {
+          system = "x86_64-linux";
+          username = "gunz";
+          extraHostModules = [ inputs.copyparty.nixosModules.default ];
+        };
+        filmotheque = {
+          system = "x86_64-linux";
+          username = "gunz";
+          extraHostModules = [ inputs.copyparty.nixosModules.default ];
+        };
+      };
 
-          mkNixosHost =
-            hostname: hostConfig:
-            nixpkgs.lib.nixosSystem {
-              modules = [ ./hosts/${hostname} ] ++ hostConfig.extraHostModules;
-              inherit (hostConfig) system;
-              specialArgs = {
-                host = hostname;
-                inherit (hostConfig) username;
-                homeModules = [ ./hosts/${hostname}/home.nix ];
-                inherit self inputs;
-              };
-            };
+      mkNixosHost =
+        hostname: hostConfig:
+        nixpkgs.lib.nixosSystem {
+          modules = [ ./hosts/${hostname} ] ++ hostConfig.extraHostModules;
+          inherit (hostConfig) system;
+          specialArgs = {
+            host = hostname;
+            inherit (hostConfig) username;
+            inherit self inputs;
+          };
+        };
+    in
+    {
+      nixosConfigurations = nixpkgs.lib.mapAttrs mkNixosHost hostConfigs;
+
+      homeConfigurations."gunz@minispore" =
+        let
+          hostConfig = hostConfigs.minispore;
+          pkgs = import nixpkgs-unstable {
+            inherit (hostConfig) system;
+            config.allowUnfree = true;
+          };
         in
-        nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            host = "minispore";
+            inherit (hostConfig) username;
+            inherit self inputs;
+          };
+          modules = [
+            nvf.homeManagerModules.default
+            ./hosts/minispore/home.nix
+            {
+              home = {
+                username = hostConfig.username;
+                homeDirectory = "/home/${hostConfig.username}";
+                stateVersion = "25.05";
+              };
+              programs.home-manager.enable = true;
+            }
+          ];
+        };
     };
 
   inputs = {

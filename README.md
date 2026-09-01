@@ -59,6 +59,27 @@
 
 [Niri]: https://github.com/niri-wm/niri
 [ghostty]: https://github.com/ghostty-org/ghostty
+
+## Rebuilding minispore
+
+The NixOS system and Home Manager profile use separate package sets and are
+activated independently:
+
+```console
+nh os switch
+nh home switch
+```
+
+From a TTY, use explicit output selectors:
+
+```console
+nh os switch .#minispore
+nh home switch '.#gunz@minispore' -b hmbackup
+```
+
+Run the Home Manager command whenever files under `modules/home` or the host's
+`home.nix` change. Run both commands when a commit changes both system and home
+configuration.
 [Starship]: https://github.com/starship/starship
 [Waybar]: https://github.com/Alexays/Waybar
 [rofi]: https://github.com/lbonn/rofi

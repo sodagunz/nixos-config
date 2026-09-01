@@ -42,3 +42,16 @@ verified.
 - No Nixpkgs/Home Manager mismatch warning is suppressed merely to make the
   configuration evaluate.
 - System and home activation commands are documented and recoverable from TTY.
+
+## Resolution
+
+- Added `homeConfigurations."gunz@minispore"`, evaluated with
+  `nixpkgs-unstable` and explicit host metadata.
+- Removed the embedded Home Manager NixOS module and its release-check
+  suppression.
+- Documented independent `nh os switch` and `nh home switch` commands in the
+  repository README.
+- `nix flake check`, the standalone Home Manager activation build, and the
+  minispore NixOS toplevel build all pass.
+- Live activation remains a user-facing smoke test: run
+  `nh home switch '.#gunz@minispore' -b hmbackup`, then `nh os test`.
