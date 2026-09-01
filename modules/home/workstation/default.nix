@@ -1,10 +1,9 @@
 _: {
   imports = [
-    ../base
     ./audacious.nix # music player
     ./browser.nix # firefox based browser
     ./cava.nix # audio visualizer
-    ./colors #nix colorscheme manager
+    ./colors # nix colorscheme manager
     ./gaming.nix # packages related to gaming
     ./ghostty # terminal
     ./gnome.nix # gnome apps
