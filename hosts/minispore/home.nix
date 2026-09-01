@@ -1,15 +1,24 @@
 { self, ... }:
 {
   imports = [
+    self.homeModules.audacious
     self.homeModules.bat
     self.homeModules.btop
+    self.homeModules.cava
     self.homeModules.codex
     self.homeModules.editor
     self.homeModules.fzf
     self.homeModules.fish
     self.homeModules.git
     self.homeModules.fastfetch
+    self.homeModules.gnome
+    self.homeModules.kitty
+    self.homeModules.nemo
+    self.homeModules.obsidian
+    self.homeModules.retroarch
     self.homeModules.starship
+    self.homeModules.waypaper
+    self.homeModules.yazi
     self.homeModules.zellij
     self.homeModules.zoxide
     self.homeModules.xdg-mimes
