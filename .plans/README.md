@@ -15,12 +15,14 @@ verifiable improvements before restructuring the entire flake.
 | 5 | [Separate Home Manager from NixOS](todo/05-home-manager-separation.md) | Medium | Establishes a clean boundary before the broader module refactor. |
 | 6 | [Adopt a dendritic module layout](todo/06-dendritic-migration.md) | Medium, incremental | Reduces program and compositor clutter without combining the migration into one risky rewrite. |
 | 7 | [Replace the desktop shell with Noctalia](todo/07-noctalia.md) | Medium | Best implemented as an early consumer of the cleaner Home Manager/module structure. |
+| 8 | [Fix Niri startup placement and bindings](todo/08-niri-startup-and-bindings.md) | High | Follow-up regression ticket for boot-time placement, look-and-feel initialization, and missing useful bindings. |
 
 ## Dependency and execution order
 
 ```text
 Current bootable Niri baseline
 ├── Desktop usability: Codex -> Ghostty -> Niri parity
+│                                      └-> Niri startup and bindings
 ├── Boot reliability: XBOOTLDR (independent maintenance window)
 └── Architecture: separate Home Manager -> dendritic foundation
                                       └-> Noctalia migration
