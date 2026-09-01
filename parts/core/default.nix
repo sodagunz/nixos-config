@@ -1,4 +1,8 @@
-{ inputs, ... }:
+{
+  inputs,
+  lib,
+  ...
+}:
 let
   hostConfigs = {
     minispore = {
@@ -32,7 +36,13 @@ let
     };
 in
 {
-  flake = {
+  options.flake.homeModules = lib.mkOption {
+    type = lib.types.lazyAttrsOf lib.types.deferredModule;
+    default = { };
+    description = "Home Manager modules exported by feature modules.";
+  };
+
+  config.flake = {
     nixosConfigurations = inputs.nixpkgs.lib.mapAttrs mkNixosHost hostConfigs;
 
     homeConfigurations."gunz@minispore" =
