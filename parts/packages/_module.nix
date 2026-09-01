@@ -68,7 +68,6 @@
     pamixer # pulseaudio command line mixer
     pavucontrol # pulseaudio volume control (GUI)
     playerctl # controller for media players
-    poweralertd # power alert
     wget # HTTP Get
     ghc
     cabal-install

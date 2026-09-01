@@ -17,6 +17,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    noctalia.url = "github:noctalia-dev/noctalia";
     nvf.url = "github:notashelf/nvf";
 
     spicetify-nix = {

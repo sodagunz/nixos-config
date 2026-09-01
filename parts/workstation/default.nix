@@ -12,6 +12,7 @@
       networking
       nh
       niri
+      noctalia
       programs
       system
       users
@@ -41,16 +42,12 @@
       micro
       nemo
       niri
+      noctalia
       obsidian
       packages
       retroarch
-      rofi
       scripts
       starship
-      swaync
-      swayosd
-      waybar
-      waypaper
       xdg-mimes
       yazi
       zellij

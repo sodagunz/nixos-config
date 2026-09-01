@@ -53,14 +53,7 @@
     spawn-at-startup "sh" "-c" "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
     spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
-    spawn-at-startup "nm-applet"
-    spawn-at-startup "poweralertd"
-    spawn-at-startup "wl-clip-persist" "--clipboard" "both"
-    spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
-    spawn-at-startup "waybar"
-    spawn-at-startup "swaync"
-    spawn-at-startup "swayosd-server"
-    spawn-at-startup "sh" "-c" "swaybg -i ~/Pictures/wallpapers/others/nixos.png -m fill"
+    spawn-at-startup "noctalia"
     spawn-at-startup "firefox"
     spawn-at-startup "ghostty"
 
@@ -72,13 +65,15 @@
         Mod+D hotkey-overlay-title="Open Discord" { spawn "discord"; }
         Mod+Z hotkey-overlay-title="Open Zed" { spawn "zed"; }
         Mod+E hotkey-overlay-title="Open file explorer" { spawn "nemo"; }
-        Mod+Space hotkey-overlay-title="Open application launcher" { spawn-sh "rofi -show drun || pkill rofi"; }
+        Mod+Space hotkey-overlay-title="Open application launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+        Mod+S hotkey-overlay-title="Open control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
+        Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn-sh "noctalia msg settings-toggle"; }
         Mod+Q { close-window; }
         Mod+F { fullscreen-window; }
-        Mod+Escape { spawn "swaylock" "-f" "-c" "000000"; }
-        Mod+Shift+Escape { spawn "power-menu"; }
+        Mod+Escape { spawn-sh "noctalia msg session lock"; }
+        Mod+Shift+Escape { spawn-sh "noctalia msg panel-toggle session"; }
         Mod+T { toggle-window-rule-opacity; }
-        Mod+V { spawn-sh "cliphist list | rofi -dmenu -theme-str 'window {width: 50%;} listview {columns: 1;}' | cliphist decode | wl-copy"; }
+        Mod+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
 
         Print { spawn "screenshot" "--copy"; }
         Mod+Print { spawn "screenshot" "--save"; }
@@ -116,18 +111,18 @@
         Mod+Shift+K { move-window-up; }
         Mod+Shift+L { move-column-right; }
 
-        XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
-        XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
-        XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
-        XF86AudioStop allow-when-locked=true { spawn "playerctl" "stop"; }
-        XF86AudioMute allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
-        XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "+2" "--max-volume=100"; }
-        XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "-2"; }
-        XF86MonBrightnessUp allow-when-locked=true { spawn "swayosd-client" "--brightness" "raise" "5%+"; }
-        XF86MonBrightnessDown allow-when-locked=true { spawn "swayosd-client" "--brightness" "lower" "5%-"; }
-        Mod+F12 { spawn "swayosd-client" "--output-volume" "+2" "--max-volume=100"; }
-        Mod+F11 { spawn "swayosd-client" "--output-volume" "-2"; }
-        Mod+F10 { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+        XF86AudioPlay allow-when-locked=true { spawn-sh "noctalia msg media toggle"; }
+        XF86AudioNext allow-when-locked=true { spawn-sh "noctalia msg media next"; }
+        XF86AudioPrev allow-when-locked=true { spawn-sh "noctalia msg media previous"; }
+        XF86AudioStop allow-when-locked=true { spawn-sh "noctalia msg media stop"; }
+        XF86AudioMute allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+        XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up 2"; }
+        XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down 2"; }
+        XF86MonBrightnessUp allow-when-locked=true { spawn-sh "noctalia msg brightness-up current 5"; }
+        XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down current 5"; }
+        Mod+F12 { spawn-sh "noctalia msg volume-up 2"; }
+        Mod+F11 { spawn-sh "noctalia msg volume-down 2"; }
+        Mod+F10 { spawn-sh "noctalia msg volume-mute"; }
 
     }
 
@@ -138,6 +133,14 @@
         match app-id=r#"^(firefox|ghostty|com\.mitchellh\.ghostty|discord|dev\.zed\.Zed)$"#
         open-fullscreen true
     }
+    window-rule {
+        match app-id="dev.noctalia.Noctalia"
+        open-floating true
+        default-column-width { fixed 1080; }
+        default-window-height { fixed 920; }
+    }
+
+    debug { honor-xdg-activation-with-invalid-serial; }
     window-rule {
         match app-id=r#"^(Viewnior|imv|mpv|audacious|udiskie|waypaper|zenity|org\.gnome\.FileRoller|pavucontrol|SoundWireServer|\.sameboy-wrapped|file_progress|confirm|dialog|download|notification|error|confirmreset)$"#
         open-floating true
