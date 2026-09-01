@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, self, ... }:
+{
 
   # This should be an 8 character hex, you can get it via
   # head -c4 /dev/urandom | od -A none -t x4
@@ -55,7 +56,7 @@
   # Enable modules as needed for server specialization
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/nixos/server
+    self.nixosModules.server
   ];
 
 }

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, self, ... }:
+{
   # This should be an 8 character hex, you can get it via
   # `head -c4 /dev/urandom | od -A none -t x4`
   # It should be unique, and static between builds.
@@ -16,7 +17,7 @@
   # Enable modules as needed for server specialization
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/nixos
-    ./../../modules/nixos/server/media.nix
+    self.nixosModules.base
+    self.nixosModules.media
   ];
 }
