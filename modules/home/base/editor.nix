@@ -22,7 +22,11 @@ _: {
         vimAlias = true;
         preventJunkFiles = true;
         hideSearchHighlight = true;
-        useSystemClipboard = true;
+        clipboard = {
+          enable = true;
+          registers = "unnamedplus";
+          providers.wl-copy.enable = true;
+        };
         bell = "visual";
         searchCase = "smart";
         undoFile.enable = true;
@@ -57,7 +61,6 @@ _: {
         };
 
         languages = {
-          enableLSP = true;
           enableFormat = true;
           enableTreesitter = true;
           enableExtraDiagnostics = true;
@@ -69,12 +72,11 @@ _: {
           go.enable = true;
           elixir.enable = true;
           rust.enable = true;
-          rust.crates.enable = true;
           zig.enable = true;
 
           css.enable = true;
           html.enable = true;
-          ts.enable = true;
+          typescript.enable = true;
           sql.enable = true;
 
           lua.enable = true;
@@ -103,8 +105,6 @@ _: {
 
           cellular-automaton.enable = true;
         };
-
-        minimap.codewindow.enable = true;
 
         statusline = {
           lualine = {

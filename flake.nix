@@ -46,15 +46,16 @@
     copyparty.url = "github:9001/copyparty";
     ghostty.url = "github:ghostty-org/ghostty";
     home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager/master";
     };
 
     nix-colors.url = "github:misterio77/nix-colors";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-gaming.url = "github:fufexan/nix-gaming";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nvf.url = "github:notashelf/nvf/af0cc1a85675e3a0dedb15ce648344c52d15c8d8";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nvf.url = "github:notashelf/nvf";
 
     spicetify-nix = {
       inputs.nixpkgs.follows = "nixpkgs";

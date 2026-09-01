@@ -9,9 +9,11 @@
   imports = [inputs.home-manager.nixosModules.home-manager];
   home-manager = {
     useUserPackages = true;
-    useGlobalPkgs = true;
+    useGlobalPkgs = false;
     extraSpecialArgs = {inherit inputs username host;};
     users.${username} = {
+      _module.args.pkgsPath = inputs.nixpkgs-unstable;
+      nixpkgs.config.allowUnfree = true;
       imports =
         [
           inputs.nvf.homeManagerModules.default
