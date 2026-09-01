@@ -63,3 +63,16 @@ and the standalone Home Manager activation build pass with this pattern.
   order.
 - Each migration commit is behavior-preserving unless explicitly labelled
   otherwise.
+
+## Completed
+
+- Added `flake-parts` and `import-tree`, with implementation files hidden below
+  underscore-prefixed paths.
+- Migrated the active Home Manager and NixOS configuration into feature-owned
+  modules under `parts/`.
+- Added `workstation`, `base`, and `server` profiles so hosts select coherent
+  capabilities rather than individual program files.
+- Removed the legacy `modules/` tree and its aggregation layers.
+- Documented how to add features and hosts in the repository README.
+- Verified every migration checkpoint with `nix flake check`; also built the
+  standalone minispore Home Manager activation package.
