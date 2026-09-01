@@ -1,84 +1,16 @@
 {
   description = "gunz systems configuration";
-  outputs =
-    {
-      home-manager,
-      nixpkgs,
-      nixpkgs-unstable,
-      nvf,
-      self,
-      ...
-    }@inputs:
-    let
-      hostConfigs = {
-        minispore = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [ ];
-        };
-        homegrown = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [ inputs.copyparty.nixosModules.default ];
-        };
-        filmotheque = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [ inputs.copyparty.nixosModules.default ];
-        };
-      };
 
-      mkNixosHost =
-        hostname: hostConfig:
-        nixpkgs.lib.nixosSystem {
-          modules = [ ./hosts/${hostname} ] ++ hostConfig.extraHostModules;
-          inherit (hostConfig) system;
-          specialArgs = {
-            host = hostname;
-            inherit (hostConfig) username;
-            inherit self inputs;
-          };
-        };
-    in
-    {
-      nixosConfigurations = nixpkgs.lib.mapAttrs mkNixosHost hostConfigs;
-
-      homeConfigurations."gunz@minispore" =
-        let
-          hostConfig = hostConfigs.minispore;
-          pkgs = import nixpkgs-unstable {
-            inherit (hostConfig) system;
-            config.allowUnfree = true;
-          };
-        in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            host = "minispore";
-            inherit (hostConfig) username;
-            inherit self inputs;
-          };
-          modules = [
-            nvf.homeManagerModules.default
-            ./hosts/minispore/home.nix
-            {
-              home = {
-                username = hostConfig.username;
-                homeDirectory = "/home/${hostConfig.username}";
-                stateVersion = "25.05";
-              };
-              programs.home-manager.enable = true;
-            }
-          ];
-        };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./parts);
 
   inputs = {
     copyparty.url = "github:9001/copyparty";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager/master";
     };
+    import-tree.url = "github:vic/import-tree";
 
     nix-colors.url = "github:misterio77/nix-colors";
     nix-flatpak.url = "github:gmodena/nix-flatpak";

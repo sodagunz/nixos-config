@@ -19,6 +19,27 @@ configuration from one place.
   configuration.
 - Migrate incrementally and keep every commit evaluable.
 
+## Foundation decision
+
+Use `flake-parts` with `import-tree` over a new `parts/` tree. Existing
+`modules/` remains a legacy tree during the migration; importing it recursively
+would incorrectly evaluate its NixOS and Home Manager modules as flake-parts
+modules.
+
+Each feature in `parts/<feature>/default.nix` may expose one or more of:
+
+- `flake.nixosModules.<feature>`
+- `flake.homeModules.<feature>`
+- flake-wide outputs/options when the feature owns them
+
+Hosts compose those exports explicitly through `self.nixosModules` and
+`self.homeModules`. This retains clear host capability selection while keeping a
+feature's flake and module contributions together.
+
+The first migration is Codex: it now exposes `flake.homeModules.codex` from
+`parts/codex`, and minispore imports that feature directly. `nix flake check`
+and the standalone Home Manager activation build pass with this pattern.
+
 ## Plan
 
 1. Choose and document the exact dendritic mechanism and module discovery
