@@ -47,7 +47,6 @@
 
   inputs = {
     copyparty.url = "github:9001/copyparty";
-    ghostty.url = "github:ghostty-org/ghostty";
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager/master";

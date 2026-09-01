@@ -29,3 +29,14 @@ The failure mode still needs to be captured before changing configuration.
 - Ghostty starts reliably from a Niri binding and from another terminal.
 - The module contains no hard-coded `x86_64-linux` package selection.
 - Errors are absent from the user journal during a normal launch.
+
+## Resolution
+
+- Replaced the dedicated Ghostty flake package with `pkgs.ghostty` from the
+  unstable Home Manager package set and removed the obsolete flake input.
+- Removed the deprecated `bold-is-bright` setting; its `false` behavior is the
+  current default.
+- Built the full minispore Home Manager activation with Ghostty 1.3.1.
+- Launched the built binary under Niri using the managed configuration. It
+  initialized OpenGL 4.6, ran its child command, and exited normally without the
+  previous EGL error or core dump.
