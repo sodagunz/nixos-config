@@ -3,22 +3,23 @@
   inputs,
   username,
   host,
-  homeModules ? [],
+  homeModules ? [ ],
   ...
-}: {
-  imports = [inputs.home-manager.nixosModules.home-manager];
+}:
+{
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = false;
-    extraSpecialArgs = {inherit inputs username host;};
+    extraSpecialArgs = { inherit inputs username host; };
     users.${username} = {
       _module.args.pkgsPath = inputs.nixpkgs-unstable;
+      home.enableNixpkgsReleaseCheck = false;
       nixpkgs.config.allowUnfree = true;
-      imports =
-        [
-          inputs.nvf.homeManagerModules.default
-        ]
-        ++ homeModules;
+      imports = [
+        inputs.nvf.homeManagerModules.default
+      ]
+      ++ homeModules;
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
@@ -42,5 +43,5 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICBhO59Hku23ejz5cyWdXQRnk8TpecPNAbZZw0VD60bv tomas"
     ];
   };
-  nix.settings.allowed-users = ["${username}"];
+  nix.settings.allowed-users = [ "${username}" ];
 }

@@ -1,35 +1,9 @@
 {
-  inputs,
   pkgs,
   ...
 }:
-let
-  ncspot-fixed = let
-    originalPkg = pkgs.ncspot;
-  in pkgs.rustPlatform.buildRustPackage {
-    inherit (originalPkg) pname meta buildInputs nativeBuildInputs;
-    
-    version = "1.3.1-fix-librespot-spotifyuri-api";
-    src = pkgs.fetchFromGitHub {
-      owner = "gui-wf";
-      repo = "ncspot";
-      rev = "2b05f53198f94f5696352d22602efa701f807db2";
-      hash = "sha256-8fBY81O97Wu9oHVk+ZakL2UT49KxSX6eoXltdP3kLqw=";
-    };
-    
-    cargoLock = {
-      lockFile = ./ncspot-Cargo.lock;
-      outputHashes = {
-        "librespot-core-0.7.1" = "sha256-DulOkNP4vbdlIHUr/dKWfMAR5JKJIYQ3fuA1yK07Nb0=";
-      };
-    };
-  };
-in
- {
+{
   home.packages = with pkgs; [
-    # ncspot # NCurses Spotify # Disabled due to issue :(
-    ncspot-fixed
-
     ardour # DAW
 
     # ---- CLI essential
@@ -56,7 +30,6 @@ in
 
     # ---- TUI
     binsider # analize ELF binaries
-    gemini-cli # gemini CLI agent
     gtt # google translate
     lazygit # git
     ncdu # NCurses (d)isk (u)tility
@@ -71,13 +44,12 @@ in
     just # easy make substitute
     nix-prefetch-github # prefetch nix info from github
     nixd # nix lsp
-    nixfmt-rfc-style # nix formatter
+    nixfmt # nix formatter
     python3 # Python3
     shfmt # bash formatter
     treefmt # project formatter
     valgrind # c memory analyzer
     zenity # uses GTK to retrieve user value
-    inputs.alejandra.defaultPackage.${stdenv.hostPlatform.system} # nixpkgs formatter
     python312Packages.ipython # interactive python
     taplo # toml formatter and more
     kdlfmt # kdl formatter

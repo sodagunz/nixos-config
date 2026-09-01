@@ -2,12 +2,14 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   # monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {};
   # monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix {
   #   inherit monolisa;
   # };
-in {
+in
+{
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -28,6 +30,7 @@ in {
 
   gtk = {
     enable = true;
+    gtk4.theme = config.gtk.theme;
     font = {
       name = "Montserrat";
       size = 14;
@@ -48,6 +51,7 @@ in {
   };
 
   home.pointerCursor = {
+    enable = true;
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;
     size = 24;

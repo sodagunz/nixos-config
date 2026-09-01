@@ -110,6 +110,10 @@ _: {
           lualine = {
             enable = true;
             theme = "nord";
+            integrations.breadcrumbs = {
+              nvim-navic.enable = true;
+              navbuddy.enable = true;
+            };
           };
         };
 
@@ -172,12 +176,10 @@ _: {
           colorizer = {
             enable = true;
             setupOpts = {
-              filetypes = {"*" = {};};
+              filetypes = {
+                "*" = { };
+              };
             };
-          };
-          breadcrumbs = {
-            enable = true;
-            navbuddy.enable = true;
           };
           smartcolumn = {
             enable = true;

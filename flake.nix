@@ -1,48 +1,51 @@
 {
   description = "gunz systems configuration";
-  outputs = {
-    home-manager,
-    nixpkgs,
-    nvf,
-    self,
-    ...
-  } @ inputs: {
-    nixosConfigurations = let
-      nixosHosts = {
-        minispore = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [];
-        };
-        homegrown = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [inputs.copyparty.nixosModules.default];
-        };
-        filmotheque = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [inputs.copyparty.nixosModules.default];
-        };
-      };
-
-      mkNixosHost = hostname: hostConfig:
-        nixpkgs.lib.nixosSystem {
-          modules = [./hosts/${hostname}] ++ hostConfig.extraHostModules;
-          inherit (hostConfig) system;
-          specialArgs = {
-            host = hostname;
-            inherit (hostConfig) username;
-            homeModules = [./hosts/${hostname}/home.nix];
-            inherit self inputs;
+  outputs =
+    {
+      home-manager,
+      nixpkgs,
+      nvf,
+      self,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations =
+        let
+          nixosHosts = {
+            minispore = {
+              system = "x86_64-linux";
+              username = "gunz";
+              extraHostModules = [ ];
+            };
+            homegrown = {
+              system = "x86_64-linux";
+              username = "gunz";
+              extraHostModules = [ inputs.copyparty.nixosModules.default ];
+            };
+            filmotheque = {
+              system = "x86_64-linux";
+              username = "gunz";
+              extraHostModules = [ inputs.copyparty.nixosModules.default ];
+            };
           };
-        };
-    in
-      nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
-  };
+
+          mkNixosHost =
+            hostname: hostConfig:
+            nixpkgs.lib.nixosSystem {
+              modules = [ ./hosts/${hostname} ] ++ hostConfig.extraHostModules;
+              inherit (hostConfig) system;
+              specialArgs = {
+                host = hostname;
+                inherit (hostConfig) username;
+                homeModules = [ ./hosts/${hostname}/home.nix ];
+                inherit self inputs;
+              };
+            };
+        in
+        nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
+    };
 
   inputs = {
-    alejandra.url = "github:kamadorueda/alejandra";
     copyparty.url = "github:9001/copyparty";
     ghostty.url = "github:ghostty-org/ghostty";
     home-manager = {

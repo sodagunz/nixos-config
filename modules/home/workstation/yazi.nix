@@ -2,10 +2,12 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    shellWrapperName = "y";
     # package = pkgs.yazi-unwrapped;
 
     settings = {
