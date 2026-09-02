@@ -1,14 +1,9 @@
-{
-  inputs,
-  pkgs,
-  ...
-}:
+{ ... }:
 {
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
     shellWrapperName = "y";
-    # package = pkgs.yazi-unwrapped;
 
     settings = {
       manager = {
@@ -21,13 +16,5 @@
         sort_sensitive = false;
       };
     };
-
-    plugins = {
-      full-border = "${inputs.yazi-plugins}/full-border.yazi";
-    };
   };
-
-  xdg.configFile."yazi/init.lua".text = ''
-    require("full-border"):setup()
-  '';
 }

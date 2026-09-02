@@ -39,9 +39,5 @@
     noctalia.url = "github:noctalia-dev/noctalia";
     nvf.url = "github:notashelf/nvf";
 
-    yazi-plugins = {
-      flake = false;
-      url = "github:yazi-rs/plugins";
-    };
   };
 }

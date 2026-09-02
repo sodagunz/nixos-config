@@ -457,8 +457,7 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
-        "nvf": "nvf",
-        "yazi-plugins": "yazi-plugins"
+        "nvf": "nvf"
       }
     },
     "systems": {
@@ -473,22 +472,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "yazi-plugins": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1751114865,
-        "narHash": "sha256-+FDiOaEYkA0A8w+Cg2Y/pFZY56lOsWLeKCNwLI0ZKVk=",
-        "owner": "yazi-rs",
-        "repo": "plugins",
-        "rev": "2ad42fa7065b4885ff058280b4ab4309c11a5755",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yazi-rs",
-        "repo": "plugins",
         "type": "github"
       }
     }
