@@ -91,7 +91,6 @@
     yt-dlp-light # youtube downloader
 
     # ---- wayland tools
-    swappy # screenshot editing tool
     wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
     xdg-utils # tools to integrate with xdg
 

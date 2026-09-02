@@ -48,8 +48,6 @@
     }
 
     prefer-no-csd
-    screenshot-path "~/Pictures/Screenshots/Screenshot_%Y_%m_%d_at_%Hh%Mm%Ss.png"
-
     spawn-at-startup "sh" "-c" "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
     spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
@@ -72,12 +70,7 @@
         Mod+F { fullscreen-window; }
         Mod+Escape { spawn-sh "noctalia msg session lock"; }
         Mod+Shift+Escape { spawn-sh "noctalia msg panel-toggle session"; }
-        Mod+T { toggle-window-rule-opacity; }
         Mod+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
-
-        Print { spawn "screenshot" "--copy"; }
-        Mod+Print { spawn "screenshot" "--save"; }
-        Mod+Shift+Print { spawn "screenshot" "--swappy"; }
 
         Mod+H { focus-column-left; }
         Mod+J { focus-window-down; }
@@ -125,9 +118,6 @@
         Mod+F10 { spawn-sh "noctalia msg volume-mute"; }
 
     }
-
-    // This gives Mod+T an alternate opacity to toggle against.
-    window-rule { opacity 0.90; }
 
     window-rule {
         match app-id=r#"^(firefox|ghostty|com\.mitchellh\.ghostty|discord|dev\.zed\.Zed)$"#
