@@ -142,7 +142,7 @@
 
     debug { honor-xdg-activation-with-invalid-serial; }
     window-rule {
-        match app-id=r#"^(Viewnior|imv|mpv|audacious|udiskie|waypaper|zenity|org\.gnome\.FileRoller|pavucontrol|SoundWireServer|\.sameboy-wrapped|file_progress|confirm|dialog|download|notification|error|confirmreset)$"#
+        match app-id=r#"^(Viewnior|imv|mpv|audacious|udiskie|zenity|org\.gnome\.FileRoller|pavucontrol|SoundWireServer|\.sameboy-wrapped|file_progress|confirm|dialog|download|notification|error|confirmreset)$"#
         open-floating true
     }
     window-rule {

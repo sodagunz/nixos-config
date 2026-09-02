@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   programs.niri.enable = true;
   xdg.portal = {
     enable = true;
@@ -15,7 +16,6 @@
 
   security.pam.services = {
     ssdm.enableGnomeKeyring = true;
-    swaylock.enableGnomeKeyring = true;
   };
 
   environment.systemPackages = with pkgs; [
