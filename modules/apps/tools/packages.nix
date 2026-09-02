@@ -47,7 +47,7 @@
         python3 # Python3
         valgrind # c memory analyzer
         zenity # uses GTK to retrieve user value
-        python315Packages.ipython # interactive python
+        python314Packages.ipython # interactive python
 
         # ---- system / media
         dconf-editor # configuration editor
