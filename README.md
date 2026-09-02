@@ -16,45 +16,50 @@ This configuration loosely uses the [dendritic pattern][Dendritic]: a feature ow
 the NixOS and Home Manager and Darwin configuration that belongs to it, rather than being
 split by configuration type, except in that they are in any of the following root directories:
 
-- [apps](apps) holds user-facing programs. `desktop` is intentionally flat;
+- [apps](modules/apps) holds user-facing programs. `desktop` is intentionally flat;
   `dev`, `gaming`, `shell`, `terminal`, and `tools` group related programs when
   useful.
-- [system](system) holds operating-system configuration, including
-  `services`.
-- [profiles](profiles) reusable base, server, and workstation setups. Stuff I would
+- [system](modules/system) holds NixOS features. Shared operating-system
+  defaults live in `system/core.nix`, with services grouped under `services`.
+- [profiles](modules/profiles) reusable base, server, and workstation setups. Stuff I would
   normally want in every machine of it's kind.
-- [machines](machines) holds machine-specific configurations. Each machine registers its
+- [machines](modules/machines) holds machine-specific configurations. Each machine registers its
   own NixOS and Home Manager outputs, and selects the modules it will use.
-- [lib](lib) contains the shared flake-parts plumbing.
+- [flake](modules/flake) contains the shared flake-parts plumbing.
 
-Each public feature directory has a `default.nix` entry point. Put its private
-implementation and assets behind an underscore-prefixed name such as
-`_module.nix` or `_nixos.nix`; as `import-tree` does not import those paths on its
-own.
+Each public feature is a meaningfully named `.nix` module discovered by
+`import-tree`. Keep simple features in one file, such as `shell/fish.nix`. When
+a feature has associated configuration, themes, or genuinely separate module
+implementations, place them in a sibling directory such as `shell/yazi/`.
+Every Nix file under `modules/` is itself a flake-parts module; split files
+contribute independently to the same deferred NixOS or Home Manager module.
 
 ## Adding configuration
 
 ### Feature
 
 Create a feature under the functional root where it belongs, for example
-`apps/dev/example/default.nix`. Export a Home Manager module through
+`modules/apps/dev/example.nix`. Export a Home Manager module through
 `flake.homeModules`, a NixOS module through `flake.nixosModules`, or both; then
 add that capability to the appropriate profile.
 
 ```nix
 { ... }:
 {
-  flake.homeModules.example = import ./_module.nix;
-  flake.nixosModules.example = import ./_nixos.nix;
+  flake.homeModules.example = { pkgs, ... }: {
+    home.packages = [ pkgs.example ];
+  };
 }
 ```
 
 ### Machine
 
-Create `machines/<hostname>/default.nix` to register a new machine's NixOS and
-Home Manager outputs. Keep its NixOS, Home Manager, hardware, and optional
-Disko modules in underscore-prefixed sibling files. You can then import features
-individually, or build up from one of the base profiles.
+Create `modules/machines/<hostname>.nix` to define the machine's NixOS and Home
+Manager modules and register both outputs. Keep only its hardware and optional
+Disko fragments under `modules/machines/<hostname>/`; each is an independently
+imported flake-parts module that contributes to the machine's exported NixOS
+module. You can then import features individually, or build up from one of the
+base profiles.
 
 ## Rebuilding
 
