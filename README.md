@@ -1,24 +1,45 @@
-# System configuration flakes
+# nixos-config
+
+Nixos configs for my users and machines.
+
+## Table of contents
+
+- [Layout](#layout)
+- [Adding configuration](#adding-configuration)
+- [Rebuilding](#rebuilding)
+- [Components](#components)
+- [Credits](#credits)
 
 ## Layout
 
-- [flake.nix](flake.nix) declares inputs and loads the functional dendritic
-  roots. [flake](flake) contains shared flake-parts plumbing.
-- Feature modules live under purpose-based roots: [apps](apps), including its
-  `desktop`, `shell`, and `tools` groups, and [system](system), including its
-  `services` group. They export NixOS configuration through
-  `flake.nixosModules`, Home Manager configuration through
-  `flake.homeModules`, or both.
-- [machines](machines) contains self-registering machine-specific facts and
-  exports each machine's NixOS and Home Manager configurations.
-- [wallpapers](wallpapers/) 🌄 wallpapers collection
+This configuration loosely uses the [dendritic pattern][Dendritic]: a feature owns
+the NixOS and Home Manager and Darwin configuration that belongs to it, rather than being
+split by configuration type, except in that they are in any of the following root directories:
 
-### Adding a feature
+- [apps](apps) holds user-facing programs. `desktop` is intentionally flat;
+  `dev`, `gaming`, `shell`, `terminal`, and `tools` group related programs when
+  useful.
+- [system](system) holds operating-system configuration, including
+  `services`.
+- [profiles](profiles) reusable base, server, and workstation setups. Stuff I would
+  normally want in every machine of it's kind.
+- [machines](machines) holds machine-specific configurations. Each machine registers its
+  own NixOS and Home Manager outputs, and selects the modules it will use.
+- [lib](lib) contains the shared flake-parts plumbing.
 
-Create a feature entry point under the functional root that fits it, such as
-`apps/dev/<feature>/default.nix`. Keep implementation modules and assets in an
-underscore-prefixed path such as `_module.nix` or `_module/`; `import-tree`
-ignores these paths and only evaluates the feature entry point.
+Each public feature directory has a `default.nix` entry point. Put its private
+implementation and assets behind an underscore-prefixed name such as
+`_module.nix` or `_nixos.nix`; as `import-tree` does not import those paths on its
+own.
+
+## Adding configuration
+
+### Feature
+
+Create a feature under the functional root where it belongs, for example
+`apps/dev/example/default.nix`. Export a Home Manager module through
+`flake.homeModules`, a NixOS module through `flake.nixosModules`, or both; then
+add that capability to the appropriate profile.
 
 ```nix
 { ... }:
@@ -28,105 +49,92 @@ ignores these paths and only evaluates the feature entry point.
 }
 ```
 
-Add the exported capability to a profile such as `profiles/workstation`, rather
-than importing program files from a host.
+### Machine
 
-### Adding a host
+Create `machines/<hostname>/default.nix` to register a new machine's NixOS and
+Home Manager outputs. Keep its NixOS, Home Manager, hardware, and optional
+Disko modules in underscore-prefixed sibling files. You can then import features
+individually, or build up from one of the base profiles.
 
-Add a self-registering `machines/<hostname>/default.nix` that defines the
-machine's system, username, optional extra NixOS modules, and its NixOS and
-Home Manager outputs. Keep its implementation in underscore-prefixed siblings
-such as `_nixos.nix`, `_home.nix`, and `_hardware-configuration.nix`.
-
-## Components
-
-|                             |              NixOS + Niri              |
-| --------------------------- | :------------------------------------: |
-| **Window Manager**          |              [Niri][Niri]              |
-| **Bar**                     |            [Waybar][Waybar]            |
-| **Application Launcher**    |              [rofi][rofi]              |
-| **Notification Daemon**     |            [swaync][swaync]            |
-| **Terminal Emulator**       |           [ghostty][ghostty]           |
-| **Shell**                   |  [fish][fish] + [Starship][Starship]   |
-| **Text Editor**             |    [Neovim][Neovim] via [nvf][nvf]     |
-| **System resource monitor** |              [Btop][Btop]              |
-| **File Manager**            |  [nemo][nemo] GUI + [yazi][yazi] TUI   |
-| **Color Scheme**            |          [Nord/Nordic][Nord]           |
-| **Cursor**                  | [Bibata-Modern-Ice][Bibata-Modern-Ice] |
-| **Icons**                   |      [Papirus-Dark][Papirus-Dark]      |
-| **Lockscreen**              |          [Swaylock][Swaylock]          |
-| **Image Viewer**            |             [qview][qview]             |
-| **Media Player**            |               [mpv][mpv]               |
-| **Music Player**            |          [ncspot][ncspot] TUI          |
-| **Screenshot Software**     |       [grim][grim] + [slurp][slurp]    |
-| **Screen Recording**        |       [wf-recorder][wf-recorder]       |
-| **Clipboard**               |   [wl-clip-persist][wl-clip-persist]   |
-| **Color Picker**            |            Niri built-in               |
-
-# Installation
-
-- `git clone github.com/tomasguinzburg/nixos-config`
-- `cd nixos-config`
-- You may need to copy some wallpapers to `~/Pictures/wallpapers` for stuff to
-  work properly
-- `nixos-rebuild switch --flake .#desktop`
-
-# Credits
-
-- [Frost-Phoenix/nixos-config](https://github.com/Frost-Phoenix/nixos-config):
-  Heavily based on this config, and indirectly inspired by dozens of other
-  projects through it.
-
-<div align="right">
-  <a href="#readme">Back to the Top</a>
-</div>
-
-<!-- Links -->
-
-[Niri]: https://github.com/niri-wm/niri
-[ghostty]: https://github.com/ghostty-org/ghostty
-
-## Rebuilding minispore
-
-The NixOS system and Home Manager profile use separate package sets and are
-activated independently:
-
-```console
-nh os switch
-nh home switch
-```
-
-From a TTY, use explicit output selectors:
+## Rebuilding
 
 ```console
 nh os switch .#minispore
 nh home switch '.#gunz@minispore' -b hmbackup
 ```
 
-Run the Home Manager command whenever a feature's Home Manager module or the
-host's `home.nix` changes. Run both commands when a commit changes both system
-and home configuration.
-[Starship]: https://github.com/starship/starship
-[Waybar]: https://github.com/Alexays/Waybar
-[rofi]: https://github.com/lbonn/rofi
+Normally OS is on nixpkgs and home-manager on nixpkgs-unstable, so they each use
+their own dedicated config. I keep home-manager config uncoupled from system config,
+as otherwise I need to maintain separate config for any machine not running nixos.
+
+```console
+nix flake check --no-build
+```
+
+## Desktop Components
+
+| Component             | Configuration                                                        |
+| --------------------- | -------------------------------------------------------------------- |
+| Window manager        | [Niri][Niri]                                                         |
+| Desktop shell         | [Noctalia][Noctalia]                                                 |
+| Browser               | [Firefox][Firefox]                                                   |
+| Terminals             | [Ghostty][Ghostty] and [Kitty][Kitty]                                |
+| Shell                 | [Fish][Fish] with [Starship][Starship]                               |
+| Editors               | [Zed][Zed], [Neovim][Neovim] via [NVF][NVF], [Helix][Helix]          |
+| File managers         | [Nemo][Nemo] and [Yazi][Yazi]                                        |
+| Video and music       | [mpv][mpv], [VLC][VLC], and [ncspot][ncspot]                         |
+| Resource monitoring   | [Btop][Btop] and [Resources][Resources]                              |
+| Audio                 | [PipeWire][PipeWire]                                                 |
+| Screen recording      | [wf-recorder][wf-recorder] with [slurp][slurp]                       |
+| Colour scheme         | [Nord][Nord]-Night, as featured by [Ghostty][Ghostty]                |
+| Icons                 | [Nordzy][Nordzy]                                                     |
+| Cursor                | [Bibata Modern Ice][Bibata]                                          |
+| Fonts                 | [Montserrat][Montserrat] and [Nerd Fonts][Nerd Fonts]                |
+
+## Server Components
+
+| Component             | Configuration                                                        |
+| --------------------- | -------------------------------------------------------------------- |
+| Media streaming       | [Jellyfin][Jellyfin]                                                 |
+| File sharing          | [Copyparty][Copyparty] and NFS                                       |
+| Media management      | [*arr services][Servarr] and Transmission                            |
+| Reverse proxy         | Not configured                                                       |
+| Emulation             | Reserved; no emulator is installed                                   |
+
+## Credits
+
+- [Frost-Phoenix/nixos-config][Frost-Phoenix] is the original foundation for
+  this configuration.
+- [mightyiam/dendritic][Dendritic] documents the module-system pattern that
+  informs its feature-oriented structure.
+
+[Dendritic]: https://github.com/mightyiam/dendritic
+[Bibata]: https://github.com/ful1e5/Bibata_Cursor
 [Btop]: https://github.com/aristocratos/btop
-[nemo]: https://github.com/linuxmint/nemo/
-[yazi]: https://github.com/sxyazi/yazi
-[fish]: https://fishshell.com/
-[Swaylock]: https://github.com/swaywm/swaylock
-[mpv]: https://github.com/mpv-player/mpv
-[nvf]: https://github.com/NotAShelf/nvf
-[Neovim]: https://github.com/neovim/neovim
-[grim]: https://sr.ht/~emersion/grim/
-[slurp]: https://github.com/emersion/slurp
-[qview]: https://interversehq.com/qview/
-[swaync]: https://github.com/ErikReider/SwayNotificationCenter
-[Nerd fonts]: https://github.com/ryanoasis/nerd-fonts
-[NetworkManager]: https://wiki.gnome.org/Projects/NetworkManager
-[network-manager-applet]: https://gitlab.gnome.org/GNOME/network-manager-applet/
-[wl-clip-persist]: https://github.com/Linus789/wl-clip-persist
-[wf-recorder]: https://github.com/ammen99/wf-recorder
-[Papirus-Dark]: https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
-[Bibata-Modern-Ice]: https://www.gnome-look.org/p/1197198
+[Copyparty]: https://github.com/9001/copyparty
+[Fish]: https://fishshell.com/
+[Firefox]: https://www.mozilla.org/firefox/
+[Frost-Phoenix]: https://github.com/Frost-Phoenix/nixos-config
+[Ghostty]: https://github.com/ghostty-org/ghostty
+[Helix]: https://helix-editor.com/
+[Jellyfin]: https://jellyfin.org/
+[Kitty]: https://sw.kovidgoyal.net/kitty/
+[Montserrat]: https://fonts.google.com/specimen/Montserrat
+[Nemo]: https://github.com/linuxmint/nemo/
+[Nerd Fonts]: https://www.nerdfonts.com/
+[Niri]: https://github.com/niri-wm/niri
 [ncspot]: https://github.com/hrkfdn/ncspot
-[Nord]: https://github.com/EliverLara/Nordic
+[Noctalia]: https://github.com/noctalia-dev/noctalia
+[Nord]: https://www.nordtheme.com/
+[Nordzy]: https://github.com/alvatip/Nordzy-icon
+[Neovim]: https://neovim.io/
+[NVF]: https://github.com/NotAShelf/nvf
+[PipeWire]: https://pipewire.org/
+[Resources]: https://apps.gnome.org/Resources/
+[Servarr]: https://wiki.servarr.com/
+[Starship]: https://starship.rs/
+[slurp]: https://github.com/emersion/slurp
+[VLC]: https://www.videolan.org/vlc/
+[wf-recorder]: https://github.com/ammen99/wf-recorder
+[Yazi]: https://yazi-rs.github.io/
+[Zed]: https://zed.dev/
