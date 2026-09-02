@@ -10,7 +10,6 @@ in
     inherit hostname system username;
     module = ./_nixos.nix;
     extraModules = [
-      inputs.agenix.nixosModules.default
       inputs.copyparty.nixosModules.default
     ];
   };
