@@ -39,11 +39,6 @@
     noctalia.url = "github:noctalia-dev/noctalia";
     nvf.url = "github:notashelf/nvf";
 
-    spicetify-nix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:gerg-l/spicetify-nix";
-    };
-
     yazi-plugins = {
       flake = false;
       url = "github:yazi-rs/plugins";
