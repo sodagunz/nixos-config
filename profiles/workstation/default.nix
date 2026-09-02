@@ -26,6 +26,7 @@
       btop
       codex
       colors
+      discord
       editor
       fastfetch
       fish

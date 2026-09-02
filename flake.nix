@@ -8,11 +8,7 @@
         (inputs.import-tree ./machines)
         (inputs.import-tree ./profiles)
         (inputs.import-tree ./system)
-        (inputs.import-tree ./services)
-        (inputs.import-tree ./desktop)
         (inputs.import-tree ./apps)
-        (inputs.import-tree ./shell)
-        (inputs.import-tree ./tools)
       ];
     };
 

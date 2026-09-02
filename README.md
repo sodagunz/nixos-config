@@ -4,9 +4,9 @@
 
 - [flake.nix](flake.nix) declares inputs and loads the functional dendritic
   roots. [flake](flake) contains shared flake-parts plumbing.
-- Feature modules live under purpose-based roots: [desktop](desktop),
-  [apps](apps), [shell](shell), [services](services), [system](system), and
-  [tools](tools). They export NixOS configuration through
+- Feature modules live under purpose-based roots: [apps](apps), including its
+  `desktop`, `shell`, and `tools` groups, and [system](system), including its
+  `services` group. They export NixOS configuration through
   `flake.nixosModules`, Home Manager configuration through
   `flake.homeModules`, or both.
 - [machines](machines) contains self-registering machine-specific facts and
