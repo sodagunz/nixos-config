@@ -16,5 +16,9 @@
         sort_sensitive = false;
       };
     };
+
+    theme.preview.syntect_theme = "${./nord.tmTheme}";
   };
+
+  xdg.configFile."yazi/theme.toml".force = true;
 }
