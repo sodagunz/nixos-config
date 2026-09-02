@@ -31,8 +31,8 @@ Each public feature is a meaningfully named `.nix` module discovered by
 `import-tree`. Keep simple features in one file, such as `shell/fish.nix`. When
 a feature has associated configuration, themes, or genuinely separate module
 implementations, place them in a sibling directory such as `shell/yazi/`.
-Prefix private Nix helpers with an underscore so `import-tree` does not import
-them independently.
+Every Nix file under `modules/` is itself a flake-parts module; split files
+contribute independently to the same deferred NixOS or Home Manager module.
 
 ## Adding configuration
 
@@ -55,10 +55,11 @@ add that capability to the appropriate profile.
 ### Machine
 
 Create `modules/machines/<hostname>.nix` to register a new machine's NixOS and
-Home Manager outputs. Keep its NixOS, Home Manager, hardware, and optional
-Disko modules in underscore-prefixed files under
-`modules/machines/<hostname>/`. You can then import features individually, or
-build up from one of the base profiles.
+Home Manager outputs. Its NixOS, Home Manager, hardware, and optional Disko
+fragments live under `modules/machines/<hostname>/`; each is an independently
+imported flake-parts module that contributes to the machine's exported module.
+You can then import features individually, or build up from one of the base
+profiles.
 
 ## Rebuilding
 

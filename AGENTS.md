@@ -14,16 +14,16 @@ points automatically with `import-tree`.
 - `profiles/` combines exported features into `base`, `server`, and
   `workstation` configurations.
 - `machines/<name>.nix` self-registers that machine's NixOS and standalone Home
-  Manager outputs; `machines/<name>/` contains its private facts and modules.
+  Manager outputs; `machines/<name>/` contains independently imported fragments
+  that contribute to the machine's exported modules.
 - `flake/` holds the shared constructors and output-option plumbing.
 
-Every public feature is a meaningfully named `.nix` flake-parts module that
-`import-tree` discovers automatically. Prefer a single `feature.nix` file.
-When a feature has associated assets or genuinely separate implementations,
-keep them in a sibling `feature/` directory. Prefix private Nix helpers with an
-underscore so `import-tree` ignores them. Public feature names under
-`flake.nixosModules` and `flake.homeModules` are interfaces used by profiles
-and machines.
+Every `.nix` file under `modules/` is a flake-parts module that `import-tree`
+discovers automatically. Prefer a single `feature.nix` file. When a feature has
+associated assets or genuinely separate implementations, keep them in a sibling
+`feature/` directory and have each Nix file contribute independently to the
+same deferred module. Public feature names under `flake.nixosModules` and
+`flake.homeModules` are interfaces used by profiles and machines.
 
 ## How to make a change
 

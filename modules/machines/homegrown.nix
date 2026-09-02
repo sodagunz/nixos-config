@@ -1,6 +1,10 @@
-{ inputs, ... }:
+{
+  hosts,
+  inputs,
+  self,
+  ...
+}:
 let
-  hosts = import ../flake/_hosts.nix { inherit inputs; };
   hostname = "homegrown";
   system = "x86_64-linux";
   username = "gunz";
@@ -8,12 +12,12 @@ in
 {
   flake.nixosConfigurations.${hostname} = hosts.mkNixos {
     inherit hostname system username;
-    module = ./homegrown/_nixos.nix;
+    module = self.nixosModules.homegrown;
     extraModules = [ inputs.copyparty.nixosModules.default ];
   };
 
   flake.homeConfigurations."${username}@${hostname}" = hosts.mkHome {
     inherit hostname system username;
-    module = ./homegrown/_home.nix;
+    module = self.homeModules.homegrown;
   };
 }
