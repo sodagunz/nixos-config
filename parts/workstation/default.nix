@@ -22,11 +22,8 @@
 
   flake.homeModules.workstation = {
     imports = with self.homeModules; [
-      audacious
       bat
       btop
-      browser
-      cava
       codex
       colors
       editor
@@ -36,10 +33,8 @@
       gaming
       git
       ghostty
-      gnome
       gtk
       kitty
-      micro
       nemo
       niri
       noctalia

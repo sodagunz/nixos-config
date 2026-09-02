@@ -30,6 +30,5 @@
       url = "github:yazi-rs/plugins";
     };
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 }

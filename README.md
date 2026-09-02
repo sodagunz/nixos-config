@@ -108,7 +108,6 @@ and home configuration.
 [yazi]: https://github.com/sxyazi/yazi
 [fish]: https://fishshell.com/
 [Swaylock]: https://github.com/swaywm/swaylock
-[audacious]: https://audacious-media-player.org/
 [mpv]: https://github.com/mpv-player/mpv
 [nvf]: https://github.com/NotAShelf/nvf
 [Neovim]: https://github.com/neovim/neovim

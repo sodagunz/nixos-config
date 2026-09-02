@@ -6,20 +6,16 @@
 with lib; let
   defaultApps = {
     browser = ["firefox.desktop"];
-    text = ["org.gnome.TextEditor.desktop"];
     image = ["imv-dir.desktop"];
     audio = ["mpv.desktop"];
     video = ["mpv.desktop"];
     directory = ["nemo.desktop"];
     office = ["libreoffice.desktop"];
-    pdf = ["org.gnome.Evince.desktop"];
     terminal = ["kitty.desktop"];
-    archive = ["org.gnome.FileRoller.desktop"];
     discord = ["webcord.desktop"];
   };
 
   mimeMap = {
-    text = ["text/plain"];
     image = [
       "image/bmp"
       "image/gif"
@@ -70,14 +66,7 @@ with lib; let
       "application/vnd.ms-powerpoint"
       "application/rtf"
     ];
-    pdf = ["application/pdf"];
     terminal = ["terminal"];
-    archive = [
-      "application/zip"
-      "application/rar"
-      "application/7z"
-      "application/*tar"
-    ];
     discord = ["x-scheme-handler/discord"];
   };
 
