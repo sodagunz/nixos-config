@@ -5,6 +5,7 @@
   flake.nixosModules.server = {
     imports = with self.nixosModules; [
       base
+      cloudflared
       media
       nas
       torrent

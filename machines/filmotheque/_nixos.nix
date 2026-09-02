@@ -1,5 +1,21 @@
-{ pkgs, self, ... }:
 {
+  config,
+  pkgs,
+  self,
+  ...
+}:
+{
+
+  age.secrets.filmotheque-cloudflared-token = {
+    file = ../../secrets/filmotheque-cloudflared.token.age;
+    mode = "0400";
+  };
+
+  sodagunz.services.cloudflared = {
+    enable = true;
+    tunnelId = "ae4102f8-f139-456d-9d33-f5d85ce06030";
+    tokenFile = config.age.secrets.filmotheque-cloudflared-token.path;
+  };
 
   # This should be an 8 character hex, you can get it via
   # head -c4 /dev/urandom | od -A none -t x4

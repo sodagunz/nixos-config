@@ -19,6 +19,10 @@
     };
 
   inputs = {
+    agenix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ryantm/agenix";
+    };
     copyparty.url = "github:9001/copyparty";
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {

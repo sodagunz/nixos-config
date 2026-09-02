@@ -9,7 +9,10 @@ in
   flake.nixosConfigurations.${hostname} = hosts.mkNixos {
     inherit hostname system username;
     module = ./_nixos.nix;
-    extraModules = [ inputs.copyparty.nixosModules.default ];
+    extraModules = [
+      inputs.agenix.nixosModules.default
+      inputs.copyparty.nixosModules.default
+    ];
   };
 
   flake.homeConfigurations."${username}@${hostname}" = hosts.mkHome {
