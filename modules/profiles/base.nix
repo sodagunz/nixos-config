@@ -7,7 +7,7 @@
       networking
       nh
       programs
-      system
+      core
       users
       virtualization
     ];

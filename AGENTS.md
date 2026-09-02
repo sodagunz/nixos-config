@@ -9,20 +9,20 @@ points automatically with `import-tree`.
 
 - `apps/` contains user-facing configuration. Keep `apps/desktop` flat; use
   deeper groups only when they make a feature easier to find.
-- `system/` contains NixOS configuration; system services belong in
-  `system/services`.
+- `system/` contains NixOS features; shared defaults live in `system/core.nix`,
+  with services grouped under `system/services`.
 - `profiles/` combines exported features into `base`, `server`, and
   `workstation` configurations.
-- `machines/<name>.nix` self-registers that machine's NixOS and standalone Home
-  Manager outputs; `machines/<name>/` contains independently imported fragments
-  that contribute to the machine's exported modules.
+- `machines/<name>.nix` owns that machine's NixOS and Home Manager modules and
+  self-registers both outputs; `machines/<name>/` contains only independently
+  imported hardware and optional Disko fragments.
 - `flake/` holds the shared constructors and output-option plumbing.
 
 Every `.nix` file under `modules/` is a flake-parts module that `import-tree`
 discovers automatically. Prefer a single `feature.nix` file. When a feature has
-associated assets or genuinely separate implementations, keep them in a sibling
-`feature/` directory and have each Nix file contribute independently to the
-same deferred module. Public feature names under `flake.nixosModules` and
+associated assets or genuinely separate implementation facts, keep them in a
+sibling `feature/` directory and have each Nix file contribute independently to
+the same deferred module. Public feature names under `flake.nixosModules` and
 `flake.homeModules` are interfaces used by profiles and machines.
 
 ## How to make a change

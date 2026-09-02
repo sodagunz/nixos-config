@@ -14,7 +14,7 @@
       niri
       noctalia
       programs
-      system
+      core
       users
       virtualization
     ];

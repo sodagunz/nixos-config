@@ -19,8 +19,8 @@ split by configuration type, except in that they are in any of the following roo
 - [apps](modules/apps) holds user-facing programs. `desktop` is intentionally flat;
   `dev`, `gaming`, `shell`, `terminal`, and `tools` group related programs when
   useful.
-- [system](modules/system) holds operating-system configuration, including
-  `services`.
+- [system](modules/system) holds NixOS features. Shared operating-system
+  defaults live in `system/core.nix`, with services grouped under `services`.
 - [profiles](modules/profiles) reusable base, server, and workstation setups. Stuff I would
   normally want in every machine of it's kind.
 - [machines](modules/machines) holds machine-specific configurations. Each machine registers its
@@ -54,12 +54,12 @@ add that capability to the appropriate profile.
 
 ### Machine
 
-Create `modules/machines/<hostname>.nix` to register a new machine's NixOS and
-Home Manager outputs. Its NixOS, Home Manager, hardware, and optional Disko
-fragments live under `modules/machines/<hostname>/`; each is an independently
-imported flake-parts module that contributes to the machine's exported module.
-You can then import features individually, or build up from one of the base
-profiles.
+Create `modules/machines/<hostname>.nix` to define the machine's NixOS and Home
+Manager modules and register both outputs. Keep only its hardware and optional
+Disko fragments under `modules/machines/<hostname>/`; each is an independently
+imported flake-parts module that contributes to the machine's exported NixOS
+module. You can then import features individually, or build up from one of the
+base profiles.
 
 ## Rebuilding
 

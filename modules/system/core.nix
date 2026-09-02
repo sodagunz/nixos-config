@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.nixosModules.system =
+  flake.nixosModules.core =
     {
       pkgs,
       ...
