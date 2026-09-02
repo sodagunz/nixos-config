@@ -16,7 +16,7 @@ excludes = [
 ]
 
 [formatter.nix]
-command  = "alejandra"
+command  = "nixfmt"
 excludes = []
 includes = ["*.nix"]
 

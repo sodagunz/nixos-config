@@ -1,80 +1,43 @@
 {
-  description = "gunz systems configuration";
-  outputs = {
-    home-manager,
-    nixpkgs,
-    nvf,
-    self,
-    ...
-  } @ inputs: {
-    nixosConfigurations = let
-      nixosHosts = {
-        minispore = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [];
-        };
-        homegrown = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [inputs.copyparty.nixosModules.default];
-        };
-        filmotheque = {
-          system = "x86_64-linux";
-          username = "gunz";
-          extraHostModules = [inputs.copyparty.nixosModules.default];
-        };
-      };
+  description = "sodagunz' nixos-config";
 
-      mkNixosHost = hostname: hostConfig:
-        nixpkgs.lib.nixosSystem {
-          modules = [./hosts/${hostname}] ++ hostConfig.extraHostModules;
-          inherit (hostConfig) system;
-          specialArgs = {
-            host = hostname;
-            inherit (hostConfig) username;
-            homeModules = [./hosts/${hostname}/home.nix];
-            inherit self inputs;
-          };
-        };
-    in
-      nixpkgs.lib.mapAttrs mkNixosHost nixosHosts;
-  };
+  # This project loosely uses the dendritic configuration.
+  # Every file besides this root is a flake parts module which exposes
+  # its own configuration.
+  # Hosts are configured in `./machines`, where `nixosConfigurations`, `homeConfigurations`,
+  # and `darwinConfigurations` are defined for each machine and rely on the rest of the modules.
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        (inputs.import-tree ./flake)
+        (inputs.import-tree ./machines)
+        (inputs.import-tree ./profiles)
+        (inputs.import-tree ./system)
+        (inputs.import-tree ./apps)
+      ];
+    };
 
   inputs = {
-    alejandra.url = "github:kamadorueda/alejandra";
-    copyparty.url = "github:9001/copyparty";
-    ghostty.url = "github:ghostty-org/ghostty";
-    home-manager = {
+    agenix = {
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ryantm/agenix";
+    };
+    copyparty.url = "github:9001/copyparty";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager/master";
     };
+    import-tree.url = "github:vic/import-tree";
 
-    hyprland = {
-      type = "git";
-      submodules = true;
-      url = "https://github.com/hyprwm/Hyprland";
-    };
-
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hyprmag.url = "github:SIMULATAN/hyprmag";
-    hyprpicker.url = "github:hyprwm/hyprpicker";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-gaming.url = "github:fufexan/nix-gaming";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nvf.url = "github:notashelf/nvf/af0cc1a85675e3a0dedb15ce648344c52d15c8d8";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    noctalia.url = "github:noctalia-dev/noctalia";
+    nvf.url = "github:notashelf/nvf";
 
-    spicetify-nix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:gerg-l/spicetify-nix";
-    };
-
-    yazi-plugins = {
-      flake = false;
-      url = "github:yazi-rs/plugins";
-    };
-
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 }

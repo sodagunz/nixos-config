@@ -1,87 +1,140 @@
-# System configuration flakes
+# nixos-config
+
+Nixos configs for my users and machines.
+
+## Table of contents
+
+- [Layout](#layout)
+- [Adding configuration](#adding-configuration)
+- [Rebuilding](#rebuilding)
+- [Components](#components)
+- [Credits](#credits)
 
 ## Layout
 
-- [flake.nix](flake.nix) base of the configuration
-- [hosts](hosts) per-host configurations that contain machine specific
-  configurations
-  - [desktop](hosts/desktop/) Desktop specific configuration
-  
-- [modules](modules) modularized NixOS configurations
-  - [core](modules/core/) Core NixOS configuration
-  - [homes](modules/home/) NixOS + home-manager configuration
-- [wallpapers](wallpapers/) 🌄 wallpapers collection
+This configuration loosely uses the [dendritic pattern][Dendritic]: a feature owns
+the NixOS and Home Manager and Darwin configuration that belongs to it, rather than being
+split by configuration type, except in that they are in any of the following root directories:
 
-## Components
+- [apps](apps) holds user-facing programs. `desktop` is intentionally flat;
+  `dev`, `gaming`, `shell`, `terminal`, and `tools` group related programs when
+  useful.
+- [system](system) holds operating-system configuration, including
+  `services`.
+- [profiles](profiles) reusable base, server, and workstation setups. Stuff I would
+  normally want in every machine of it's kind.
+- [machines](machines) holds machine-specific configurations. Each machine registers its
+  own NixOS and Home Manager outputs, and selects the modules it will use.
+- [lib](lib) contains the shared flake-parts plumbing.
 
-|                             |            NixOS + Hyprland            |
-| --------------------------- | :------------------------------------: |
-| **Window Manager**          |          [Hyprland][Hyprland]          |
-| **Bar**                     |            [Waybar][Waybar]            |
-| **Application Launcher**    |              [rofi][rofi]              |
-| **Notification Daemon**     |            [swaync][swaync]            |
-| **Terminal Emulator**       |           [ghostty][ghostty]           |
-| **Shell**                   |  [fish][fish] + [Starship][Starship]   |
-| **Text Editor**             |    [Neovim][Neovim] via [nvf][nvf]     |
-| **System resource monitor** |              [Btop][Btop]              |
-| **File Manager**            |  [nemo][nemo] GUI + [yazi][yazi] TUI   |
-| **Color Scheme**            |          [Nord/Nordic][Nord]           |
-| **Cursor**                  | [Bibata-Modern-Ice][Bibata-Modern-Ice] |
-| **Icons**                   |      [Papirus-Dark][Papirus-Dark]      |
-| **Lockscreen**              |          [Hyprlock][Hyprlock]          |
-| **Image Viewer**            |             [qview][qview]             |
-| **Media Player**            |               [mpv][mpv]               |
-| **Music Player**            |          [ncspot][ncspot] TUI          |
-| **Screenshot Software**     |         [grimblast][grimblast]         |
-| **Screen Recording**        |       [wf-recorder][wf-recorder]       |
-| **Clipboard**               |   [wl-clip-persist][wl-clip-persist]   |
-| **Color Picker**            |        [hyprpicker][hyprpicker]        |
+Each public feature directory has a `default.nix` entry point. Put its private
+implementation and assets behind an underscore-prefixed name such as
+`_module.nix` or `_nixos.nix`; as `import-tree` does not import those paths on its
+own.
 
-# Installation
+## Adding configuration
 
-- `git clone github.com/tomasguinzburg/nixos-config`
-- `cd nixos-config`
-- You may need to copy some wallpapers to `~/Pictures/wallpapers` for stuff to
-  work properly
-- `nixos-rebuild switch --flake .#desktop`
+### Feature
 
-# Credits
+Create a feature under the functional root where it belongs, for example
+`apps/dev/example/default.nix`. Export a Home Manager module through
+`flake.homeModules`, a NixOS module through `flake.nixosModules`, or both; then
+add that capability to the appropriate profile.
 
-- [Frost-Phoenix/nixos-config](https://github.com/Frost-Phoenix/nixos-config):
-  Heavily based on this config, and indirectly inspired by dozens of other
-  projects through it.
+```nix
+{ ... }:
+{
+  flake.homeModules.example = import ./_module.nix;
+  flake.nixosModules.example = import ./_nixos.nix;
+}
+```
 
-<div align="right">
-  <a href="#readme">Back to the Top</a>
-</div>
+### Machine
 
-<!-- Links -->
+Create `machines/<hostname>/default.nix` to register a new machine's NixOS and
+Home Manager outputs. Keep its NixOS, Home Manager, hardware, and optional
+Disko modules in underscore-prefixed sibling files. You can then import features
+individually, or build up from one of the base profiles.
 
-[Hyprland]: https://github.com/hyprwm/Hyprland
-[ghostty]: https://github.com/ghostty-org/ghostty
-[Starship]: https://github.com/starship/starship
-[Waybar]: https://github.com/Alexays/Waybar
-[rofi]: https://github.com/lbonn/rofi
+## Rebuilding
+
+```console
+nh os switch .#minispore
+nh home switch '.#gunz@minispore' -b hmbackup
+```
+
+Normally OS is on nixpkgs and home-manager on nixpkgs-unstable, so they each use
+their own dedicated config. I keep home-manager config uncoupled from system config,
+as otherwise I need to maintain separate config for any machine not running nixos.
+
+```console
+nix flake check --no-build
+```
+
+## Desktop Components
+
+| Component             | Configuration                                                        |
+| --------------------- | -------------------------------------------------------------------- |
+| Window manager        | [Niri][Niri]                                                         |
+| Desktop shell         | [Noctalia][Noctalia]                                                 |
+| Browser               | [Firefox][Firefox]                                                   |
+| Terminals             | [Ghostty][Ghostty] and [Kitty][Kitty]                                |
+| Shell                 | [Fish][Fish] with [Starship][Starship]                               |
+| Editors               | [Zed][Zed], [Neovim][Neovim] via [NVF][NVF], [Helix][Helix]          |
+| File managers         | [Nemo][Nemo] and [Yazi][Yazi]                                        |
+| Video and music       | [mpv][mpv], [VLC][VLC], and [ncspot][ncspot]                         |
+| Resource monitoring   | [Btop][Btop] and [Resources][Resources]                              |
+| Audio                 | [PipeWire][PipeWire]                                                 |
+| Screen recording      | [wf-recorder][wf-recorder] with [slurp][slurp]                       |
+| Colour scheme         | [Nord][Nord]-Night, as featured by [Ghostty][Ghostty]                |
+| Icons                 | [Nordzy][Nordzy]                                                     |
+| Cursor                | [Bibata Modern Ice][Bibata]                                          |
+| Fonts                 | [Montserrat][Montserrat] and [Nerd Fonts][Nerd Fonts]                |
+
+## Server Components
+
+| Component             | Configuration                                                        |
+| --------------------- | -------------------------------------------------------------------- |
+| Media streaming       | [Jellyfin][Jellyfin]                                                 |
+| File sharing          | [Copyparty][Copyparty] and NFS                                       |
+| Media management      | [*arr services][Servarr] and Transmission                            |
+| Reverse proxy         | Not configured                                                       |
+| Emulation             | Reserved; no emulator is installed                                   |
+
+## Credits
+
+- [Frost-Phoenix/nixos-config][Frost-Phoenix] is the original foundation for
+  this configuration.
+- [mightyiam/dendritic][Dendritic] documents the module-system pattern that
+  informs its feature-oriented structure.
+
+[Dendritic]: https://github.com/mightyiam/dendritic
+[Bibata]: https://github.com/ful1e5/Bibata_Cursor
 [Btop]: https://github.com/aristocratos/btop
-[nemo]: https://github.com/linuxmint/nemo/
-[yazi]: https://github.com/sxyazi/yazi
-[fish]: https://fishshell.com/
-[Swaylock-effects]: https://github.com/mortie/swaylock-effects
-[Hyprlock]: https://github.com/hyprwm/hyprlock
-[audacious]: https://audacious-media-player.org/
-[mpv]: https://github.com/mpv-player/mpv
-[nvf]: https://github.com/NotAShelf/nvf
-[Neovim]: https://github.com/neovim/neovim
-[grimblast]: https://github.com/hyprwm/contrib
-[qview]: https://interversehq.com/qview/
-[swaync]: https://github.com/ErikReider/SwayNotificationCenter
-[Nerd fonts]: https://github.com/ryanoasis/nerd-fonts
-[NetworkManager]: https://wiki.gnome.org/Projects/NetworkManager
-[network-manager-applet]: https://gitlab.gnome.org/GNOME/network-manager-applet/
-[wl-clip-persist]: https://github.com/Linus789/wl-clip-persist
-[wf-recorder]: https://github.com/ammen99/wf-recorder
-[hyprpicker]: https://github.com/hyprwm/hyprpicker
-[Papirus-Dark]: https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
-[Bibata-Modern-Ice]: https://www.gnome-look.org/p/1197198
+[Copyparty]: https://github.com/9001/copyparty
+[Fish]: https://fishshell.com/
+[Firefox]: https://www.mozilla.org/firefox/
+[Frost-Phoenix]: https://github.com/Frost-Phoenix/nixos-config
+[Ghostty]: https://github.com/ghostty-org/ghostty
+[Helix]: https://helix-editor.com/
+[Jellyfin]: https://jellyfin.org/
+[Kitty]: https://sw.kovidgoyal.net/kitty/
+[Montserrat]: https://fonts.google.com/specimen/Montserrat
+[Nemo]: https://github.com/linuxmint/nemo/
+[Nerd Fonts]: https://www.nerdfonts.com/
+[Niri]: https://github.com/niri-wm/niri
 [ncspot]: https://github.com/hrkfdn/ncspot
-[Nord]: https://github.com/EliverLara/Nordic
+[Noctalia]: https://github.com/noctalia-dev/noctalia
+[Nord]: https://www.nordtheme.com/
+[Nordzy]: https://github.com/alvatip/Nordzy-icon
+[Neovim]: https://neovim.io/
+[NVF]: https://github.com/NotAShelf/nvf
+[PipeWire]: https://pipewire.org/
+[Resources]: https://apps.gnome.org/Resources/
+[Servarr]: https://wiki.servarr.com/
+[Starship]: https://starship.rs/
+[slurp]: https://github.com/emersion/slurp
+[VLC]: https://www.videolan.org/vlc/
+[wf-recorder]: https://github.com/ammen99/wf-recorder
+[Yazi]: https://yazi-rs.github.io/
+[Zed]: https://zed.dev/
