@@ -7,7 +7,7 @@
 {
 
   age.secrets.filmotheque-cloudflared-token = {
-    file = ../../secrets/filmotheque-cloudflared.token.age;
+    file = ../../.secrets/filmotheque-cloudflared.token.age;
     mode = "0400";
   };
 
