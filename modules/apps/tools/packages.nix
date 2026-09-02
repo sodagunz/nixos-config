@@ -23,8 +23,6 @@
 
         # ---- CLI non-essential
         bitwise # programming calculator
-        gifsicle # gif utility
-        gtrash # better rm with recovery
         mimeo # open files using MIME types
 
         # ---- doc
@@ -36,10 +34,9 @@
         gtt # google translate
         lazygit # git
         ncdu # NCurses (d)isk (u)tility
-        ueberzugpp
         tdf # PDF renderer
         wiki-tui # Wikipedia
-        ncspot # spotify TUI
+        ncspot # Spotify
 
         # ---- programming
         gcc # GNU Compiler Collection
@@ -47,24 +44,17 @@
         gnumake # GNU Make
         just # easy make substitute
         nix-prefetch-github # prefetch nix info from github
-        nixd # nix lsp
-        nixfmt # nix formatter
         python3 # Python3
-        shfmt # bash formatter
         valgrind # c memory analyzer
         zenity # uses GTK to retrieve user value
-        python312Packages.ipython # interactive python
-        taplo # toml formatter and more
-        kdlfmt # kdl formatter
-        yamlfmt # yaml formatter
+        python315Packages.ipython # interactive python
 
         # ---- system / media
-        caligula # disk imaging/burning
         dconf-editor # configuration editor
-        ffmpeg # a/v processor
         imv # image viewer
         libnotify # notifications daemon
         mpv # video player
+        vlc # VideoLan Client
         openssl # ssl transport layer security
         sccache # cache for cargo
         pkg-config # for openssl pkg info
@@ -72,16 +62,12 @@
         pavucontrol # pulseaudio volume control (GUI)
         playerctl # controller for media players
         wget # HTTP Get
-        ghc
-        cabal-install
-        haskell-language-server
 
         # ---- info fetchers
         nitch # (ni)x fe(tch)
         onefetch # git repo fetch
 
         # ---- leisure
-        ani-cli # anime via CLI
         cbonsai # terminal screensaver bonsai
         cmatrix # terminal screensaver matrix
         cowsay # cowsay
@@ -91,18 +77,10 @@
         toipe # speed typing with good UI
         tty-clock # terminal screensaver clock
         ttyper # speed typing good feedback on misses
-        yt-dlp-light # youtube downloader
 
         # ---- wayland tools
         wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
         xdg-utils # tools to integrate with xdg
-
-        # ---- apps
-        gimp # Photoshop without the sugar
-        libreoffice # Office without the suits
-        resources # GUI resources monitor
-        thunderbird # Mozilla Email client
-        vlc # VideoLan Client
       ];
     };
 }
