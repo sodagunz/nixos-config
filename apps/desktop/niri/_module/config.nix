@@ -1,4 +1,4 @@
-{config, pkgs, ...}: {
+{ config, pkgs, ... }: {
   xdg.configFile."niri/config.kdl".text = ''
     output "HDMI-A-2" {
         mode "3840x2160@59.997"

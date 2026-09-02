@@ -9,19 +9,19 @@
   # System power management: `performance` | `schedutil` | `powersave`
   powerManagement.cpuFreqGovernor = "schedutil";
 
-  # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable. 
+  # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable.
   boot.kernelPackages = pkgs.linuxPackages; # ZFS usually lags behind latest
-  
+
   # SSH agent is required for headless hosts
   programs.ssh.startAgent = true;
 
   # Set up zfs
   # TODO: make this a module and parameterize pools?
   boot = {
-    supportedFilesystems = ["zfs"];
+    supportedFilesystems = [ "zfs" ];
     zfs = {
       forceImportRoot = false;
-      extraPools = ["tank"];
+      extraPools = [ "tank" ];
       package = pkgs.zfs;
       devNodes = "/dev/disk/by-id";
     };
@@ -51,7 +51,7 @@
       }
     ];
   };
-  environment.systemPackages = [pkgs.smartmontools];
+  environment.systemPackages = [ pkgs.smartmontools ];
 
   # Enable modules as needed for server specialization
   imports = [

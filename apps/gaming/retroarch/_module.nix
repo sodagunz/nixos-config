@@ -1,6 +1,7 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = (
-    with pkgs; [
+    with pkgs;
+    [
       # (retroarch.override {
       #   cores = with libretro; [
       #     fceumm

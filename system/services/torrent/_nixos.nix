@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
 
   environment.systemPackages = with pkgs; [ transmission_4-qt ];
@@ -29,7 +29,7 @@
 
   services.prowlarr = {
     enable = true;
-    openFirewall = true; #opens 9696
+    openFirewall = true; # opens 9696
   };
 
   users.groups.media.members = [

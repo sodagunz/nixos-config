@@ -5,7 +5,7 @@ _: {
     themeFile = "Nord";
 
     font = {
-      name = "Maple Mono";
+      name = "FiraCode Nerd Font Mono";
       size = 16;
     };
 

@@ -5,12 +5,12 @@
   # It should be unique, and static between builds.
   networking.hostId = "28346cc6";
 
-  # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable. 
+  # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable.
   boot.kernelPackages = pkgs.linuxPackages;
 
   # System power management: `performance` | `schedutil` | `powersave`
   powerManagement.cpuFreqGovernor = "schedutil";
-  
+
   # SSH agent is required for headless hosts
   programs.ssh.startAgent = true;
 

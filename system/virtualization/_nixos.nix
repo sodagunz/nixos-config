@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Install necessary packages
   environment.systemPackages = with pkgs; [
     dive

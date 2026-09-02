@@ -1,3 +1,3 @@
-{...}: {
-  imports = [./bat.nix];
+{ ... }: {
+  imports = [ ./bat.nix ];
 }

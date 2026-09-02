@@ -1,10 +1,10 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
 
-  environment.systemPackages = with pkgs; [blueman];
+  environment.systemPackages = with pkgs; [ blueman ];
 
   services.blueman.enable = true;
 }

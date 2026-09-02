@@ -3,8 +3,9 @@
   inputs,
   username,
   ...
-}: {
-  nixpkgs.overlays = [inputs.copyparty.overlays.default];
+}:
+{
+  nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
   environment.systemPackages = with pkgs; [
     acl
     copyparty
@@ -70,8 +71,8 @@
   ];
 
   # open copyparty ports
-  networking.firewall.allowedTCPPorts = [3923];
-  networking.firewall.allowedUDPPorts = [3923];
+  networking.firewall.allowedTCPPorts = [ 3923 ];
+  networking.firewall.allowedUDPPorts = [ 3923 ];
 
   users.users.copyparty = {
     extraGroups = [
