@@ -36,6 +36,7 @@
     ueberzugpp
     tdf # PDF renderer
     wiki-tui # Wikipedia
+    ncspot # spotify TUI
 
     # ---- programming
     gcc # GNU Compiler Collection

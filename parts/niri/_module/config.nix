@@ -1,4 +1,4 @@
-{config, ...}: {
+{config, pkgs, ...}: {
   xdg.configFile."niri/config.kdl".text = ''
     output "HDMI-A-2" {
         mode "3840x2160@59.997"
@@ -48,6 +48,9 @@
     }
 
     prefer-no-csd
+    xwayland-satellite {
+        path "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
+    }
     hotkey-overlay { skip-at-startup; }
     spawn-at-startup "sh" "-c" "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
@@ -62,7 +65,8 @@
         Mod+A hotkey-overlay-title="Open terminal" { spawn "ghostty"; }
         Mod+W hotkey-overlay-title="Open Firefox" { spawn "firefox"; }
         Mod+D hotkey-overlay-title="Open Discord on next workspace" { spawn-sh "niri msg action focus-workspace-down; discord"; }
-        Mod+Z hotkey-overlay-title="Open Zed on next workspace" { spawn-sh "niri msg action focus-workspace-down; zed"; }
+        Mod+Z hotkey-overlay-title="Open Zed on next workspace" { spawn-sh "niri msg action focus-workspace-down; zeditor"; }
+        Mod+N hotkey-overlay-title="Open ncspot on workspace 10" { spawn-sh "niri msg action focus-workspace 10; ghostty -e ncspot"; }
         Mod+E hotkey-overlay-title="Open file explorer" { spawn "nemo"; }
         Mod+Space hotkey-overlay-title="Open application launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
         Mod+S hotkey-overlay-title="Open control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
