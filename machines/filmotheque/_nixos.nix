@@ -55,7 +55,7 @@
 
   # Enable modules as needed for server specialization
   imports = [
-    ./hardware-configuration.nix
+    ./_hardware-configuration.nix
     self.nixosModules.server
   ];
 

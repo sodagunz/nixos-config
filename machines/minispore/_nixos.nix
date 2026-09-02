@@ -28,7 +28,7 @@
 
   # Use default core modules for workstations.
   imports = [
-    ./hardware-configuration.nix
+    ./_hardware-configuration.nix
     self.nixosModules.workstation
   ];
 }

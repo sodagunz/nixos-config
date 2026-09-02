@@ -2,17 +2,22 @@
 
 ## Layout
 
-- [flake.nix](flake.nix) declares inputs and loads the dendritic module tree.
-- [parts](parts) contains feature-owned flake-parts modules. A feature can
-  export NixOS configuration through `flake.nixosModules`, Home Manager
-  configuration through `flake.homeModules`, or both.
-- [hosts](hosts) contains machine-specific facts and selects exported profiles.
+- [flake.nix](flake.nix) declares inputs and loads the functional dendritic
+  roots. [flake](flake) contains shared flake-parts plumbing.
+- Feature modules live under purpose-based roots: [desktop](desktop),
+  [apps](apps), [shell](shell), [services](services), [system](system), and
+  [tools](tools). They export NixOS configuration through
+  `flake.nixosModules`, Home Manager configuration through
+  `flake.homeModules`, or both.
+- [machines](machines) contains self-registering machine-specific facts and
+  exports each machine's NixOS and Home Manager configurations.
 - [wallpapers](wallpapers/) 🌄 wallpapers collection
 
 ### Adding a feature
 
-Create `parts/<feature>/default.nix`. Keep implementation modules and assets in
-an underscore-prefixed path such as `_module.nix` or `_module/`; `import-tree`
+Create a feature entry point under the functional root that fits it, such as
+`apps/dev/<feature>/default.nix`. Keep implementation modules and assets in an
+underscore-prefixed path such as `_module.nix` or `_module/`; `import-tree`
 ignores these paths and only evaluates the feature entry point.
 
 ```nix
@@ -23,14 +28,15 @@ ignores these paths and only evaluates the feature entry point.
 }
 ```
 
-Add the exported capability to a profile such as `parts/workstation`, rather
+Add the exported capability to a profile such as `profiles/workstation`, rather
 than importing program files from a host.
 
 ### Adding a host
 
-Add the machine under `hosts/<hostname>`, register its system and username in
-`parts/core/default.nix`, and import an exported NixOS profile from the host.
-Standalone Home Manager profiles are constructed in `parts/core/default.nix`.
+Add a self-registering `machines/<hostname>/default.nix` that defines the
+machine's system, username, optional extra NixOS modules, and its NixOS and
+Home Manager outputs. Keep its implementation in underscore-prefixed siblings
+such as `_nixos.nix`, `_home.nix`, and `_hardware-configuration.nix`.
 
 ## Components
 

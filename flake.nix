@@ -1,7 +1,20 @@
 {
   description = "gunz systems configuration";
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./parts);
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        (inputs.import-tree ./flake)
+        (inputs.import-tree ./machines)
+        (inputs.import-tree ./profiles)
+        (inputs.import-tree ./system)
+        (inputs.import-tree ./services)
+        (inputs.import-tree ./desktop)
+        (inputs.import-tree ./apps)
+        (inputs.import-tree ./shell)
+        (inputs.import-tree ./tools)
+      ];
+    };
 
   inputs = {
     copyparty.url = "github:9001/copyparty";
