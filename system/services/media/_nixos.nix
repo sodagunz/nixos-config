@@ -80,13 +80,31 @@
     ];
   };
 
-  # fileSystems."/srv".options = ["defaults" "acl"];
-  system.activationScripts.setSharedAcls = with pkgs; ''
-    ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /srv
-    ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /srv
-    ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /mnt/tank
-    ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /mnt/tank
-    ${acl}/bin/setfacl -R -m d:u::rwx,d:g:media:rwx,d:o::--- /tank
-    ${acl}/bin/setfacl -R -m u::rwx,g:media:rwx,o::--- /tank
-  '';
+  systemd.services.media-permissions = {
+    description = "Set shared media directory permissions";
+    after = [ "zfs-mount.service" ];
+    before = [
+      "copyparty.service"
+      "jellyfin.service"
+      "prowlarr.service"
+      "radarr.service"
+      "sonarr.service"
+      "transmission.service"
+    ];
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.acl ];
+    unitConfig.RequiresMountsFor = [ "/tank" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      for directory in /srv /tank /tank/media /tank/data /tank/backups; do
+        if [[ -d "$directory" ]]; then
+          setfacl -m u::rwx,g:media:rwx,o::--- "$directory"
+          setfacl -m d:u::rwx,d:g:media:rwx,d:o::--- "$directory"
+        fi
+      done
+    '';
+  };
 }
