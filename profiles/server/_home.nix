@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ self, pkgs, ... }:
+{
+  imports = [
+    self.homeModules.helix
+    self.homeModules.zellij
+  ];
+
   home.packages = with pkgs; [
     entr
     eza

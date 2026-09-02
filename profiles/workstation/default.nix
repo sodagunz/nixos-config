@@ -34,6 +34,7 @@
       gaming
       git
       ghostty
+      helix
       gtk
       kitty
       nemo
