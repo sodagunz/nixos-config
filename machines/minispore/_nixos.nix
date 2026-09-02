@@ -7,6 +7,15 @@
 
   boot.kernelPackages = pkgs.linuxPackages;
 
+  boot.loader = {
+    efi.efiSysMountPoint = "/efi";
+    systemd-boot = {
+      xbootldrMountPoint = "/boot";
+      # Five rollback generations fit comfortably on the 2 GiB XBOOTLDR partition.
+      configurationLimit = 5;
+    };
+  };
+
   # System power management: `performance` | `schedutil` | `powersave`
   powerManagement.cpuFreqGovernor = "schedutil";
 
