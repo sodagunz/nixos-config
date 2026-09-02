@@ -48,34 +48,48 @@
     }
 
     prefer-no-csd
+    hotkey-overlay { skip-at-startup; }
     spawn-at-startup "sh" "-c" "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
     spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
     spawn-at-startup "noctalia"
-    spawn-at-startup "firefox"
-    spawn-at-startup "ghostty"
+    spawn-at-startup "sh" "-c" "firefox & i=0; while ! niri msg windows | grep -q '\"app_id\": \"firefox\"' && [ $i -lt 20 ]; do sleep 0.1; i=$((i + 1)); done; niri msg action focus-workspace-down; ghostty"
 
     environment { NIXOS_OZONE_WL "1"; }
 
     binds {
+        Mod+Shift+Slash hotkey-overlay-title="Show important hotkeys" { show-hotkey-overlay; }
         Mod+A hotkey-overlay-title="Open terminal" { spawn "ghostty"; }
         Mod+W hotkey-overlay-title="Open Firefox" { spawn "firefox"; }
-        Mod+D hotkey-overlay-title="Open Discord" { spawn "discord"; }
-        Mod+Z hotkey-overlay-title="Open Zed" { spawn "zed"; }
+        Mod+D hotkey-overlay-title="Open Discord on next workspace" { spawn-sh "niri msg action focus-workspace-down; discord"; }
+        Mod+Z hotkey-overlay-title="Open Zed on next workspace" { spawn-sh "niri msg action focus-workspace-down; zed"; }
         Mod+E hotkey-overlay-title="Open file explorer" { spawn "nemo"; }
         Mod+Space hotkey-overlay-title="Open application launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
         Mod+S hotkey-overlay-title="Open control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
         Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn-sh "noctalia msg settings-toggle"; }
         Mod+Q { close-window; }
+        Mod+Shift+E hotkey-overlay-title="Exit Niri" { quit; }
         Mod+F { fullscreen-window; }
+        Mod+Shift+F hotkey-overlay-title="Maximize column" { maximize-column; }
         Mod+Escape { spawn-sh "noctalia msg session lock"; }
         Mod+Shift+Escape { spawn-sh "noctalia msg panel-toggle session"; }
         Mod+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
+        Mod+O hotkey-overlay-title="Open overview" { open-overview; }
+        Mod+R hotkey-overlay-title="Next column width preset" { switch-preset-column-width; }
+        Mod+Shift+R hotkey-overlay-title="Previous column width preset" { switch-preset-column-width-back; }
+        Mod+Shift+Comma hotkey-overlay-title="Toggle floating window" { toggle-window-floating; }
+        Mod+Shift+Period hotkey-overlay-title="Switch floating and tiling focus" { switch-focus-between-floating-and-tiling; }
 
         Mod+H { focus-column-left; }
         Mod+J { focus-window-down; }
         Mod+K { focus-window-up; }
         Mod+L { focus-column-right; }
+        Mod+Ctrl+H hotkey-overlay-title="Consume or expel window left" { consume-or-expel-window-left; }
+        Mod+Ctrl+L hotkey-overlay-title="Consume or expel window right" { consume-or-expel-window-right; }
+        Mod+Ctrl+J hotkey-overlay-title="Switch workspace down" { focus-workspace-down; }
+        Mod+Ctrl+K hotkey-overlay-title="Switch workspace up" { focus-workspace-up; }
+        Mod+Ctrl+Shift+J hotkey-overlay-title="Move column to workspace down" { move-column-to-workspace-down; }
+        Mod+Ctrl+Shift+K hotkey-overlay-title="Move column to workspace up" { move-column-to-workspace-up; }
 
         Mod+1 { focus-workspace 1; }
         Mod+2 { focus-workspace 2; }
@@ -104,6 +118,9 @@
         Mod+Shift+K { move-window-up; }
         Mod+Shift+L { move-column-right; }
 
+        Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+        Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+
         XF86AudioPlay allow-when-locked=true { spawn-sh "noctalia msg media toggle"; }
         XF86AudioNext allow-when-locked=true { spawn-sh "noctalia msg media next"; }
         XF86AudioPrev allow-when-locked=true { spawn-sh "noctalia msg media previous"; }
@@ -119,10 +136,6 @@
 
     }
 
-    window-rule {
-        match app-id=r#"^(firefox|ghostty|com\.mitchellh\.ghostty|discord|dev\.zed\.Zed)$"#
-        open-fullscreen true
-    }
     window-rule {
         match app-id="dev.noctalia.Noctalia"
         open-floating true
@@ -140,12 +153,9 @@
         open-floating true
     }
     window-rule {
-        match app-id="firefox" at-startup=true
-        open-on-workspace "1"
-    }
-    window-rule {
-        match app-id=r#"^(ghostty|com\.mitchellh\.ghostty)$"# at-startup=true
-        open-on-workspace "2"
+        match app-id=r#"^(firefox|ghostty|com\.mitchellh\.ghostty)$"#
+        open-fullscreen false
+        open-maximized true
     }
   '';
 }
