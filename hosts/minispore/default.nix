@@ -11,20 +11,20 @@
   powerManagement.cpuFreqGovernor = "schedutil";
 
   # Replaces SSH agent workstations.
-  services.gnome.gnome-keyring.enable = true;
+  # services.gnome.gnome-keyring.enable = true;
 
   # NAS client configuration
   # TODO: replace with hostname, maybe parameterize path?
-  environment.systemPackages = with pkgs; [ nfs-utils ];
-  fileSystems."/mnt/tank" = {
-    device = "192.168.1.195:/mnt/tank";
-    fsType = "nfs";
-    options = [
-      "x-systemd.automount"
-      "noauto"
-      "_netdev"
-    ];
-  };
+  # environment.systemPackages = with pkgs; [ nfs-utils ];
+  # fileSystems."/mnt/tank" = {
+  #   device = "192.168.1.195:/mnt/tank";
+  #   fsType = "nfs";
+  #   options = [
+  #     "x-systemd.automount"
+  #     "noauto"
+  #     "_netdev"
+  #   ];
+  # };
 
   # Use default core modules for workstations.
   imports = [
