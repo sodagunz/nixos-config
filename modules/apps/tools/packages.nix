@@ -51,7 +51,6 @@
         nixfmt # nix formatter
         python3 # Python3
         shfmt # bash formatter
-        treefmt # project formatter
         valgrind # c memory analyzer
         zenity # uses GTK to retrieve user value
         python312Packages.ipython # interactive python

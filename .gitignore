@@ -1,7 +1,3 @@
-GEMINI.md
-
-# Secret plaintext must never be committed. Encrypted Agenix files and their
-# recipient rules remain tracked.
-secrets/*
-!secrets/*.age
-!secrets/secrets.nix
+!.secrets/*.age
+!.secrets/secrets.nix
+.direnv
