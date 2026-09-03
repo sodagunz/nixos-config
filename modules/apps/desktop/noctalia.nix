@@ -185,6 +185,7 @@
             "English (US)" = "US";
             French = "FR";
             Spanish = "ES";
+            "Spanish (Latin American)" = "LA";
           };
           panel = {
             launcher_placement = "attached";

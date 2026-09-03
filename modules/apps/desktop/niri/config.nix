@@ -16,8 +16,8 @@
       input {
           keyboard {
               xkb {
-                  layout "us,fr"
-                  options "grp:alt_caps_toggle"
+                  layout "us,fr,latam"
+                  options "grp:alt_shift_toggle"
               }
               numlock
           }
