@@ -1,3 +1,16 @@
+```
+███████╗··██████╗·██████╗··█████╗··██████╗·██╗···██╗███╗···██╗███████╗···/┐········
+██╔════╝·██╔═══██╗██╔══██╗██╔══██╗██╔════╝·██║···██║████╗··██║╚══███╔╝··/·(░)─┐····
+███████╗·██║···██║██║··██║███████║██║··███╗██║···██║██╔██╗·██║··███╔╝····(▒▒▒)···°·  
+╚════██║·██║···██║██║··██║██╔══██║██║···██║██║···██║██║╚██╗██║·███╔╝·····|▓▓▓|·|º|·  
+███████║·╚██████╔╝██████╔╝██║··██║╚██████╔╝╚██████╔╝██║·╚████║███████╗···|███|·|▓|·  
+╚══════╝··╚═════╝·╚═════╝·╚═╝··╚═╝·╚═════╝··╚═════╝·╚═╝··╚═══╝╚══════╝···\___/·|_|·  
+
+github: https://github.com/sodagunz                                                 
+email: sodagunz@proton.me                                                           
+```
+     
+
 # nixos-config
 
 Nixos configs for my users and machines.
@@ -7,6 +20,7 @@ Nixos configs for my users and machines.
 - [Layout](#layout)
 - [Adding configuration](#adding-configuration)
 - [Rebuilding](#rebuilding)
+- [Pull-based deployment](#pull-based-deployment)
 - [Components](#components)
 - [Credits](#credits)
 
@@ -21,7 +35,7 @@ split by configuration type, except in that they are in any of the following roo
   useful.
 - [system](modules/system) holds NixOS features. Shared operating-system
   defaults live in `system/core.nix`, with services grouped under `services`.
-- [profiles](modules/profiles) reusable base, server, and workstation setups. Stuff I would
+- [profiles](modules/profiles) reusable base and workstation setups. Stuff I would
   normally want in every machine of it's kind.
 - [machines](modules/machines) holds machine-specific configurations. Each machine registers its
   own NixOS and Home Manager outputs, and selects the modules it will use.
@@ -75,6 +89,39 @@ as otherwise I need to maintain separate config for any machine not running nixo
 ```console
 nix flake check --no-build
 ```
+
+## Pull-based deployment
+
+`main` is the deployable release branch. After its required GitHub Actions checks
+pass and a pull request merges, Comin polls it on each enrolled host and switches
+the matching NixOS configuration. A successful NixOS switch then
+builds and activates the matching standalone Home Manager configuration as
+`gunz`, from Comin's exact fetched flake revision. Home Manager activation only
+runs after the NixOS deployment succeeds, with `hmbackup` collision backups.
+
+Before enrolling a host, create a fine-grained GitHub token with
+**Contents: Read** permission for this repository, then encrypt it for the two
+existing recipients:
+
+```console
+agenix -e .secrets/comin-github.token.age
+```
+
+Add every enrolled host's age recipient to `.secrets/secrets.nix` and declare
+the secret in that machine module. Bootstrap each online host once with the
+Comin-enabled configuration, then confirm polling and deployment with
+`journalctl -u comin`. Normal NixOS rollback and boot-menu generations remain
+the recovery path if a deployment is bad. A failed Home Manager activation is
+recorded by Comin, while the successful NixOS generation remains available for
+rollback.
+
+GitHub branch protection is managed outside this repository: require all CI
+checks for pull requests to `main`, and block direct and force pushes. Comin
+does not use testing branches, tags, releases, or a deploy workflow. `homegrown`
+currently uses the placeholder token path until its age recipient is available.
+SSH commit signature verification is also deferred; configure Comin's
+`sshAllowedSignersPath` with an allowed-signers file once commit signing is in
+place.
 
 ## Desktop Components
 

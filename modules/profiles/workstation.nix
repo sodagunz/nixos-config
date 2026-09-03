@@ -1,25 +1,5 @@
 { self, ... }:
 {
-  flake.nixosModules.workstation = {
-    imports = with self.nixosModules; [
-      audio
-      bluetooth
-      bootloader
-      cachix
-      flatpak
-      gaming
-      hardware
-      networking
-      nh
-      niri
-      noctalia
-      programs
-      core
-      users
-      virtualization
-    ];
-  };
-
   flake.homeModules.workstation = {
     imports = with self.homeModules; [
       bat
@@ -49,6 +29,18 @@
       yazi
       zellij
       zoxide
+    ];
+  };
+  flake.nixosModules.workstation = {
+    imports = with self.nixosModules; [
+      audio
+      bluetooth
+      flatpak
+      gaming
+      hardware
+      niri
+      noctalia
+      base
     ];
   };
 }

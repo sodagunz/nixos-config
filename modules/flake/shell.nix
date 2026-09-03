@@ -1,15 +1,10 @@
 { ... }:
 {
-  perSystem = { pkgs, ... }: {
-    devShells.default = pkgs.mkShell {
-      packages = with pkgs; [
-        kdlfmt
-        nixfmt
-        shfmt
-        taplo
-        treefmt
-        yamlfmt
-      ];
+  perSystem =
+    { config, pkgs, ... }:
+    {
+      devShells.default = pkgs.mkShell {
+        packages = [ config.treefmt.build.wrapper ];
+      };
     };
-  };
 }

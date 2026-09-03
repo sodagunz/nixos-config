@@ -10,6 +10,22 @@ let
   username = "gunz";
 in
 {
+  flake.homeConfigurations."${username}@${hostname}" = hosts.mkHome {
+    inherit hostname system username;
+    module = self.homeModules.filmotheque;
+  };
+  flake.homeModules.filmotheque =
+    { self, ... }:
+    {
+      imports = [ self.homeModules.base ];
+    };
+  flake.nixosConfigurations.${hostname} = hosts.mkNixos {
+    inherit hostname system username;
+    extraModules = [
+      inputs.copyparty.nixosModules.default
+    ];
+    module = self.nixosModules.filmotheque;
+  };
   flake.nixosModules.filmotheque =
     {
       config,
@@ -18,55 +34,46 @@ in
       ...
     }:
     {
+      age.secrets."comin-github.token" = {
+        file = ../../.secrets/comin-github.token.age;
+        mode = "0400";
+      };
       age.secrets.filmotheque-cloudflared-token = {
         file = ../../.secrets/filmotheque-cloudflared.token.age;
         mode = "0400";
       };
-
-      sodagunz.services.cloudflared = {
-        enable = true;
-        tunnelId = "ae4102f8-f139-456d-9d33-f5d85ce06030";
-        tokenFile = config.age.secrets.filmotheque-cloudflared-token.path;
-      };
-
-      # This should be an 8 character hex, you can get it via
-      # head -c4 /dev/urandom | od -A none -t x4
-      # It should be unique, and static between builds.
-      networking.hostId = "83a73ad2";
-
-      # System power management: `performance` | `schedutil` | `powersave`
-      powerManagement.cpuFreqGovernor = "schedutil";
-
-      # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable.
-      boot.kernelPackages = pkgs.linuxPackages; # ZFS usually lags behind latest
-
-      # SSH agent is required for headless hosts
-      programs.ssh.startAgent = true;
-
       # Set up zfs
       # TODO: make this a module and parameterize pools?
       boot = {
         supportedFilesystems = [ "zfs" ];
         zfs = {
-          forceImportRoot = false;
-          extraPools = [ "tank" ];
-          package = pkgs.zfs;
           devNodes = "/dev/disk/by-id";
+          extraPools = [ "tank" ];
+          forceImportRoot = false;
+          package = pkgs.zfs;
         };
       };
-      services.zfs = {
-        autoScrub = {
-          enable = true;
-          interval = "weekly";
-        };
-
-        autoSnapshot.enable = false;
-      };
-
+      # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable.
+      boot.kernelPackages = pkgs.linuxPackages; # ZFS usually lags behind latest
+      environment.systemPackages = [ pkgs.smartmontools ];
+      imports = with self.nixosModules; [
+        base
+        cloudflared
+        media
+        nas
+        torrent
+      ];
+      # This should be an 8 character hex, you can get it via
+      # head -c4 /dev/urandom | od -A none -t x4
+      # It should be unique, and static between builds.
+      networking.hostId = "83a73ad2";
+      # System power management: `performance` | `schedutil` | `powersave`
+      powerManagement.cpuFreqGovernor = "schedutil";
+      # SSH agent is required for headless hosts
+      programs.ssh.startAgent = true;
       # Set up smart monitoring
       # TODO: make this a module and parameterize drive names?
       services.smartd = {
-        enable = true;
         autodetect = true;
         devices = [
           {
@@ -78,28 +85,20 @@ in
             options = "-a -o on -S on -s S(/../.././02|L/../../7/03)";
           }
         ];
+        enable = true;
       };
-      environment.systemPackages = [ pkgs.smartmontools ];
+      services.zfs = {
+        autoScrub = {
+          enable = true;
+          interval = "weekly";
+        };
 
-      imports = [ self.nixosModules.server ];
+        autoSnapshot.enable = false;
+      };
+      sodagunz.services.cloudflared = {
+        enable = true;
+        tokenFile = config.age.secrets.filmotheque-cloudflared-token.path;
+        tunnelId = "ae4102f8-f139-456d-9d33-f5d85ce06030";
+      };
     };
-
-  flake.homeModules.filmotheque =
-    { self, ... }:
-    {
-      imports = [ self.homeModules.server ];
-    };
-
-  flake.nixosConfigurations.${hostname} = hosts.mkNixos {
-    inherit hostname system username;
-    module = self.nixosModules.filmotheque;
-    extraModules = [
-      inputs.copyparty.nixosModules.default
-    ];
-  };
-
-  flake.homeConfigurations."${username}@${hostname}" = hosts.mkHome {
-    inherit hostname system username;
-    module = self.homeModules.filmotheque;
-  };
 }

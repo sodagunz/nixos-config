@@ -6,11 +6,11 @@
       programs.helix = {
         enable = true;
         settings = {
-          theme = "nord-night";
           editor = {
             line-number = "relative";
             lsp.display-messages = true;
           };
+          theme = "nord-night";
         };
       };
     };

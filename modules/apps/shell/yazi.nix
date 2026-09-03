@@ -6,8 +6,6 @@
       programs.yazi = {
         enable = true;
         enableZshIntegration = true;
-        shellWrapperName = "y";
-
         settings = {
           manager = {
             linemode = "size";
@@ -19,7 +17,7 @@
             sort_sensitive = false;
           };
         };
-
+        shellWrapperName = "y";
         theme.preview.syntect_theme = "${./yazi/nord.tmTheme}";
       };
 

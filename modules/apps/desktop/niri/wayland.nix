@@ -7,20 +7,18 @@
       ...
     }:
     {
+      environment.systemPackages = with pkgs; [
+        # xwaylandvideobridge
+      ];
       programs.niri.enable = true;
+      services.gnome.gnome-keyring.enable = true;
       xdg.portal = {
         enable = true;
-        xdgOpenUsePortal = true;
         extraPortals = [
           pkgs.xdg-desktop-portal-gnome
           pkgs.xdg-desktop-portal-gtk
         ];
+        xdgOpenUsePortal = true;
       };
-
-      services.gnome.gnome-keyring.enable = true;
-
-      environment.systemPackages = with pkgs; [
-        # xwaylandvideobridge
-      ];
     };
 }

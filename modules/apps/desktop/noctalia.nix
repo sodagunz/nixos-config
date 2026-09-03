@@ -4,11 +4,111 @@
     imports = [ inputs.noctalia.homeModules.default ];
 
     programs.noctalia = {
+      customPalettes.NordNight.dark = {
+        mError = "#bf616a";
+        mHover = "#4c566a";
+        mOnError = "#252933";
+        mOnHover = "#eceff4";
+        mOnPrimary = "#252933";
+        mOnSecondary = "#252933";
+        mOnSurface = "#c0c5cf";
+        mOnSurfaceVariant = "#e5e9f0";
+        mOnTertiary = "#252933";
+        mOutline = "#4c566a";
+        mPrimary = "#81a1c1";
+        mSecondary = "#88c0d0";
+        mShadow = "#252933";
+        mSurface = "#252933";
+        mSurfaceVariant = "#3b4252";
+        mTertiary = "#b48ead";
+        terminal = {
+          background = "#252933";
+          bright = {
+            black = "#4c566a";
+            blue = "#81a1c1";
+            cyan = "#8fbcbb";
+            green = "#a3be8c";
+            magenta = "#b48ead";
+            red = "#bf616a";
+            white = "#eceff4";
+            yellow = "#ebcb8b";
+          };
+          cursor = "#eceff4";
+          cursorText = "#252933";
+          foreground = "#c0c5cf";
+          normal = {
+            black = "#3b4252";
+            blue = "#81a1c1";
+            cyan = "#88c0d0";
+            green = "#a3be8c";
+            magenta = "#b48ead";
+            red = "#bf616a";
+            white = "#e5e9f0";
+            yellow = "#ebcb8b";
+          };
+          selectionBg = "#eceff4";
+          selectionFg = "#4c566a";
+        };
+      };
       enable = true;
       settings = {
         accessibility.ui_scale = 1.2;
-
         bar.default = {
+          capsule_group = [
+            {
+              fill = "surface_variant";
+              id = "g1";
+              members = [
+                "notifications"
+                "clipboard"
+                "network"
+                "bluetooth"
+                "volume"
+                "brightness"
+                "battery"
+                "session"
+              ];
+              padding = 6.0;
+            }
+            {
+              fill = "surface_variant";
+              id = "g2";
+              members = [ "tray" ];
+              padding = 6.0;
+            }
+            {
+              fill = "surface_variant";
+              id = "g3";
+              members = [ "clock" ];
+              padding = 6.0;
+            }
+            {
+              fill = "surface_variant";
+              id = "g4";
+              members = [
+                "GPU_Use"
+                "GPU_Temp"
+                "GPU_RAM"
+              ];
+              padding = 6.0;
+            }
+            {
+              fill = "surface_variant";
+              id = "g5";
+              members = [
+                "cpu"
+                "temp"
+                "ram"
+              ];
+              padding = 6.0;
+            }
+            {
+              fill = "surface_variant";
+              id = "g6";
+              members = [ "Disk" ];
+              padding = 6.0;
+            }
+          ];
           center = [
             "weather"
             "group:g3"
@@ -34,80 +134,17 @@
           ];
           thickness = 48;
           widget_spacing = 12;
-          capsule_group = [
-            {
-              id = "g1";
-              members = [
-                "notifications"
-                "clipboard"
-                "network"
-                "bluetooth"
-                "volume"
-                "brightness"
-                "battery"
-                "session"
-              ];
-              fill = "surface_variant";
-              padding = 6.0;
-            }
-            {
-              id = "g2";
-              members = [ "tray" ];
-              fill = "surface_variant";
-              padding = 6.0;
-            }
-            {
-              id = "g3";
-              members = [ "clock" ];
-              fill = "surface_variant";
-              padding = 6.0;
-            }
-            {
-              id = "g4";
-              members = [
-                "GPU_Use"
-                "GPU_Temp"
-                "GPU_RAM"
-              ];
-              fill = "surface_variant";
-              padding = 6.0;
-            }
-            {
-              id = "g5";
-              members = [
-                "cpu"
-                "temp"
-                "ram"
-              ];
-              fill = "surface_variant";
-              padding = 6.0;
-            }
-            {
-              id = "g6";
-              members = [ "Disk" ];
-              fill = "surface_variant";
-              padding = 6.0;
-            }
-          ];
         };
-
         control_center.width = 1200;
         location.address = "Valencia, Spain";
-        nightlight.enabled = true;
-        osd = {
-          offset_y = 80;
-          position = "bottom_center";
-        };
-
         lockscreen_widgets = {
           enabled = false;
-          schema_version = 2;
-          widget_order = [ "lockscreen-login-box@HDMI-A-2" ];
           grid = {
             cell_size = 16;
             major_interval = 4;
             visible = true;
           };
+          schema_version = 2;
           widget."lockscreen-login-box@HDMI-A-2" = {
             box_height = 196.0;
             box_width = 810.0;
@@ -117,7 +154,6 @@
             placement_height = 2160.0;
             placement_width = 3840.0;
             rotation = 0.0;
-            type = "login_box";
             settings = {
               background_color = "surface_variant";
               background_opacity = 0.88;
@@ -134,13 +170,17 @@
               show_unlock_hint = true;
               show_weather = true;
             };
+            type = "login_box";
           };
+          widget_order = [ "lockscreen-login-box@HDMI-A-2" ];
         };
-
+        nightlight.enabled = true;
+        osd = {
+          offset_y = 80;
+          position = "bottom_center";
+        };
         shell = {
           font_family = "Montserrat";
-          polkit_agent = true;
-          telemetry_enabled = false;
           keyboard_layout.custom_labels = {
             "English (US)" = "US";
             French = "FR";
@@ -151,16 +191,18 @@
             open_near_click_control_center = true;
             open_near_click_launcher = true;
           };
+          polkit_agent = true;
+          telemetry_enabled = false;
         };
         theme = {
+          custom_palette = "NordNight";
           mode = "dark";
           source = "custom";
-          custom_palette = "NordNight";
         };
         wallpaper = {
+          default.path = "/home/gunz/Pictures/wallpapers/others/nord2.webp";
           directory = "/home/gunz/Pictures/wallpapers/others";
           enabled = true;
-          default.path = "/home/gunz/Pictures/wallpapers/others/nord2.webp";
           monitors."HDMI-A-2".path = "/home/gunz/Pictures/wallpapers/others/nord2.webp";
         };
         widget = {
@@ -196,54 +238,6 @@
             vpn_status = "both";
           };
           sysmon.stat = "gpu_usage";
-        };
-      };
-
-      customPalettes.NordNight.dark = {
-        mPrimary = "#81a1c1";
-        mOnPrimary = "#252933";
-        mSecondary = "#88c0d0";
-        mOnSecondary = "#252933";
-        mTertiary = "#b48ead";
-        mOnTertiary = "#252933";
-        mError = "#bf616a";
-        mOnError = "#252933";
-        mSurface = "#252933";
-        mOnSurface = "#c0c5cf";
-        mSurfaceVariant = "#3b4252";
-        mOnSurfaceVariant = "#e5e9f0";
-        mOutline = "#4c566a";
-        mShadow = "#252933";
-        mHover = "#4c566a";
-        mOnHover = "#eceff4";
-
-        terminal = {
-          background = "#252933";
-          foreground = "#c0c5cf";
-          cursor = "#eceff4";
-          cursorText = "#252933";
-          selectionBg = "#eceff4";
-          selectionFg = "#4c566a";
-          normal = {
-            black = "#3b4252";
-            red = "#bf616a";
-            green = "#a3be8c";
-            yellow = "#ebcb8b";
-            blue = "#81a1c1";
-            magenta = "#b48ead";
-            cyan = "#88c0d0";
-            white = "#e5e9f0";
-          };
-          bright = {
-            black = "#4c566a";
-            red = "#bf616a";
-            green = "#a3be8c";
-            yellow = "#ebcb8b";
-            blue = "#81a1c1";
-            magenta = "#b48ead";
-            cyan = "#8fbcbb";
-            white = "#eceff4";
-          };
         };
       };
     };

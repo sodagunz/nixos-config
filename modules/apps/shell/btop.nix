@@ -3,6 +3,7 @@
   flake.homeModules.btop =
     { pkgs, ... }:
     {
+      home.packages = [ pkgs.nvtopPackages.intel ];
       programs.btop = {
         enable = true;
         settings = {
@@ -11,7 +12,5 @@
           update_ms = 500;
         };
       };
-
-      home.packages = [ pkgs.nvtopPackages.intel ];
     };
 }

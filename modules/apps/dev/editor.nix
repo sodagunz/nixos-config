@@ -4,170 +4,110 @@
     { pkgs, ... }:
     {
       home.packages = [ pkgs.zed-editor ];
-
-      programs.vim = {
-        enable = true;
+      home.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
       };
-
       programs.nvf = {
         enable = true;
         settings = {
           vim = {
-            viAlias = true;
-            vimAlias = true;
-            preventJunkFiles = true;
-            hideSearchHighlight = true;
-            clipboard = {
-              enable = true;
-              registers = "unnamedplus";
-              providers.wl-copy.enable = true;
-            };
-            bell = "visual";
-            searchCase = "smart";
-            undoFile.enable = true;
-
             assistant = {
               copilot = {
-                enable = true;
                 cmp.enable = false;
+                enable = true;
                 setupOpts = {
                   accept = "<S-CR>";
                 };
               };
             };
-
-            lsp = {
-              enable = true;
-              formatOnSave = false; # format files on save, creates a backup
-              lspkind.enable = true; # pictograms on LSP suggestions
-              lightbulb.enable = true; # lightbulb when codeaction exists
-              lspsaga.enable = false; # improved lsp experience
-              trouble.enable = true; # improved diagnostics
-              lspSignature.enable = true; # show function signature as you type
-              otter-nvim.enable = true; # creates tmp subbuffer with only one language
-              nvim-docs-view.enable = false; # shows docs on a new panel #mapped to l by default which sucks
+            autocomplete.nvim-cmp.enable = true;
+            autocomplete.nvim-cmp.mappings.confirm = "<S-CR>";
+            autopairs.nvim-autopairs.enable = true;
+            bell = "visual";
+            binds = {
+              cheatsheet.enable = false; # visual aid for vim navigation
+              whichKey.enable = true;
             };
-
+            clipboard = {
+              enable = true;
+              providers.wl-copy.enable = true;
+              registers = "unnamedplus";
+            };
+            comments.comment-nvim.enable = true;
             debugger = {
               nvim-dap = {
                 enable = true;
                 ui.enable = true;
               };
             };
-
+            git = {
+              enable = true;
+              gitsigns.codeActions.enable = false;
+              gitsigns.enable = true;
+            };
+            hideSearchHighlight = true;
             languages = {
+              bash.enable = true;
+              clang.enable = true;
+              css.enable = true;
+              elixir.enable = true;
+              enableExtraDiagnostics = true;
               enableFormat = true;
               enableTreesitter = true;
-              enableExtraDiagnostics = true;
-
-              nix.enable = true;
-              bash.enable = true;
-
-              clang.enable = true;
               go.enable = true;
-              elixir.enable = true;
-              rust.enable = true;
-              zig.enable = true;
-
-              css.enable = true;
-              html.enable = true;
-              typescript.enable = true;
-              sql.enable = true;
-
-              lua.enable = true;
-
-              python.enable = true;
-              julia.enable = false; # Julia depot takes ages to build
-
-              ocaml.enable = true;
               haskell.enable = true;
-
+              html.enable = true;
+              julia.enable = false; # Julia depot takes ages to build
+              lua.enable = true;
               markdown = {
                 enable = true;
                 extensions.render-markdown-nvim.enable = true;
               };
+              nix.enable = true;
+              ocaml.enable = true;
+              python.enable = true;
+              rust.enable = true;
+              sql.enable = true;
+              typescript.enable = true;
+              zig.enable = true;
             };
-
-            visuals = {
-              nvim-scrollbar.enable = true;
-              nvim-web-devicons.enable = true;
-              nvim-cursorline.enable = true;
-              cinnamon-nvim.enable = true; # softened scrolling
-              fidget-nvim.enable = true; # fidget spinner for notify
-
-              highlight-undo.enable = true;
-              indent-blankline.enable = true;
-
-              cellular-automaton.enable = true;
+            lsp = {
+              enable = true;
+              formatOnSave = false; # format files on save, creates a backup
+              lightbulb.enable = true; # lightbulb when codeaction exists
+              lspSignature.enable = true; # show function signature as you type
+              lspkind.enable = true; # pictograms on LSP suggestions
+              lspsaga.enable = false; # improved lsp experience
+              nvim-docs-view.enable = false; # shows docs on a new panel #mapped to l by default which sucks
+              otter-nvim.enable = true; # creates tmp subbuffer with only one language
+              trouble.enable = true; # improved diagnostics
             };
-
+            notify.nvim-notify.enable = true;
+            preventJunkFiles = true;
+            projects.project-nvim.enable = true; # Never used before
+            searchCase = "smart";
+            snippets.luasnip.enable = true;
             statusline = {
               lualine = {
                 enable = true;
-                theme = "nord";
                 integrations.breadcrumbs = {
-                  nvim-navic.enable = true;
                   navbuddy.enable = true;
+                  nvim-navic.enable = true;
                 };
+                theme = "nord";
               };
             };
-
+            tabline.nvimBufferline.enable = true;
+            telescope.enable = true;
             theme = {
               enable = true;
               name = "nord";
               transparent = false;
             };
-
-            autopairs.nvim-autopairs.enable = true;
-
-            autocomplete.nvim-cmp.enable = true;
-            autocomplete.nvim-cmp.mappings.confirm = "<S-CR>";
-
-            snippets.luasnip.enable = true;
-
-            tabline.nvimBufferline.enable = true;
-
             treesitter.context.enable = true;
-
-            binds = {
-              whichKey.enable = true;
-              cheatsheet.enable = false; # visual aid for vim navigation
-            };
-
-            telescope.enable = true;
-
-            git = {
-              enable = true;
-              gitsigns.enable = true;
-              gitsigns.codeActions.enable = false;
-            };
-
-            notify.nvim-notify.enable = true;
-
-            projects.project-nvim.enable = true; # Never used before
-
-            utility = {
-              ccc.enable = false;
-              surround.enable = true;
-              diffview-nvim.enable = true;
-              motion = {
-                hop.enable = true;
-                leap.enable = false;
-                precognition.enable = false;
-              };
-
-              images.image-nvim.enable = false;
-              snacks-nvim.enable = true;
-              oil-nvim.enable = true;
-              sleuth.enable = true;
-              leetcode-nvim.enable = true;
-              yazi-nvim.enable = true;
-            };
-
             ui = {
               borders.enable = true;
-              noice.enable = true;
-              illuminate.enable = true;
               colorizer = {
                 enable = true;
                 setupOpts = {
@@ -176,30 +116,57 @@
                   };
                 };
               };
+              fastaction.enable = true;
+              illuminate.enable = true;
+              noice.enable = true;
               smartcolumn = {
                 enable = true;
                 setupOpts.custom_colorcolumn = {
-                  rust = "120";
-                  nix = "110";
-                  ruby = "120";
-                  java = "130";
                   go = [
                     "90"
                     "130"
                   ];
+                  java = "130";
+                  nix = "110";
+                  ruby = "120";
+                  rust = "120";
                 };
               };
-              fastaction.enable = true;
             };
-
-            comments.comment-nvim.enable = true;
+            undoFile.enable = true;
+            utility = {
+              ccc.enable = false;
+              diffview-nvim.enable = true;
+              images.image-nvim.enable = false;
+              leetcode-nvim.enable = true;
+              motion = {
+                hop.enable = true;
+                leap.enable = false;
+                precognition.enable = false;
+              };
+              oil-nvim.enable = true;
+              sleuth.enable = true;
+              snacks-nvim.enable = true;
+              surround.enable = true;
+              yazi-nvim.enable = true;
+            };
+            viAlias = true;
+            vimAlias = true;
+            visuals = {
+              cellular-automaton.enable = true;
+              cinnamon-nvim.enable = true; # softened scrolling
+              fidget-nvim.enable = true; # fidget spinner for notify
+              highlight-undo.enable = true;
+              indent-blankline.enable = true;
+              nvim-cursorline.enable = true;
+              nvim-scrollbar.enable = true;
+              nvim-web-devicons.enable = true;
+            };
           };
         };
       };
-
-      home.sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
+      programs.vim = {
+        enable = true;
       };
     };
 }

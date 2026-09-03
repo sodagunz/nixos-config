@@ -1,15 +1,15 @@
 { ... }:
 {
   flake.nixosModules.audio = { pkgs, ... }: {
-    services.pulseaudio.enable = false;
+    environment.systemPackages = with pkgs; [ pulseaudioFull ];
+    security.rtkit.enable = true;
     services.pipewire = {
-      enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
+      enable = true;
       pulse.enable = true;
       # lowLatency.enable = true;
     };
-    environment.systemPackages = with pkgs; [ pulseaudioFull ];
-    security.rtkit.enable = true;
+    services.pulseaudio.enable = false;
   };
 }
