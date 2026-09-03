@@ -56,7 +56,6 @@
       hotkey-overlay { skip-at-startup; }
       spawn-at-startup "sh" "-c" "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
-      spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
       spawn-at-startup "noctalia"
       spawn-at-startup "sh" "-c" "firefox & i=0; while ! niri msg windows | grep -q '\"app_id\": \"firefox\"' && [ $i -lt 20 ]; do sleep 0.1; i=$((i + 1)); done; niri msg action focus-workspace-down; ghostty"
 
