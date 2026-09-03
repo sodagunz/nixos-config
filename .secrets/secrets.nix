@@ -15,4 +15,8 @@ in
     keys."gunz@minispore"
     keys."gunz@filmotheque"
   ];
+  ".secrets/nextcloud-admin-password.age".publicKeys = [
+    keys."gunz@minispore"
+    keys."gunz@filmotheque"
+  ];
 }

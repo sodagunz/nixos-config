@@ -94,7 +94,9 @@
       # Make my main user part of that group for convenience.
       users.groups.media.gid = 987;
       users.groups.media.members = [
+        "immich"
         "jellyfin"
+        "nextcloud"
         "copyparty"
         "${username}"
       ];
