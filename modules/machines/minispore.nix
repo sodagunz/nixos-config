@@ -44,7 +44,7 @@ in
       # TODO: replace with hostname, maybe parameterize path?
       # environment.systemPackages = with pkgs; [ nfs-utils ];
       # fileSystems."/mnt/tank" = {
-      #   device = "192.168.1.195:/mnt/tank";
+      #   device = "192.168.1.201:/mnt/tank";
       #   fsType = "nfs";
       #   options = [
       #     "x-systemd.automount"

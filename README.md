@@ -35,7 +35,7 @@ split by configuration type, except in that they are in any of the following roo
   useful.
 - [system](modules/system) holds NixOS features. Shared operating-system
   defaults live in `system/core.nix`, with services grouped under `services`.
-- [profiles](modules/profiles) reusable base, server, and workstation setups. Stuff I would
+- [profiles](modules/profiles) reusable base and workstation setups. Stuff I would
   normally want in every machine of it's kind.
 - [machines](modules/machines) holds machine-specific configurations. Each machine registers its
   own NixOS and Home Manager outputs, and selects the modules it will use.

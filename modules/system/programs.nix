@@ -11,6 +11,7 @@
         # pinentryFlavor = "";
       };
       nix-ld.enable = true;
+      ssh.extraConfig = "VisualHostKey yes";
       zsh.enable = true;
       # ssh.startAgent = true;
     };

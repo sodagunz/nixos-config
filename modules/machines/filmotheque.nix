@@ -17,7 +17,7 @@ in
   flake.homeModules.filmotheque =
     { self, ... }:
     {
-      imports = [ self.homeModules.server ];
+      imports = [ self.homeModules.base ];
     };
   flake.nixosConfigurations.${hostname} = hosts.mkNixos {
     inherit hostname system username;

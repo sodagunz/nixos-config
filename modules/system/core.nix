@@ -35,7 +35,7 @@
             address = [
               "/homegrown/192.168.1.204"
               "/minispore/192.168.1.200"
-              "/filmotheque/192.168.1.195"
+              "/filmotheque/192.168.1.201"
             ];
             bind-interfaces = true;
             no-resolv = true;
