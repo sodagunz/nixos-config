@@ -9,27 +9,95 @@
         accessibility.ui_scale = 1.2;
 
         bar.default = {
+          center = [
+            "weather"
+            "group:g3"
+            "date"
+          ];
           end = [
+            "group:g2"
+            "group:g4"
             "media"
-            "tray"
-            "notifications"
-            "clipboard"
-            "network"
-            "bluetooth"
-            "volume"
-            "brightness"
-            "battery"
-            "control-center"
-            "session"
-            "screenshot"
+            "group:g1"
           ];
           icon_color = "primary";
           scale = 1.5;
+          start = [
+            "keyboard_layout"
+            "launcher"
+            "control-center"
+            "wallpaper"
+            "screenshot"
+            "workspaces"
+            "group:g5"
+            "group:g6"
+          ];
           thickness = 48;
           widget_spacing = 12;
+          capsule_group = [
+            {
+              id = "g1";
+              members = [
+                "notifications"
+                "clipboard"
+                "network"
+                "bluetooth"
+                "volume"
+                "brightness"
+                "battery"
+                "session"
+              ];
+              fill = "surface_variant";
+              padding = 6.0;
+            }
+            {
+              id = "g2";
+              members = [ "tray" ];
+              fill = "surface_variant";
+              padding = 6.0;
+            }
+            {
+              id = "g3";
+              members = [ "clock" ];
+              fill = "surface_variant";
+              padding = 6.0;
+            }
+            {
+              id = "g4";
+              members = [
+                "GPU_Use"
+                "GPU_Temp"
+                "GPU_RAM"
+              ];
+              fill = "surface_variant";
+              padding = 6.0;
+            }
+            {
+              id = "g5";
+              members = [
+                "cpu"
+                "temp"
+                "ram"
+              ];
+              fill = "surface_variant";
+              padding = 6.0;
+            }
+            {
+              id = "g6";
+              members = [ "Disk" ];
+              fill = "surface_variant";
+              padding = 6.0;
+            }
+          ];
         };
 
-        control_center.width = 1000;
+        control_center.width = 1200;
+        location.address = "Valencia, Spain";
+        nightlight.enabled = true;
+        osd = {
+          offset_y = 80;
+          position = "bottom_center";
+        };
 
         lockscreen_widgets = {
           enabled = false;
@@ -71,8 +139,18 @@
 
         shell = {
           font_family = "Montserrat";
+          polkit_agent = true;
           telemetry_enabled = false;
-          panel.launcher_position = "top_center";
+          keyboard_layout.custom_labels = {
+            "English (US)" = "US";
+            French = "FR";
+            Spanish = "ES";
+          };
+          panel = {
+            launcher_placement = "attached";
+            open_near_click_control_center = true;
+            open_near_click_launcher = true;
+          };
         };
         theme = {
           mode = "dark";
@@ -84,6 +162,40 @@
           enabled = true;
           default.path = "/home/gunz/Pictures/wallpapers/others/nord2.webp";
           monitors."HDMI-A-2".path = "/home/gunz/Pictures/wallpapers/others/nord2.webp";
+        };
+        widget = {
+          Disk = {
+            stat = "disk_used";
+            type = "sysmon";
+          };
+          GPU_RAM = {
+            stat = "gpu_vram";
+            type = "sysmon";
+          };
+          GPU_Temp = {
+            stat = "gpu_temp";
+            type = "sysmon";
+          };
+          GPU_Use = {
+            stat = "gpu_usage";
+            type = "sysmon";
+          };
+          clock = {
+            color = "primary";
+            font_scale = 1.25;
+            format = "{:%H:%M:%S}";
+          };
+          media = {
+            hide_when_no_media = true;
+            max_length = 140;
+            show_progress = true;
+            title_scroll = "always";
+          };
+          network = {
+            show_label = false;
+            vpn_status = "both";
+          };
+          sysmon.stat = "gpu_usage";
         };
       };
 

@@ -2,7 +2,6 @@
 {
   flake.nixosModules.networking =
     {
-      pkgs,
       host,
       ...
     }:
@@ -30,7 +29,5 @@
           ];
         };
       };
-
-      environment.systemPackages = with pkgs; [ networkmanagerapplet ];
     };
 }

@@ -1,18 +1,23 @@
+#######################################################################################
+# ███████╗ ██████╗ ██████╗  █████╗  ██████╗ ██╗   ██╗███╗   ██╗███████╗   /┐          #
+# ██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝ ██║   ██║████╗  ██║╚══███╔╝  / (░)─┐ ·    #
+# ███████╗██║   ██║██║  ██║███████║██║  ███╗██║   ██║██╔██╗ ██║  ███╔╝    (▒▒▒)   °   #
+# ╚════██║██║   ██║██║  ██║██╔══██║██║   ██║██║   ██║██║╚██╗██║ ███╔╝     |▓▓▓| |º|   #
+# ███████║╚██████╔╝██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║ ╚████║███████╗   |███| |▓|   #
+# ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝   \___/ |_|   #
+#                                                                                     #
+# github: https://github.com/sodagunz                                                 #
+# email: sodagunz@proton.me                                                           #
+#######################################################################################
 {
   description = "sodagunz' nixos-config";
 
   # This project loosely uses the dendritic configuration.
   # Every file besides this root is a flake parts module which exposes
   # its own configuration.
-  # Hosts are configured in `./machines`, where `nixosConfigurations`, `homeConfigurations`,
-  # and `darwinConfigurations` are defined for each machine and rely on the rest of the modules.
   outputs =
-    inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        (inputs.import-tree ./modules)
-      ];
-    };
+    { flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
     agenix = {
@@ -33,6 +38,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     noctalia.url = "github:noctalia-dev/noctalia";
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nvf.url = "github:notashelf/nvf";
 
   };

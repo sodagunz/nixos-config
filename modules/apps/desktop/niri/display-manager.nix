@@ -1,25 +1,43 @@
 { ... }:
 {
-  flake.nixosModules.niri = { username, ... }: {
-    services = {
-      xserver = {
-        enable = true;
-        xkb.layout = "us,fr";
-      };
+  flake.nixosModules.niri =
+    {
+      inputs,
+      username,
+      ...
+    }:
+    {
+      imports = [ inputs.noctalia-greeter.nixosModules.default ];
 
-      displayManager = {
-        defaultSession = "niri";
-        autoLogin = {
-          enable = true;
-          user = "${username}";
+      programs.noctalia-greeter = {
+        enable = true;
+        settings = {
+          session.default = "niri";
+          user.default = username;
+          keyboard = {
+            layout = "us,fr";
+            options = "grp:alt_caps_toggle";
+            numlock = true;
+          };
         };
       };
-      libinput = {
-        enable = true;
-        # mouse = {
-        #   accelProfile = "flat";
-        # };
+
+      services = {
+        xserver = {
+          enable = true;
+          xkb.layout = "us,fr";
+          displayManager.lightdm.enable = false;
+        };
+
+        displayManager = {
+          defaultSession = "niri";
+        };
+        libinput = {
+          enable = true;
+          # mouse = {
+          #   accelProfile = "flat";
+          # };
+        };
       };
     };
-  };
 }
