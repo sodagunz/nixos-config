@@ -16,6 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:ryantm/agenix";
     };
+    comin = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nlewo/comin";
+    };
     copyparty.url = "github:9001/copyparty";
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
@@ -23,7 +27,6 @@
       url = "github:nix-community/home-manager/master";
     };
     import-tree.url = "github:vic/import-tree";
-
     nix-colors.url = "github:misterio77/nix-colors";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-gaming.url = "github:fufexan/nix-gaming";

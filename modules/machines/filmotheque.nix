@@ -34,6 +34,10 @@ in
       ...
     }:
     {
+      age.secrets."comin-github.token" = {
+        file = ../../.secrets/comin-github.token.age;
+        mode = "0400";
+      };
       age.secrets.filmotheque-cloudflared-token = {
         file = ../../.secrets/filmotheque-cloudflared.token.age;
         mode = "0400";
@@ -52,7 +56,13 @@ in
       # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable.
       boot.kernelPackages = pkgs.linuxPackages; # ZFS usually lags behind latest
       environment.systemPackages = [ pkgs.smartmontools ];
-      imports = [ self.nixosModules.server ];
+      imports = with self.nixosModules; [
+        base
+        cloudflared
+        media
+        nas
+        torrent
+      ];
       # This should be an 8 character hex, you can get it via
       # head -c4 /dev/urandom | od -A none -t x4
       # It should be unique, and static between builds.

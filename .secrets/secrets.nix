@@ -7,7 +7,11 @@ let
   };
 in
 {
-  "secrets/filmotheque-cloudflared.token.age".publicKeys = [
+  ".secrets/comin-github.token.age".publicKeys = [
+    keys."gunz@minispore"
+    keys."gunz@filmotheque"
+  ];
+  ".secrets/filmotheque-cloudflared.token.age".publicKeys = [
     keys."gunz@minispore"
     keys."gunz@filmotheque"
   ];

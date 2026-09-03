@@ -25,6 +25,10 @@ in
   flake.nixosModules.minispore =
     { pkgs, self, ... }:
     {
+      age.secrets."comin-github.token" = {
+        file = ../../.secrets/comin-github.token.age;
+        mode = "0400";
+      };
       boot.kernelPackages = pkgs.linuxPackages;
       boot.loader = {
         efi.efiSysMountPoint = "/efi";

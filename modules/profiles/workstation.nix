@@ -35,19 +35,12 @@
     imports = with self.nixosModules; [
       audio
       bluetooth
-      bootloader
-      cachix
       flatpak
       gaming
       hardware
-      networking
-      nh
       niri
       noctalia
-      programs
-      core
-      users
-      virtualization
+      base
     ];
   };
 }
