@@ -13,9 +13,9 @@
         enable = true;
         settings = {
           keyboard = {
-            layout = "us,fr";
+            layout = "us,fr,latam";
+            options = "grp:alt_shift_toggle";
             numlock = true;
-            options = "grp:alt_caps_toggle";
           };
           session.default = "niri";
           user.default = username;
@@ -35,7 +35,10 @@
         xserver = {
           displayManager.lightdm.enable = false;
           enable = true;
-          xkb.layout = "us,fr";
+          xkb = {
+            layout = "us,fr,latam";
+            options = "grp:alt_shift_toggle";
+          };
         };
       };
     };
