@@ -16,6 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Configure Cachix reads
+        uses: cachix/cachix-action@v17
+        with:
+          name: sodagunz
+          skipPush: true
       - name: Check formatting with treefmt and Pedantix
         run: nix fmt -- --ci
   validate:
