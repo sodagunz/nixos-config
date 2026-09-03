@@ -182,10 +182,9 @@
         shell = {
           font_family = "Montserrat";
           keyboard_layout.custom_labels = {
-            "English (US)" = "US";
+            "English (US)" = "EN";
             French = "FR";
-            Spanish = "ES";
-            "Spanish (Latin American)" = "LA";
+            "Spanish (Latin American)" = "ES";
           };
           panel = {
             launcher_placement = "attached";
