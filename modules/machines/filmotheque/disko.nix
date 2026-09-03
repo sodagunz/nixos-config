@@ -40,94 +40,90 @@
         #   };
         # };
         hdd1 = {
-          device = "/dev/disk/by-id/ata-TOSHIBA_MG08ACA16TE_51S0A6CMFVGG";
-          type = "disk";
           content = {
-            type = "gpt";
             partitions = {
               zfs = {
-                size = "100%";
+                content = {
+                  pool = "tank";
+                  type = "zfs";
+                };
                 # type = "8300";  # Linux filesystem type; you may also use "BF01" or specific ZFS type
                 label = "zfs-hdd1";
-                content = {
-                  type = "zfs";
-                  pool = "tank";
-                };
+                size = "100%";
               };
             };
+            type = "gpt";
           };
+          device = "/dev/disk/by-id/ata-TOSHIBA_MG08ACA16TE_51S0A6CMFVGG";
+          type = "disk";
         };
 
         hdd2 = {
-          device = "/dev/disk/by-id/ata-TOSHIBA_MG08ACA16TE_51S0A6X5FVGG";
-          type = "disk";
           content = {
-            type = "gpt";
             partitions = {
               zfs = {
-                size = "100%";
+                content = {
+                  pool = "tank";
+                  type = "zfs";
+                };
                 # type = "8300";
                 label = "zfs-hdd2";
-                content = {
-                  type = "zfs";
-                  pool = "tank";
-                };
+                size = "100%";
               };
             };
+            type = "gpt";
           };
+          device = "/dev/disk/by-id/ata-TOSHIBA_MG08ACA16TE_51S0A6X5FVGG";
+          type = "disk";
         };
       };
 
       zpool = {
         tank = {
-          type = "zpool";
-          rootFsOptions = {
-            compression = "lz4";
-            atime = "off";
-            xattr = "sa";
-            acltype = "posixacl";
+          datasets = {
+            "tank/backups" = {
+              mountpoint = "/tank/backups";
+              options = {
+                recordsize = "1M";
+              };
+              type = "zfs_fs";
+            };
+            "tank/data" = {
+              mountpoint = "/tank/data";
+              options = {
+                recordsize = "128K";
+              };
+              type = "zfs_fs";
+            };
+            "tank/media" = {
+              mountpoint = "/tank/media";
+              options = {
+                recordsize = "1M";
+              };
+              type = "zfs_fs";
+            };
           };
-
           mode = {
             topology = {
               type = "topology";
               vdev = [
                 {
-                  mode = "mirror";
                   members = [
                     "/dev/disk/by-partlabel/zfs-hdd1"
                     "/dev/disk/by-partlabel/zfs-hdd2"
                   ];
+                  mode = "mirror";
                 }
               ];
             };
           };
-
-          datasets = {
-            "tank/data" = {
-              type = "zfs_fs";
-              mountpoint = "/tank/data";
-              options = {
-                recordsize = "128K";
-              };
-            };
-
-            "tank/backups" = {
-              type = "zfs_fs";
-              mountpoint = "/tank/backups";
-              options = {
-                recordsize = "1M";
-              };
-            };
-
-            "tank/media" = {
-              type = "zfs_fs";
-              mountpoint = "/tank/media";
-              options = {
-                recordsize = "1M";
-              };
-            };
+          rootFsOptions = {
+            acltype = "posixacl";
+            atime = "off";
+            compression = "lz4";
+            xattr = "sa";
           };
+          type = "zpool";
         };
       };
     };

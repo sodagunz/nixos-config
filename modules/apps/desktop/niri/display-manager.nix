@@ -12,23 +12,17 @@
       programs.noctalia-greeter = {
         enable = true;
         settings = {
-          session.default = "niri";
-          user.default = username;
           keyboard = {
             layout = "us,fr";
-            options = "grp:alt_caps_toggle";
             numlock = true;
+            options = "grp:alt_caps_toggle";
           };
+          session.default = "niri";
+          user.default = username;
         };
       };
 
       services = {
-        xserver = {
-          enable = true;
-          xkb.layout = "us,fr";
-          displayManager.lightdm.enable = false;
-        };
-
         displayManager = {
           defaultSession = "niri";
         };
@@ -37,6 +31,11 @@
           # mouse = {
           #   accelProfile = "flat";
           # };
+        };
+        xserver = {
+          displayManager.lightdm.enable = false;
+          enable = true;
+          xkb.layout = "us,fr";
         };
       };
     };

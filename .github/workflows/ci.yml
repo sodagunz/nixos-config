@@ -1,0 +1,46 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Check formatting with treefmt and Pedantix
+        run: nix fmt -- --ci
+  validate:
+    name: Validate flake
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - run: nix flake check --no-build
+  build:
+    name: Build ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: minispore NixOS
+            attribute: nixosConfigurations.minispore.config.system.build.toplevel
+          - name: minispore Home Manager
+            attribute: homeConfigurations."gunz@minispore".activationPackage
+          - name: filmotheque NixOS
+            attribute: nixosConfigurations.filmotheque.config.system.build.toplevel
+          - name: filmotheque Home Manager
+            attribute: homeConfigurations."gunz@filmotheque".activationPackage
+    steps:
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - run: nix build --no-link .#${{ matrix.attribute }}

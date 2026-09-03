@@ -1,16 +1,15 @@
 { lib, ... }:
 {
   options.flake = {
-    homeModules = lib.mkOption {
-      type = lib.types.lazyAttrsOf lib.types.deferredModule;
-      default = { };
-      description = "Home Manager modules exported by feature modules.";
-    };
-
     homeConfigurations = lib.mkOption {
-      type = lib.types.lazyAttrsOf lib.types.raw;
       default = { };
       description = "Home Manager configurations exported by machine modules.";
+      type = lib.types.lazyAttrsOf lib.types.raw;
+    };
+    homeModules = lib.mkOption {
+      default = { };
+      description = "Home Manager modules exported by feature modules.";
+      type = lib.types.lazyAttrsOf lib.types.deferredModule;
     };
   };
 }

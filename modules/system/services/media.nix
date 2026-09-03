@@ -2,13 +2,12 @@
 {
   flake.nixosModules.media =
     {
-      pkgs,
       inputs,
+      pkgs,
       username,
       ...
     }:
     {
-      nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
       environment.systemPackages = with pkgs; [
         acl
         copyparty
@@ -16,75 +15,55 @@
         jellyfin-web
         jellyfin-ffmpeg
       ];
-
+      # open copyparty ports
+      networking.firewall.allowedTCPPorts = [ 3923 ];
+      networking.firewall.allowedUDPPorts = [ 3923 ];
+      nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
       services = {
 
         copyparty = {
           enable = true;
-          user = "copyparty";
           group = "media";
-
           settings = {
             i = "0.0.0.0";
           };
-
+          user = "copyparty";
           volumes = {
             "/" = {
-              path = "/srv";
               access = {
                 rwmd = "*";
               };
               flags = {
-                fk = 4;
-                scan = 60;
-                e2d = true;
-                chmod_f = 775;
                 chmod_d = 775;
+                chmod_f = 775;
+                e2d = true;
+                fk = 4;
                 gid = 987;
+                scan = 60;
               };
+              path = "/srv";
             };
             "/tank" = {
-              path = "/tank";
               access.rwmd = "*";
               flags = {
+                chmod_d = 775;
+                chmod_f = 775;
+                e2d = true;
                 fk = 4;
                 scan = 60;
-                e2d = true;
-                chmod_f = 775;
-                chmod_d = 775;
               };
+              path = "/tank";
             };
           };
         };
 
         jellyfin = {
           enable = true;
-          openFirewall = true;
           group = "media";
+          openFirewall = true;
         };
       };
-
-      # Ensure copyparty and jellyfin have a common group.
-      # Make my main user part of that group for convenience.
-      users.groups.media.gid = 987;
-      users.groups.media.members = [
-        "jellyfin"
-        "copyparty"
-        "${username}"
-      ];
-
-      # open copyparty ports
-      networking.firewall.allowedTCPPorts = [ 3923 ];
-      networking.firewall.allowedUDPPorts = [ 3923 ];
-
-      users.users.copyparty = {
-        extraGroups = [
-          "keys"
-        ];
-      };
-
       systemd.services.media-permissions = {
-        description = "Set shared media directory permissions";
         after = [ "zfs-mount.service" ];
         before = [
           "copyparty.service"
@@ -94,13 +73,8 @@
           "sonarr.service"
           "transmission.service"
         ];
-        wantedBy = [ "multi-user.target" ];
+        description = "Set shared media directory permissions";
         path = [ pkgs.acl ];
-        unitConfig.RequiresMountsFor = [ "/tank" ];
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-        };
         script = ''
           for directory in /srv /tank /tank/media /tank/data /tank/backups; do
             if [[ -d "$directory" ]]; then
@@ -109,6 +83,25 @@
             fi
           done
         '';
+        serviceConfig = {
+          RemainAfterExit = true;
+          Type = "oneshot";
+        };
+        unitConfig.RequiresMountsFor = [ "/tank" ];
+        wantedBy = [ "multi-user.target" ];
+      };
+      # Ensure copyparty and jellyfin have a common group.
+      # Make my main user part of that group for convenience.
+      users.groups.media.gid = 987;
+      users.groups.media.members = [
+        "jellyfin"
+        "copyparty"
+        "${username}"
+      ];
+      users.users.copyparty = {
+        extraGroups = [
+          "keys"
+        ];
       };
     };
 }

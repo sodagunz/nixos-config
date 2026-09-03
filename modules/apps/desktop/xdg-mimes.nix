@@ -2,24 +2,42 @@
 {
   flake.homeModules.xdg-mimes =
     {
-      pkgs,
       lib,
+      pkgs,
       ...
     }:
     with lib;
     let
       defaultApps = {
-        browser = [ "firefox.desktop" ];
-        image = [ "imv-dir.desktop" ];
         audio = [ "mpv.desktop" ];
-        video = [ "mpv.desktop" ];
+        browser = [ "firefox.desktop" ];
         directory = [ "nemo.desktop" ];
+        discord = [ "webcord.desktop" ];
+        image = [ "imv-dir.desktop" ];
         office = [ "libreoffice.desktop" ];
         terminal = [ "kitty.desktop" ];
-        discord = [ "webcord.desktop" ];
+        video = [ "mpv.desktop" ];
       };
 
       mimeMap = {
+        audio = [
+          "audio/aac"
+          "audio/mpeg"
+          "audio/ogg"
+          "audio/opus"
+          "audio/wav"
+          "audio/webm"
+          "audio/x-matroska"
+        ];
+        browser = [
+          "text/html"
+          "x-scheme-handler/about"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+          "x-scheme-handler/unknown"
+        ];
+        directory = [ "inode/directory" ];
+        discord = [ "x-scheme-handler/discord" ];
         image = [
           "image/bmp"
           "image/gif"
@@ -30,33 +48,6 @@
           "image/tiff"
           "image/vnd.microsoft.icon"
           "image/webp"
-        ];
-        audio = [
-          "audio/aac"
-          "audio/mpeg"
-          "audio/ogg"
-          "audio/opus"
-          "audio/wav"
-          "audio/webm"
-          "audio/x-matroska"
-        ];
-        video = [
-          "video/mp2t"
-          "video/mp4"
-          "video/mpeg"
-          "video/ogg"
-          "video/webm"
-          "video/x-flv"
-          "video/x-matroska"
-          "video/x-msvideo"
-        ];
-        directory = [ "inode/directory" ];
-        browser = [
-          "text/html"
-          "x-scheme-handler/about"
-          "x-scheme-handler/http"
-          "x-scheme-handler/https"
-          "x-scheme-handler/unknown"
         ];
         office = [
           "application/vnd.oasis.opendocument.text"
@@ -71,7 +62,16 @@
           "application/rtf"
         ];
         terminal = [ "terminal" ];
-        discord = [ "x-scheme-handler/discord" ];
+        video = [
+          "video/mp2t"
+          "video/mp4"
+          "video/mpeg"
+          "video/ogg"
+          "video/webm"
+          "video/x-flv"
+          "video/x-matroska"
+          "video/x-msvideo"
+        ];
       };
 
       associations =
@@ -81,16 +81,14 @@
         );
     in
     {
-      xdg.configFile."mimeapps.list".force = true;
-      xdg.mimeApps.enable = true;
-      xdg.mimeApps.associations.added = associations;
-      xdg.mimeApps.defaultApplications = associations;
-
       home.packages = with pkgs; [ junction ];
-
       home.sessionVariables = {
         # prevent wine from creating file associations
         WINEDLLOVERRIDES = "winemenubuilder.exe=d";
       };
+      xdg.configFile."mimeapps.list".force = true;
+      xdg.mimeApps.associations.added = associations;
+      xdg.mimeApps.defaultApplications = associations;
+      xdg.mimeApps.enable = true;
     };
 }

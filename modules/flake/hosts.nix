@@ -1,30 +1,12 @@
 { inputs, ... }:
 {
   _module.args.hosts = {
-    mkNixos =
-      {
-        hostname,
-        system,
-        username,
-        module,
-        extraModules ? [ ],
-      }:
-      inputs.nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [ module ] ++ extraModules;
-        specialArgs = {
-          host = hostname;
-          inherit username inputs;
-          self = inputs.self;
-        };
-      };
-
     mkHome =
       {
         hostname,
+        module,
         system,
         username,
-        module,
       }:
       let
         pkgs = import inputs.nixpkgs-unstable {
@@ -35,8 +17,8 @@
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          host = hostname;
           inherit username inputs;
+          host = hostname;
           self = inputs.self;
         };
         modules = [
@@ -51,6 +33,23 @@
             programs.home-manager.enable = true;
           }
         ];
+      };
+    mkNixos =
+      {
+        extraModules ? [ ],
+        hostname,
+        module,
+        system,
+        username,
+      }:
+      inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [ module ] ++ extraModules;
+        specialArgs = {
+          inherit username inputs;
+          host = hostname;
+          self = inputs.self;
+        };
       };
   };
 }

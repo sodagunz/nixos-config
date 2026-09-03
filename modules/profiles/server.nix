@@ -1,24 +1,8 @@
 { self, ... }:
 {
-  flake.nixosModules.server = {
-    imports = with self.nixosModules; [
-      agenix
-      base
-      cloudflared
-      media
-      nas
-      torrent
-    ];
-  };
-
   flake.homeModules.server =
-    { self, pkgs, ... }:
+    { pkgs, self, ... }:
     {
-      imports = [
-        self.homeModules.helix
-        self.homeModules.zellij
-      ];
-
       home.packages = with pkgs; [
         entr
         eza
@@ -34,5 +18,19 @@
         perl
         shellcheck
       ];
+      imports = [
+        self.homeModules.helix
+        self.homeModules.zellij
+      ];
     };
+  flake.nixosModules.server = {
+    imports = with self.nixosModules; [
+      agenix
+      base
+      cloudflared
+      media
+      nas
+      torrent
+    ];
+  };
 }

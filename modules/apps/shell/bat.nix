@@ -2,18 +2,17 @@
 {
   flake.homeModules.bat = { pkgs, ... }: {
     programs.bat = {
-      enable = true;
       config = {
         pager = "less -FR";
         theme = "Nord";
       };
+      enable = true;
       extraPackages = with pkgs.bat-extras; [
         batman
         batpipe
         batgrep
         # batdiff
       ];
-
       # themes = {
       #   tokyonight = {
       #     src = pkgs.fetchFromGitHub {

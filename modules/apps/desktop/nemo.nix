@@ -1,8 +1,6 @@
 { ... }:
 {
   flake.homeModules.nemo = { pkgs, ... }: {
-    home.packages = with pkgs; [ nemo ];
-
     dconf.settings = {
       "org/nemo/preferences" = {
         always-use-browser = true;
@@ -41,5 +39,6 @@
         start-with-sidebar = true;
       };
     };
+    home.packages = with pkgs; [ nemo ];
   };
 }

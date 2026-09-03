@@ -2,14 +2,13 @@
 {
   flake.homeModules.starship = { pkgs, ... }: {
     home.packages = with pkgs; [ starship ];
-    xdg.configFile."starship.toml".source = ./starship/starship.toml;
-
     programs.starship = {
       enable = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
       enableTransience = true;
+      enableZshIntegration = true;
     };
+    xdg.configFile."starship.toml".source = ./starship/starship.toml;
   };
 }

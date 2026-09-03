@@ -2,8 +2,8 @@
 {
   flake.homeModules.gtk =
     {
-      pkgs,
       config,
+      pkgs,
       ...
     }:
     let
@@ -14,6 +14,27 @@
     in
     {
       fonts.fontconfig.enable = true;
+      gtk = {
+        cursorTheme = {
+          name = "Bibata-Modern-Ice";
+          package = pkgs.bibata-cursors;
+          size = 24;
+        };
+        enable = true;
+        font = {
+          name = "Montserrat";
+          size = 14;
+        };
+        gtk4.theme = config.gtk.theme;
+        iconTheme = {
+          name = "Nordzy";
+          package = pkgs.nordzy-icon-theme;
+        };
+        theme = {
+          name = "Nordic";
+          package = pkgs.nordic;
+        };
+      };
       home.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
         nerd-fonts.fira-code
@@ -30,29 +51,6 @@
         # monolisa
         # monolisa-nerd
       ];
-
-      gtk = {
-        enable = true;
-        gtk4.theme = config.gtk.theme;
-        font = {
-          name = "Montserrat";
-          size = 14;
-        };
-        theme = {
-          name = "Nordic";
-          package = pkgs.nordic;
-        };
-        iconTheme = {
-          name = "Nordzy";
-          package = pkgs.nordzy-icon-theme;
-        };
-        cursorTheme = {
-          name = "Bibata-Modern-Ice";
-          package = pkgs.bibata-cursors;
-          size = 24;
-        };
-      };
-
       home.pointerCursor = {
         enable = true;
         name = "Bibata-Modern-Ice";
