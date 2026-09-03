@@ -14,8 +14,8 @@
         settings = {
           keyboard = {
             layout = "us,fr,latam";
-            options = "grp:alt_shift_toggle";
             numlock = true;
+            options = "grp:alt_shift_toggle";
           };
           session.default = "niri";
           user.default = username;
