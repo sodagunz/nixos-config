@@ -42,6 +42,12 @@ in
         file = ../../.secrets/filmotheque-cloudflared.token.age;
         mode = "0400";
       };
+      age.secrets.nextcloud-admin-password = {
+        file = ../../.secrets/nextcloud-admin-password.age;
+        group = "nextcloud";
+        mode = "0400";
+        owner = "nextcloud";
+      };
       # Set up zfs
       # TODO: make this a module and parameterize pools?
       boot = {
@@ -58,6 +64,7 @@ in
       environment.systemPackages = [ pkgs.smartmontools ];
       imports = with self.nixosModules; [
         base
+        cloudStorage
         cloudflared
         media
         nas
