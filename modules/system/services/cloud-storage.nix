@@ -14,6 +14,13 @@
         license = "agpl3Plus";
         url = "https://github.com/xXRoxXeRXx/integration_immich/releases/download/v1.4.0/integration_immich.tar.gz";
       };
+      epubViewer = pkgs.fetchNextcloudApp {
+        appName = "epubviewer";
+        appVersion = "1.9.2";
+        hash = "sha256-HQpC0D+Dj5gojIzz+CHUKmUIkxF2qyqoWI787OFbMF8=";
+        license = "agpl3Plus";
+        url = "https://github.com/devnoname120/epubviewer/releases/download/1.9.2/epubviewer-1.9.2.tar.gz";
+      };
     in
     {
       networking.firewall.allowedTCPPorts = [
@@ -55,6 +62,7 @@
         enable = true;
         extraApps = with config.services.nextcloud.package.packages.apps; {
           inherit collectives richdocuments;
+          epubviewer = epubViewer;
           integration_immich = integrationImmich;
         };
         extraAppsEnable = true;
@@ -122,8 +130,8 @@
         path = [ config.services.nextcloud.occ ];
         requires = [ "nextcloud-setup.service" ];
         script = ''
-          nextcloud-occ config:user:set gunz integration_immich server_url \
-            --value=http://127.0.0.1:2283
+          nextcloud-occ user:setting gunz integration_immich server_url \
+            http://127.0.0.1:2283
         '';
         serviceConfig = {
           RemainAfterExit = true;
