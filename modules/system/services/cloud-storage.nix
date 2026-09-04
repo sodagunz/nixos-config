@@ -6,6 +6,15 @@
       pkgs,
       ...
     }:
+    let
+      integrationImmich = pkgs.fetchNextcloudApp {
+        appName = "integration_immich";
+        appVersion = "1.4.0";
+        hash = "sha256-PKL0FtM2oVWqlo1lAm3G3pC8Tkfzm/W4ySWAa4HG9R4=";
+        license = "agpl3Plus";
+        url = "https://github.com/xXRoxXeRXx/integration_immich/releases/download/v1.4.0/integration_immich.tar.gz";
+      };
+    in
     {
       networking.firewall.allowedTCPPorts = [
         2283
@@ -46,12 +55,14 @@
         enable = true;
         extraApps = with config.services.nextcloud.package.packages.apps; {
           inherit collectives richdocuments;
+          integration_immich = integrationImmich;
         };
         extraAppsEnable = true;
         hostName = "192.168.1.201";
         https = false;
         maxUploadSize = "16G";
         package = pkgs.nextcloud32;
+        settings.allow_local_remote_servers = true;
       };
       services.nginx.virtualHosts."192.168.1.201".listen = [
         {
@@ -104,6 +115,21 @@
         after = [ "cloud-storage-permissions.service" ];
         requires = [ "cloud-storage-permissions.service" ];
         unitConfig.RequiresMountsFor = [ "/tank/media/pictures" ];
+      };
+      systemd.services.nextcloud-immich-integration = {
+        after = [ "nextcloud-setup.service" ];
+        description = "Configure the Nextcloud Immich integration";
+        path = [ config.services.nextcloud.occ ];
+        requires = [ "nextcloud-setup.service" ];
+        script = ''
+          nextcloud-occ config:user:set gunz integration_immich server_url \
+            --value=http://127.0.0.1:2283
+        '';
+        serviceConfig = {
+          RemainAfterExit = true;
+          Type = "oneshot";
+        };
+        wantedBy = [ "multi-user.target" ];
       };
       systemd.services.nextcloud-office = {
         after = [
