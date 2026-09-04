@@ -10,7 +10,25 @@
       networking.firewall.allowedTCPPorts = [
         2283
         8888
+        9980
       ];
+      services.collabora-online = {
+        aliasGroups = [
+          {
+            host = "http://192.168.1.201:8888";
+          }
+        ];
+        enable = true;
+        settings = {
+          net.listen = "any";
+          server_name = "192.168.1.201:9980";
+          ssl = {
+            enable = false;
+            termination = false;
+          };
+          storage.wopi."@allow" = true;
+        };
+      };
       services.immich = {
         enable = true;
         host = "0.0.0.0";
@@ -26,12 +44,15 @@
         database.createLocally = true;
         datadir = "/var/lib/nextcloud";
         enable = true;
+        extraApps = with config.services.nextcloud.package.packages.apps; {
+          inherit collectives richdocuments;
+        };
+        extraAppsEnable = true;
         hostName = "192.168.1.201";
         https = false;
         maxUploadSize = "16G";
         package = pkgs.nextcloud32;
       };
-
       services.nginx.virtualHosts."192.168.1.201".listen = [
         {
           addr = "0.0.0.0";
@@ -83,6 +104,27 @@
         after = [ "cloud-storage-permissions.service" ];
         requires = [ "cloud-storage-permissions.service" ];
         unitConfig.RequiresMountsFor = [ "/tank/media/pictures" ];
+      };
+      systemd.services.nextcloud-office = {
+        after = [
+          "coolwsd.service"
+          "nextcloud-setup.service"
+        ];
+        description = "Configure Nextcloud Office to use the local Collabora server";
+        path = [ config.services.nextcloud.occ ];
+        requires = [
+          "coolwsd.service"
+          "nextcloud-setup.service"
+        ];
+        script = ''
+          nextcloud-occ config:app:set richdocuments wopi_url \
+            --value=http://192.168.1.201:9980
+        '';
+        serviceConfig = {
+          RemainAfterExit = true;
+          Type = "oneshot";
+        };
+        wantedBy = [ "multi-user.target" ];
       };
       # The External Storage app and its mount are application state, but this
       # service makes that state reproducible from the NixOS configuration.
