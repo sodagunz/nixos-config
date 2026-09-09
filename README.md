@@ -9,7 +9,6 @@
 github: https://github.com/sodagunz                                                 
 email: sodagunz@proton.me                                                           
 ```
-     
 
 # nixos-config
 
@@ -17,12 +16,19 @@ Nixos configs for my users and machines.
 
 ## Table of contents
 
-- [Layout](#layout)
-- [Adding configuration](#adding-configuration)
-- [Rebuilding](#rebuilding)
-- [Pull-based deployment](#pull-based-deployment)
-- [Components](#components)
-- [Credits](#credits)
+<!--toc:start-->
+- [nixos-config](#nixos-config)
+  - [Table of contents](#table-of-contents)
+  - [Layout](#layout)
+  - [Adding configuration](#adding-configuration)
+    - [Feature](#feature)
+    - [Machine](#machine)
+  - [Rebuilding](#rebuilding)
+  - [Deploy](#deploy)
+  - [Desktop Components](#desktop-components)
+  - [Server Components](#server-components)
+  - [Credits](#credits)
+<!--toc:end-->
 
 ## Layout
 
@@ -90,17 +96,15 @@ as otherwise I need to maintain separate config for any machine not running nixo
 nix flake check --no-build
 ```
 
-## Pull-based deployment
+## Deploy
 
-`main` is the deployable release branch. After its required GitHub Actions checks
-pass and a pull request merges, Comin polls it on each enrolled host and switches
-the matching NixOS configuration. A successful NixOS switch then
-builds and activates the matching standalone Home Manager configuration as
-`gunz`, from Comin's exact fetched flake revision. Home Manager activation only
-runs after the NixOS deployment succeeds, with `hmbackup` collision backups.
+We use [Comin][Comin] to manage release and deploy to all machines. It's constantly polling `main`, which needs to be protected.
+Merging to it will trigger a diff, and if it correctly identifies that the **NixOS** configuration changed, it will trigger an os switch in all machines.
+After a successful os switch, it will attempt to run a custom post installation script that triggers a home switch. This is not natively supported by [Comin][comin], so it could fail.
+Because of this setup, a change landing on main that affects only `homeConfigurations` is not guaranteed to be deployed to machines that were already up to date.
 
 Before enrolling a host, create a fine-grained GitHub token with
-**Contents: Read** permission for this repository, then encrypt it for the two
+**Contents: Read** permission for the source repository, then encrypt it for the two
 existing recipients:
 
 ```console
@@ -111,15 +115,15 @@ Add every enrolled host's age recipient to `.secrets/secrets.nix` and declare
 the secret in that machine module. Bootstrap each online host once with the
 Comin-enabled configuration, then confirm polling and deployment with
 `journalctl -u comin`. Normal NixOS rollback and boot-menu generations remain
-the recovery path if a deployment is bad. A failed Home Manager activation is
+the recovery path if a deployment is bad, Comin uses it's own generation ordering. A failed Home Manager activation is
 recorded by Comin, while the successful NixOS generation remains available for
 rollback.
 
 GitHub branch protection is managed outside this repository: require all CI
-checks for pull requests to `main`, and block direct and force pushes. Comin
-does not use testing branches, tags, releases, or a deploy workflow. `homegrown`
-currently uses the placeholder token path until its age recipient is available.
-SSH commit signature verification is also deferred; configure Comin's
+checks for pull requests to `main`, and block direct and force pushes. No testing branch, tag, release or deploy workflow is currently configured for Comin.
+The trunk, `main`, is the source of truth and (if everything goes well) the actual configuration of every configured machine.
+ `homegrown` currently uses the placeholder token path until its age recipient is available, as it's currently on a pitstop due to ~~someone temporarily comandeering it's SSD~~ unforseen technical issues.
+SSH commit signature verification is also deferred to a later commit; configure Comin's
 `sshAllowedSignersPath` with an allowed-signers file once commit signing is in
 place.
 
@@ -150,8 +154,9 @@ place.
 | Media streaming       | [Jellyfin][Jellyfin]                                                 |
 | File sharing          | [Copyparty][Copyparty] and NFS                                       |
 | Media management      | [*arr services][Servarr] and Transmission                            |
-| Reverse proxy         | Not configured                                                       |
-| Emulation             | Reserved; no emulator is installed                                   |
+| Reverse proxy         | [Cloudflared][Cloudflared]                                           |
+| Emulation             | Retroarch                                                            |
+| Deployment            | [Comin][Comin]                                                       |
 
 ## Credits
 
@@ -163,7 +168,9 @@ place.
 [Dendritic]: https://github.com/mightyiam/dendritic
 [Bibata]: https://github.com/ful1e5/Bibata_Cursor
 [Btop]: https://github.com/aristocratos/btop
+[Cloudflared]: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/
 [Copyparty]: https://github.com/9001/copyparty
+[Comin]: https://github.com/nlewo/comin
 [Fish]: https://fishshell.com/
 [Firefox]: https://www.mozilla.org/firefox/
 [Frost-Phoenix]: https://github.com/Frost-Phoenix/nixos-config
