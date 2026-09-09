@@ -29,7 +29,7 @@
               fi
 
               activation_package="$(nix build --no-link --print-out-paths \
-                "$COMIN_FLAKE_URL#homeConfigurations.\\\"gunz@$COMIN_HOSTNAME\\\".activationPackage")"
+                "$COMIN_FLAKE_URL#homeConfigurations.\"gunz@$COMIN_HOSTNAME\".activationPackage")"
               runuser -u gunz -- env \
                 HOME=/home/gunz \
                 HOME_MANAGER_BACKUP_EXT=hmbackup \
