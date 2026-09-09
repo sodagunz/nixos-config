@@ -38,7 +38,10 @@ in
           xbootldrMountPoint = "/boot";
         };
       };
-      environment.systemPackages = [ pkgs.amdgpu_top pkgs.libva-utils ];
+      environment.systemPackages = [
+        pkgs.amdgpu_top
+        pkgs.libva-utils
+      ];
       # Replaces SSH agent workstations.
       # services.gnome.gnome-keyring.enable = true;
       # NAS client configuration
