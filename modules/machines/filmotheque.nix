@@ -61,7 +61,12 @@ in
       };
       # Use `pkgs.linuxPackages` for stable kernel, or `pkgs.linuxPackages_latest` for unstable.
       boot.kernelPackages = pkgs.linuxPackages; # ZFS usually lags behind latest
-      environment.systemPackages = [ pkgs.smartmontools ];
+      environment.systemPackages = with pkgs; [
+        amdgpu_top
+        libva-utils
+        smartmontools
+      ];
+      hardware.graphics.enable = true;
       imports = with self.nixosModules; [
         base
         cloudStorage

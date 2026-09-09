@@ -13,6 +13,8 @@
         extraGroups = [
           "networkmanager"
           "wheel"
+          "render"
+          "video"
         ];
         isNormalUser = true;
         openssh.authorizedKeys.keys = [

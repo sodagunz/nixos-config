@@ -59,8 +59,23 @@
 
         jellyfin = {
           enable = true;
+          forceEncodingConfig = true;
           group = "media";
+          hardwareAcceleration = {
+            device = "/dev/dri/renderD128";
+            enable = true;
+            type = "vaapi";
+          };
           openFirewall = true;
+          transcoding = {
+            enableHardwareEncoding = true;
+            hardwareDecodingCodecs = {
+              h264 = true;
+              hevc = true;
+              hevc10bit = true;
+            };
+            hardwareEncodingCodecs.hevc = true;
+          };
         };
       };
       systemd.services.media-permissions = {
@@ -90,8 +105,7 @@
         unitConfig.RequiresMountsFor = [ "/tank" ];
         wantedBy = [ "multi-user.target" ];
       };
-      # Ensure copyparty and jellyfin have a common group.
-      # Make my main user part of that group for convenience.
+      # Give the media services and main user shared access to the media library.
       users.groups.media.gid = 987;
       users.groups.media.members = [
         "immich"
@@ -105,5 +119,10 @@
           "keys"
         ];
       };
+      # Allow Jellyfin to access the hardware rendering devices.
+      users.users.jellyfin.extraGroups = [
+        "render"
+        "video"
+      ];
     };
 }
