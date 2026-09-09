@@ -13,11 +13,11 @@ ambient or manually installed binary.
 ## Plan
 
 1. Confirm the package name and version in the current `nixpkgs-unstable` input.
-2. Add it to an appropriate Home Manager CLI/development module rather than a
+1. Add it to an appropriate Home Manager CLI/development module rather than a
    host-wide NixOS package list.
-3. Keep Codex state and authentication in the normal persistent home location
+1. Keep Codex state and authentication in the normal persistent home location
    (`~/.codex`); do not place credentials in the Nix store.
-4. Verify `codex --version` and `codex resume` from a new shell and from a TTY.
+1. Verify `codex --version` and `codex resume` from a new shell and from a TTY.
 
 ## Acceptance criteria
 

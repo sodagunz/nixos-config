@@ -21,17 +21,17 @@ tools where Noctalia provides a satisfactory replacement.
 
 1. Enable the native unstable Home Manager `programs.noctalia` module with a
    minimal configuration and autostart it from Niri.
-2. Confirm required system services. NetworkManager and Bluetooth are already
+1. Confirm required system services. NetworkManager and Bluetooth are already
    expected; evaluate UPower and power-profiles-daemon before enabling related
    widgets.
-3. Recreate the current essentials: workspace display, tray, clock, networking,
+1. Recreate the current essentials: workspace display, tray, clock, networking,
    Bluetooth, audio, brightness, notifications, media, power/session actions,
    and launcher behavior.
-4. Move Niri bindings from the old tools to Noctalia commands one group at a
+1. Move Niri bindings from the old tools to Noctalia commands one group at a
    time.
-5. Disable Waybar, SwayNC, SwayOSD, Rofi, and overlapping lock/background tools
+1. Disable Waybar, SwayNC, SwayOSD, Rofi, and overlapping lock/background tools
    only after their replacements are verified.
-6. Match the existing theme deliberately after functionality is stable.
+1. Match the existing theme deliberately after functionality is stable.
 
 ## Acceptance criteria
 

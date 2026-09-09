@@ -6,16 +6,16 @@ verifiable improvements before restructuring the entire flake.
 
 ## Priorities
 
-| Order | Workstream | Priority | Reason |
-| --- | --- | --- | --- |
-| 1 | [Add Codex to Home Manager](todo/01-codex-home-manager.md) | High | Makes the recovery and maintenance tool available after every activation and from a fresh login. |
-| 2 | [Fix Ghostty](todo/02-ghostty.md) | High | Restores the primary terminal and removes a hard-coded system assumption. |
-| 3 | [Restore Niri configuration parity](todo/03-niri-parity.md) | High | Fixes daily bindings and recovers the useful behavior of the previous desktop. |
-| 4 | [Add an XBOOTLDR partition](todo/04-xbootldr.md) | High, maintenance window | Removes the recurring boot-partition capacity constraint, but requires careful partition work. |
-| 5 | [Separate Home Manager from NixOS](todo/05-home-manager-separation.md) | Medium | Establishes a clean boundary before the broader module refactor. |
-| 6 | [Adopt a dendritic module layout](todo/06-dendritic-migration.md) | Medium, incremental | Reduces program and compositor clutter without combining the migration into one risky rewrite. |
-| 7 | [Replace the desktop shell with Noctalia](todo/07-noctalia.md) | Medium | Best implemented as an early consumer of the cleaner Home Manager/module structure. |
-| 8 | [Fix Niri startup placement and bindings](todo/08-niri-startup-and-bindings.md) | High | Follow-up regression ticket for boot-time placement, look-and-feel initialization, and missing useful bindings. |
+| Order | Workstream                                                                      | Priority                 | Reason                                                                                                          |
+| ----- | ------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| 1     | [Add Codex to Home Manager](todo/01-codex-home-manager.md)                      | High                     | Makes the recovery and maintenance tool available after every activation and from a fresh login.                |
+| 2     | [Fix Ghostty](todo/02-ghostty.md)                                               | High                     | Restores the primary terminal and removes a hard-coded system assumption.                                       |
+| 3     | [Restore Niri configuration parity](todo/03-niri-parity.md)                     | High                     | Fixes daily bindings and recovers the useful behavior of the previous desktop.                                  |
+| 4     | [Add an XBOOTLDR partition](todo/04-xbootldr.md)                                | High, maintenance window | Removes the recurring boot-partition capacity constraint, but requires careful partition work.                  |
+| 5     | [Separate Home Manager from NixOS](todo/05-home-manager-separation.md)          | Medium                   | Establishes a clean boundary before the broader module refactor.                                                |
+| 6     | [Adopt a dendritic module layout](todo/06-dendritic-migration.md)               | Medium, incremental      | Reduces program and compositor clutter without combining the migration into one risky rewrite.                  |
+| 7     | [Replace the desktop shell with Noctalia](todo/07-noctalia.md)                  | Medium                   | Best implemented as an early consumer of the cleaner Home Manager/module structure.                             |
+| 8     | [Fix Niri startup placement and bindings](todo/08-niri-startup-and-bindings.md) | High                     | Follow-up regression ticket for boot-time placement, look-and-feel initialization, and missing useful bindings. |
 
 ## Dependency and execution order
 
