@@ -25,28 +25,27 @@ verified.
 
 1. Create a standalone Home Manager entry for `gunz@minispore` using
    `nixpkgs-unstable` and the current home modules.
-2. Pass shared inputs and host metadata explicitly through `extraSpecialArgs`.
-3. Verify that the standalone output builds to the same effective home setup.
-4. Add documented build/switch commands, preferably through `nh` if supported
-   by the chosen workflow.
-5. Remove the embedded Home Manager NixOS module only after standalone
+1. Pass shared inputs and host metadata explicitly through `extraSpecialArgs`.
+1. Verify that the standalone output builds to the same effective home setup.
+1. Add documented build/switch commands, preferably through `nh` if supported by
+   the chosen workflow.
+1. Remove the embedded Home Manager NixOS module only after standalone
    activation succeeds from both the graphical session and a TTY.
-6. Decide how system rebuilds communicate that a separate home activation is
+1. Decide how system rebuilds communicate that a separate home activation is
    required.
 
 ## Acceptance criteria
 
 - `nixosConfigurations.minispore` evaluates against stable `nixpkgs`.
-- `homeConfigurations` evaluates and installs packages from
-  `nixpkgs-unstable`.
+- `homeConfigurations` evaluates and installs packages from `nixpkgs-unstable`.
 - No Nixpkgs/Home Manager mismatch warning is suppressed merely to make the
   configuration evaluate.
 - System and home activation commands are documented and recoverable from TTY.
 
 ## Resolution
 
-- Added `homeConfigurations."gunz@minispore"`, evaluated with
-  `nixpkgs-unstable` and explicit host metadata.
+- Added `homeConfigurations."gunz@minispore"`, evaluated with `nixpkgs-unstable`
+  and explicit host metadata.
 - Removed the embedded Home Manager NixOS module and its release-check
   suppression.
 - Documented independent `nh os switch` and `nh home switch` commands in the

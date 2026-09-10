@@ -45,15 +45,15 @@ and the standalone Home Manager activation build pass with this pattern.
 1. Choose and document the exact dendritic mechanism and module discovery
    convention. Evaluate a small `flake-parts`/import-tree style foundation
    before committing the entire repository to it.
-2. Establish shared constructors or module classes for flake, NixOS, and Home
+1. Establish shared constructors or module classes for flake, NixOS, and Home
    Manager contributions.
-3. Move one low-risk feature first (for example `fzf` or `yazi`) and verify the
+1. Move one low-risk feature first (for example `fzf` or `yazi`) and verify the
    resulting option graph and output.
-4. Migrate independent CLI/editor features, then desktop services, then Niri.
-5. Use Noctalia as a real test of the feature boundary rather than adding it to
+1. Migrate independent CLI/editor features, then desktop services, then Niri.
+1. Use Noctalia as a real test of the feature boundary rather than adding it to
    the old workstation import list.
-6. Remove old aggregation modules only after their imports are empty.
-7. Add lightweight documentation explaining how to add a host and a feature.
+1. Remove old aggregation modules only after their imports are empty.
+1. Add lightweight documentation explaining how to add a host and a feature.
 
 ## Acceptance criteria
 

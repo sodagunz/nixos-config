@@ -12,6 +12,11 @@
       treefmt = {
         programs = {
           kdlfmt.enable = true;
+          mdformat = {
+            enable = true;
+            plugins = ps: [ ps.mdformat-gfm ];
+            settings.wrap = 80;
+          };
           pedantix.enable = true;
           shfmt.enable = true;
           taplo.enable = true;
@@ -24,7 +29,6 @@
             "*.jpg"
             "*.json"
             "*.lock"
-            "*.md"
             "*.png"
             "*.tmTheme"
             "*.webp"

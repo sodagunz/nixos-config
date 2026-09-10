@@ -6,23 +6,23 @@
 
 ## Current concerns
 
-The Home Manager module selects
-`inputs.ghostty.packages.x86_64-linux.default` directly. This is brittle and may
-not agree with the package set or system used to evaluate the configuration.
-The failure mode still needs to be captured before changing configuration.
+The Home Manager module selects `inputs.ghostty.packages.x86_64-linux.default`
+directly. This is brittle and may not agree with the package set or system used
+to evaluate the configuration. The failure mode still needs to be captured
+before changing configuration.
 
 ## Plan
 
 1. Launch Ghostty from a TTY or another terminal and record stderr and relevant
    user-journal messages.
-2. Determine whether the problem is package startup, graphics/backend support,
+1. Determine whether the problem is package startup, graphics/backend support,
    shell integration, or the existing Ghostty configuration/theme.
-3. Replace the hard-coded architecture lookup with a system-aware package, or
+1. Replace the hard-coded architecture lookup with a system-aware package, or
    use the unstable `pkgs.ghostty` package if the separate input is no longer
    necessary.
-4. Temporarily test with an empty/minimal Ghostty config to distinguish package
+1. Temporarily test with an empty/minimal Ghostty config to distinguish package
    failures from configuration failures.
-5. Restore settings incrementally and verify launch under Niri.
+1. Restore settings incrementally and verify launch under Niri.
 
 ## Acceptance criteria
 

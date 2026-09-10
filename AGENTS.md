@@ -29,15 +29,15 @@ the same deferred module. Public feature names under `flake.nixosModules` and
 
 1. Inspect `git status` and the relevant profile/machine before editing. Keep
    unrelated user changes intact.
-2. Put a new user program in `apps/` and a new OS concern in `system/`. Give a
+1. Put a new user program in `apps/` and a new OS concern in `system/`. Give a
    program with its own configuration or launcher its own feature; use
    `apps/tools` only for genuinely general package bundles.
-3. Export the feature from its public `.nix` module, then add it to the
+1. Export the feature from its public `.nix` module, then add it to the
    appropriate profile. Do not import individual features from a machine unless
    the feature is truly machine-specific.
-4. Keep shared policy in features or profiles. Keep hardware, host IDs, disks,
+1. Keep shared policy in features or profiles. Keep hardware, host IDs, disks,
    and machine-specific service facts in `machines/<name>`.
-5. Preserve the package-set split: NixOS uses stable `nixpkgs`; standalone Home
+1. Preserve the package-set split: NixOS uses stable `nixpkgs`; standalone Home
    Manager uses `nixpkgs-unstable`.
 
 ## Verify and hand off
