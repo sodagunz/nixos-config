@@ -18,7 +18,18 @@
       # open copyparty ports
       networking.firewall.allowedTCPPorts = [ 3923 ];
       networking.firewall.allowedUDPPorts = [ 3923 ];
-      nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
+      nixpkgs.overlays = [
+        inputs.copyparty.overlays.default
+        (
+          final: _prev:
+          let
+            unstable = inputs.nixpkgs-unstable.legacyPackages.${final.stdenv.hostPlatform.system};
+          in
+          {
+            inherit (unstable) jellyfin jellyfin-ffmpeg jellyfin-web;
+          }
+        )
+      ];
       services = {
 
         copyparty = {
