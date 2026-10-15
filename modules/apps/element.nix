@@ -3,7 +3,11 @@
   flake.homeModules.element =
     { pkgs, ... }:
     {
-      home.packages = [ pkgs.element-desktop ];
+      home.packages = [
+        (pkgs.element-desktop.override {
+          commandLineArgs = "--password-store=gnome-libsecret";
+        })
+      ];
     };
 
   flake.nixosModules.element = {

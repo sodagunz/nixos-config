@@ -100,7 +100,11 @@
           "transmission.service"
         ];
         description = "Set shared media directory permissions";
-        path = [ pkgs.acl ];
+        path = [
+          pkgs.acl
+          pkgs.coreutils
+          pkgs.findutils
+        ];
         script = ''
           for directory in /srv /tank /tank/media /tank/data /tank/backups; do
             if [[ -d "$directory" ]]; then
@@ -108,9 +112,20 @@
               setfacl -m d:u::rwx,d:g:media:rwx,d:o::--- "$directory"
             fi
           done
+
+          # Default ACLs only affect new children. Repair files and directories
+          # that predate this policy, then make every existing directory pass
+          # the shared ACL on to newly created content.
+          repair_marker=/var/lib/media-permissions/media-acl-v1
+          if [[ -d /tank/media && ! -e "$repair_marker" ]]; then
+            setfacl -R -m g:media:rwX /tank/media
+            find /tank/media -type d -exec setfacl -m d:g:media:rwx,d:o::--- {} +
+            touch "$repair_marker"
+          fi
         '';
         serviceConfig = {
           RemainAfterExit = true;
+          StateDirectory = "media-permissions";
           Type = "oneshot";
         };
         unitConfig.RequiresMountsFor = [ "/tank" ];
