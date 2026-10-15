@@ -8,6 +8,7 @@
       colors
       discord
       editor
+      element
       fastfetch
       fish
       fzf
@@ -35,6 +36,7 @@
     imports = with self.nixosModules; [
       audio
       bluetooth
+      element
       flatpak
       gaming
       hardware
