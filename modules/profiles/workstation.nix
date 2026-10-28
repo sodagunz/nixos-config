@@ -6,6 +6,7 @@
       btop
       codex
       colors
+      devenv
       discord
       editor
       element
