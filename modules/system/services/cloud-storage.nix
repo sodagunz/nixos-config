@@ -3,6 +3,7 @@
   flake.nixosModules.cloudStorage =
     {
       config,
+      inputs,
       pkgs,
       ...
     }:
@@ -49,6 +50,11 @@
         enable = true;
         host = "0.0.0.0";
         mediaLocation = "/tank/media/pictures";
+        package =
+          inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.immich.override
+            {
+              nodejs = pkgs.nodejs;
+            };
         settings.server.externalDomain = "http://192.168.1.201:2283";
       };
       services.nextcloud = {
@@ -69,7 +75,7 @@
         hostName = "192.168.1.201";
         https = false;
         maxUploadSize = "16G";
-        package = pkgs.nextcloud32;
+        package = pkgs.nextcloud33;
         settings.allow_local_remote_servers = true;
       };
       services.nginx.virtualHosts."192.168.1.201".listen = [

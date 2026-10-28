@@ -8,20 +8,6 @@
     }:
     {
       imports = [ inputs.noctalia-greeter.nixosModules.default ];
-
-      programs.noctalia-greeter = {
-        enable = true;
-        settings = {
-          keyboard = {
-            layout = "us,fr,latam";
-            numlock = true;
-            options = "grp:alt_shift_toggle";
-          };
-          session.default = "niri";
-          user.default = username;
-        };
-      };
-
       services = {
         displayManager = {
           defaultSession = "niri";
@@ -39,6 +25,18 @@
             layout = "us,fr,latam";
             options = "grp:alt_shift_toggle";
           };
+        };
+      };
+      services.displayManager.noctalia-greeter = {
+        enable = true;
+        settings = {
+          keyboard = {
+            layout = "us,fr,latam";
+            numlock = true;
+            options = "grp:alt_shift_toggle";
+          };
+          session.default = "niri";
+          user.default = username;
         };
       };
     };

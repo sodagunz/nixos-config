@@ -45,8 +45,8 @@
                 rwmd = "*";
               };
               flags = {
-                chmod_d = 775;
-                chmod_f = 775;
+                chmod_d = "775";
+                chmod_f = "775";
                 e2d = true;
                 fk = 4;
                 gid = 987;
@@ -57,8 +57,8 @@
             "/tank" = {
               access.rwmd = "*";
               flags = {
-                chmod_d = 775;
-                chmod_f = 775;
+                chmod_d = "775";
+                chmod_f = "775";
                 e2d = true;
                 fk = 4;
                 scan = 60;
