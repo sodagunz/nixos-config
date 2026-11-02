@@ -95,7 +95,7 @@
                   navbuddy.enable = true;
                   nvim-navic.enable = true;
                 };
-                theme = "nord";
+                setupOpts.options.theme = "nord";
               };
             };
             tabline.nvimBufferline.enable = true;

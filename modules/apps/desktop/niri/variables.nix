@@ -16,7 +16,6 @@
       QT_SCALE_FACTOR = "2";
       QT_STYLE_OVERRIDE = "kvantum";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      SDL_VIDEODRIVER = "wayland";
       SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
       WLR_DRM_NO_ATOMIC = "1";
       XDG_SESSION_TYPE = "wayland";
