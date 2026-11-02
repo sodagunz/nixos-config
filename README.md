@@ -103,14 +103,12 @@ nix flake check --no-build
 
 ## Deploy
 
-We use [Comin] to manage release and deploy to all machines. It's constantly
-polling `main`, which needs to be protected. Merging to it will trigger a diff,
-and if it correctly identifies that the **NixOS** configuration changed, it will
-trigger an os switch in all machines. After a successful os switch, it will
-attempt to run a custom post installation script that triggers a home switch.
-This is not natively supported by [Comin], so it could fail. Because of this
-setup, a change landing on main that affects only `homeConfigurations` is not
-guaranteed to be deployed to machines that were already up to date.
+We use [Comin] to deploy `main` automatically. Each host's NixOS generation
+references its Home Manager activation package, so a Home Manager change also
+changes the NixOS output that Comin watches. After a successful NixOS switch,
+the post-deployment hook activates Home Manager for that host. This is our own
+hook, not native Comin Home Manager support. Check `journalctl -u comin` for
+deployment status and `journalctl -t comin-home-manager` for activation output.
 
 Before enrolling a host, create a fine-grained GitHub token with **Contents:
 Read** permission for the source repository, then encrypt it for the two
@@ -124,9 +122,9 @@ Add every enrolled host's age recipient to `.secrets/secrets.nix` and declare
 the secret in that machine module. Bootstrap each online host once with the
 Comin-enabled configuration, then confirm polling and deployment with
 `journalctl -u comin`. Normal NixOS rollback and boot-menu generations remain
-the recovery path if a deployment is bad, Comin uses it's own generation
-ordering. A failed Home Manager activation is recorded by Comin, while the
-successful NixOS generation remains available for rollback.
+the recovery path if a deployment is bad; Comin uses its own generation
+ordering. Comin logs a failed Home Manager hook but keeps the successful NixOS
+deployment and does not retry the hook when it skips an already-deployed output.
 
 GitHub branch protection is managed outside this repository: require all CI
 checks for pull requests to `main`, and block direct and force pushes. No
