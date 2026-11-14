@@ -4,6 +4,7 @@
     imports = with self.homeModules; [
       bat
       btop
+      claude
       codex
       colors
       devenv

@@ -14,11 +14,11 @@
     in
     {
       config = lib.mkIf cfg.enable {
-        # Keep the server on stable while using Cloudflared's current connector.
+        # Keep the server on stable while using a patched Cloudflared connector.
         nixpkgs.overlays = [
           (final: _prev: {
             cloudflared =
-              inputs.nixpkgs-unstable.legacyPackages.${final.stdenv.hostPlatform.system}.cloudflared;
+              inputs.nixpkgs-cloudflared.legacyPackages.${final.stdenv.hostPlatform.system}.cloudflared;
           })
         ];
 

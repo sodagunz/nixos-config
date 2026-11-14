@@ -31,6 +31,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-cloudflared.url = "github:NixOS/nixpkgs/master";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia-greeter = {
